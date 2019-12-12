@@ -127,13 +127,13 @@ a {
 	text-align: right;
 }
 
-.edit-panel-div-title.icon-times {
+.edit-panel-div-title .icon-times {
 	position: absolute;
 	right: 15px;
 	line-height: 42px;
 }
 
-.edit-panel-div-title.icon-times:hover {
+.edit-panel-div-title .icon-times:hover {
 	color: red;
 	cursor: pointer;
 }

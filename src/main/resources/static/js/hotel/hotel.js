@@ -74,6 +74,14 @@ $(function() {
 						myzui._error("the params can not be empty");
 						return;
 					}
+					if (_this.hotel4Add.phonenumber) {
+						var isMobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
+				        var isPhone = /^(?:(?:0\d{2,3})-)?(?:\d{7,8})(-(?:\d{3,}))?$/;
+				        if (!isMobile.exec(_this.hotel4Add.phonenumber) && !isPhone.exec(_this.hotel4Add.phonenumber)) {
+				        	myzui._error("please input correct phonenumber");
+				        	return;
+				        }
+					}
 					var url = "hotels";
 					if (_this.hotel4Add.id == 0) { //add
 						axios.post(url, this.hotel4Add).then(function(res) {

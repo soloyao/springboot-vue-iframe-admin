@@ -21,8 +21,17 @@ $(function() {
 			data: data4Vue,
 			mounted: function() {
 				this.list(1);
+				
+				$("#lightBoxToggle").lightbox();
 			},
 			methods: {
+				showImage: function() {
+					var myLightBox = $("#lightBoxToggle").data("zui.lightbox");
+					myLightBox.show("upload/" + this.category4Add.image);
+				},
+				deleteItemImage: function() {
+					this.category4Add.image = "";
+				},
 				upload: function() {
 					var _this = this;
 					$.uploader("../upload", function(data) {

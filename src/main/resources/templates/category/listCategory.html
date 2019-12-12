@@ -61,9 +61,10 @@
 						<button class="btn btn-info" @click="upload"><i class="icon icon-cloud-upload"></i>upload image</button>
 					</div>
 				</div>
-				<div class="form-group">
+				<div v-if="category4Add.image" class="form-group">
 					<div class="card">
-						<img v-if="category4Add.image" :src="'upload/' + category4Add.image" class="img-thumbnail">
+						<img @click="showImage" :src="'upload/' + category4Add.image" class="img-thumbnail" style="margin:0 auto;">
+						<i class="icon icon-times icon-2x" @click="deleteItemImage"></i>
 					</div>
 				</div>
 			</div>
@@ -74,6 +75,7 @@
 		</div>
 		<div class="edit-panel-div-shim" @click="cancel" :class="isEditShow?'active':''"></div>
 		<!-- edit end -->
+		<div id="lightBoxToggle" :src="'upload/' + category4Add.image" style="width:0px;height:0px;"></div>
 	</div>
 </body>
 </html>

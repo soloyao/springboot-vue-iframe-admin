@@ -88,3 +88,14 @@ div#app .list{
 .card .icon-times:hover{
 	color:red;
 }
+
+.edit-panel-div-title .icon-times {
+	position: absolute;
+	right: 15px;
+	line-height: 42px;
+}
+
+.edit-panel-div-title .icon-times:hover {
+	color: red;
+	cursor: pointer;
+}
