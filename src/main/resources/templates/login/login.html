@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="include::include"></div>
+	<link href="./static/css/login/login.css" rel="stylesheet" />
+	<script src="./static/js/login/login.js"></script>
+</head>
+<body>
+	<div id="app" class="wrap login_wrap">
+		<div class="index">
+			<a href="index">
+				<div class="logo">
+				</div>
+			</a>
+			<div class="login_box">
+				<div class="login_form">
+					<div class="login_title">
+						登录
+					</div>
+					<div class="form_text_ipt">
+						<input type="text" id="login-name" placeholder="name" v-model="user4Login.name" />
+					</div>
+					<div class="form_text_ipt">
+						<input type="password" placeholder="password" v-model="user4Login.password" @keydown="loginKeyDown" />
+					</div>
+					<div class="form_btn">
+						<button @click="login">login</button>
+					</div>
+					<div class="form_reg_btn">
+						<a href="javascript:void(0);" style="display:inline-block;float:left;">use face</a>
+						<a href="javascript:void(0);" style="display:inline-block;float:right;">use card</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

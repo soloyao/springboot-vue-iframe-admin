@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>Flip Card Clock</title>
+<link rel="stylesheet" href="./static/css/zui.css">
+<link rel="stylesheet" href="./static/css/common/zui.uploader.css">
+<script src="./static/js/common/jquery.min.js"></script>
+<script src="./static/js/common/zui.js"></script>
+<script src="./static/js/common/zui.uploader.js"></script>
+</head>
+<body>
+<img data-toggle="lightbox" src="./static/image/logo_bg.jpg" data-image="./static/image/logo_bg.jpg" data-caption="小图看大图" class="img-thumbnail" alt="" width="200">
+<img id="lightBoxToggle" src="./static/image/logo_bg.jpg" class="img-thumbnail" alt="" width="200">
+<button id="demo">demo</button>
+<script>
+$(function() {
+	$("#lightBoxToggle").lightbox({
+		image: "./static/image/logo_bg.jpg"
+	});
+	
+	$("#demo").click(function() {
+		// 获取实例对象
+		var myLightBox = $('#lightBoxToggle').data('zui.lightbox');
+		// 立即显示
+		myLightBox.show();
+		// 更新图片和描述文本并立即显示
+		//myLightBox.show("./static/image/logo_bg.jpg", '新的图片');
+	});
+	
+	/* $("#lightBoxToggle").click(function() {
+		// 获取实例对象
+		var myLightBox = $('#lightBoxToggle').data('zui.lightbox');
+		// 立即显示
+		//myLightBox.show();
+		// 更新图片和描述文本并立即显示
+		myLightBox.show("./static/image/logo_bg.jpg", '新的图片');
+	}); */
+});
+</script>
+</body>
+</html>

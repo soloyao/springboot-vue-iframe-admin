@@ -1,0 +1,145 @@
+html, body {
+    height: 100%;
+    color: rgb(51, 51, 51);
+    font-size: 12px;
+    font-family: 微软雅黑, MicrosoftYaHei;
+}
+.wrap {
+	max-width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+	margin: 0 auto;
+	background: #ccc;
+}
+.login_wrap {
+	background: url(../../image/logo_bg.jpg) no-repeat center;
+	background-size: 100%;
+}
+
+.logo {
+	width: 500px;
+	height: 150px;
+	margin: 0px auto;
+	background: url(../../image/logowz.png) no-repeat center;
+}
+
+.login_box {
+	width: 360px;
+	background: #FFFFFF;
+	margin: 0px auto;
+}
+
+.login_title {
+	font-size: 25px;
+	text-align: center;
+	color: #FF7F50;
+	padding: 15px 0;
+	width: 300px;
+	margin: 0 auto;
+	border-bottom: solid 1px #CCCCCC;
+}
+
+.form_text_ipt {
+	width: 300px;
+	height: 40px;
+	border: solid 1px #CCCCCC;
+	margin: 20px auto 0 auto;
+	background: #FFFFFF;
+}
+
+.form_text_ipt input {
+	width: 290px;
+	height: 30px;
+	margin: 5px;
+	border: none;
+	font-family: "微软雅黑";
+	font-size: 15px;
+	color: #666;
+}
+
+.form_check_ipt {
+	width: 300px;
+	margin: 10px auto;
+	overflow: hidden;
+}
+
+.form_text_ipt input {
+	width: 290px;
+	height: 30px;
+	margin: 5px;
+	border: none;
+	font-family: "微软雅黑";
+	font-size: 15px;
+	color: #666;
+}
+
+.check_left label {
+	cursor: pointer;
+}
+
+.check_left label input {
+	position: relative;
+	top: 2px;
+}
+
+.form_btn {
+	width: 300px;
+	height: 40px;
+	margin: 10px auto;
+}
+
+.form_btn button {
+	width: 100%;
+	height: 100%;
+	border: none;
+	color: #FFFFFF;
+	font-size: 14px;
+	background: #FF7F50;
+	cursor: pointer;
+}
+
+.form_reg_btn {
+	width: 300px;
+	margin: 0 auto;
+	font-size: 14px;
+	color: #666;
+	padding-bottom:30px;
+}
+
+.other_login {
+	overflow: hidden;
+	width: 300px;
+	height: 80px;
+	line-height: 80px;
+	margin: 0px auto;
+}
+
+.other_left {
+	font-size: 14px;
+	color: #999;
+}
+
+.other_right a {
+	margin: 5px;
+	color: #636363;
+}
+
+.other_right a:hover {
+	color: #AEEEEE;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.red {
+	color: #f60;
+}

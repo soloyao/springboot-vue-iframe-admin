@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="include::include"></div>
+	<script src="./static/js/common/component-pager.js"></script>
+	<link href="./static/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
+	<script src="./static/js/common/jquery.ztree.all.js"></script>
+	<link href="./static/css/user/user.css" rel="stylesheet" />
+	<script src="./static/js/user/user.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div class="col-sm-12 content table-content load-indicator" :class="isLoading?'loading':''" data-loading="正在加载">
+			<div class="panel">
+				<div class="panel-heading">
+					<!-- top start -->
+					<div id="top-div">
+						<!-- search start -->
+						<div class="input-group search-div">
+							<input type="text" class="form-control" id="keyword" placeholder="you can input some keyword to search">
+							<span class="input-group-btn">
+								<button class="btn btn-primary" @click="search">search</button>
+								<button class="btn btn-default" @click="reset">reset</button>
+								<button class="btn btn-success" @click="addEdit">add</button>
+							</span>
+						</div>
+						<!-- search end -->
+					</div>
+					<!-- top end -->
+				</div>
+				<div class="panel-body">
+					<!-- table start -->
+					<div style="height:38px;">
+						 <table class="table table-hover table-striped" style="margin:0px;">
+						 	<thead>
+						 		<th width="76">id</th>
+								<th width="190">name</th>
+								<th width="282">realname</th>
+								<th width="305">phone</th>
+								<th width="178">sex</th>
+								<th width="407">roles</th>
+								<th width="230">operate</th>
+						 	</thead>
+						 </table>
+					</div>
+					<div style="height:calc(100% - 38px);overflow:auto;">
+						<table class="table table-hover table-striped">
+							<tbody>
+								<tr v-for="user in users">
+									<td width="76">{{user.id}}</td>
+									<td width="190">{{user.name}}</td>
+									<td width="282">{{user.realname}}</td>
+									<td width="305">{{user.phone}}</td>
+									<td width="178">{{user.sex}}</td>
+									<td width="407"><template v-for="role in user.roles">{{role.name}}</template></td>
+									<td width="230">
+										<button class="btn btn-xs btn-primary" @click="updateEdit(user)"><i class="icon icon-pencil"></i></button>
+										<button class="btn btn-xs btn-danger" @click="deleteUser(user.id)"><i class="icon icon-trash"></i></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- table end -->
+				</div>
+				<div class="panel-footer">
+					<!-- page start -->
+					<component-pager v-bind.sync="pagination" v-on:list="list"></component-pager>
+					<!-- page end -->
+				</div>
+			</div>
+		</div>
+		
+		<!-- edit start -->
+		<div class="edit-panel-div" :class="isEditShow?'active':''">
+			<div class="edit-panel-div-title">
+				{{editTitle}}
+				<i class="icon icon-times" @click="cancel"></i>
+			</div>
+			<div class="edit-panel-div-content form-horizontal">
+				<div class="form-group">
+					<label for="name" class="col-sm-3 required">name</label>
+					<div class="col-sm-9">
+						<input class="form-control" v-model="user4Add.name" id="name" placeholder="name" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="password" class="col-sm-3 required">password</label>
+					<div class="col-sm-9">
+						<input type="password" class="form-control" v-model="user4Add.password" id="password" placeholder="password" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="realname" class="col-sm-3 required">realname</label>
+					<div class="col-sm-9">
+						<input class="form-control" v-model="user4Add.realname" id="realname" placeholder="realname" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="phone" class="col-sm-3 required">phone</label>
+					<div class="col-sm-9">
+						<input class="form-control" v-model="user4Add.phone" id="phone" placeholder="phone" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="sex" class="col-sm-3 required">sex</label>
+					<div class="col-sm-9">
+						<input class="form-control" v-model="user4Add.sex" id="sex" placeholder="sex" />
+					</div>
+				</div>
+				<span>assign role</span>
+				<!-- ztree start -->
+				<ul id="tree" class="ztree"></ul>
+				<!-- ztree end -->
+			</div>
+			<div class="edit-panel-div-footer">
+				<button class="btn btn-success" @click="save">save</button>
+				<button class="btn btn-default" @click="cancel">cancel</button>
+			</div>
+		</div>
+		<div class="edit-panel-div-shim" @click="cancel" :class="isEditShow?'active':''"></div>
+		<!-- edit end -->
+	</div>
+</body>
+</html>

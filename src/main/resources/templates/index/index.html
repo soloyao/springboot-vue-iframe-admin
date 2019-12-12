@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="shortcut icon" th:href="@{/static/image/favicon.ico}"/>
+	<div th:replace="include::include"></div>
+	<link href="./static/css/index/index.css" rel="stylesheet" />
+	<script src="./static/js/index/index.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div class="center">
+			<div id="navigation" aria-multiselectable="true" class="panel-group" :style="{left:showNav=='none'?'-180px':'0px'}">
+				<div style="text-align:center;margin:15px 0;">
+					<!-- <img src="./static/image/logo.png" alt="system" style="width:50px;"> -->
+					<i class="icon icon-cubes icon-2x" style="color:white;"></i>
+					<span style="font-size:22px;color:white;">one system</span>
+				</div>
+				<div class="panel panel-default" v-for="(item, index) in items">
+					<div class="panel panel-heading">
+						<h4 :class="index == 0 ? 'parent' : ''" class="panel-title text-center" @click="parentClick">
+							<a data-toggle="collapse" data-parent="#navigation" :href="'#' + item.name">
+								<span><i class="icon" :class="item.icon"></i>{{item.name}}<i class="icon icon-caret-right"></i></span>
+							</a>
+						</h4>
+					</div>
+					<div :id="item.name" class="panel-collapse collapse" style="width:90%;margin:0 auto;" :class="index == 0 ? 'in' : ''">
+						<div class="panel-body">
+							<ul class="list-unstyled text-center">
+								<template v-for="(children, ind) in item.children" v-if="children">
+									<!-- <li :class="index == 0 && ind ==0 ? 'children' : ''" @click="childrenClick($event, children)"> -->
+									<li :class="{children:children==active}" @click="childrenClick($event, children)">
+										<!-- <a href="javascript:void(0)" :class="index == 0 && ind ==0 ? 'bg' : ''">{{children.name}}</a> -->
+										<a href="javascript:void(0)">
+											<span><!-- <i class="icon" :class="children.icon"></i> -->{{children.name}}</span>
+										</a>
+									</li>
+								</template>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="page-content" :style="{width:showNav=='none'?'100%':'calc(100% - 180px)'}">
+				<div class="top">
+					<button class="btn btn-success" style="margin-left:10px;" @click="toggleNav" title="toggle menu" data-toggle="tooltip" data-placement="right">
+						<i class="icon icon-bars"></i>
+					</button>
+					<!-- <span class="top-btn-left top-btn"><i class="icon icon-bars" @click="toggleNav"></i></span> -->
+					<span class="top-btn-left top-btn"><i class="icon icon-refresh" @click="refreshNav" data-toggle="tooltip" title="refresh" data-placement="right"></i></span>
+					<div class="right-info">
+						<span class="right-info-date">
+							<!-- beautiful clock -->
+							<div class="clock">
+							  <div class="flip">
+							    <div class="digital front" data-number="0"></div>
+							    <div class="digital back" data-number="1"></div>
+							  </div>
+							  <div class="flip">
+							    <div class="digital front" data-number="0"></div>
+							    <div class="digital back" data-number="1"></div>
+							  </div>
+							  <em class="divider">:</em>
+							  <div class="flip">
+							    <div class="digital front" data-number="0"></div>
+							    <div class="digital back" data-number="1"></div>
+							  </div>
+							  <div class="flip">
+							    <div class="digital front" data-number="0"></div>
+							    <div class="digital back" data-number="1"></div>
+							  </div>
+							  <em class="divider">:</em>
+							  <div class="flip">
+							    <div class="digital front" data-number="0"></div>
+							    <div class="digital back" data-number="1"></div>
+							  </div>
+							  <div class="flip">
+							    <div class="digital front" data-number="0"></div>
+							    <div class="digital back" data-number="1"></div>
+							  </div>
+							</div>
+							<!-- beautiful clock -->
+						</span>
+						<div class="right-info-user dropdown">
+							<img class="right-info-user-img" src="./static/image/usericon.jpg" style="border-radius:50%;">
+							<button data-toggle="dropdown" title="my info">
+			                    <span id="user_loginid">{{name}}</span>
+			                    <i class="right-info-user-icon icon icon-angle-down"></i>
+			                </button>
+			                <ul class="dropdown-menu" role="menu">
+			                    <li><a href="javascript:void(0);" @click="personalInfo"><span class="icon icon-user"></span>&nbsp;personal information</a></li>
+			                    <li class="divider"></li>
+			                    <li><a href="javascript:void(0)" @click="logout"><span class="icon icon-th-large"></span>&nbsp;logout</a></li>
+			                </ul>
+						</div>
+					</div>
+					<span class="top-btn-right top-btn">
+						<i class="icon" :class="isFullScreen?'icon-collapse-full':'icon-expand-full'" title="toggle full screen" data-toggle="tooltip" data-placement="left" @click="fullScreen"></i>
+					</span>
+				</div>
+				<div class="menuTabs">
+					<a href="javascript:void(0)"><i class="icon icon-backward"></i></a>
+					
+					<!-- home tab start -->
+					<a id="tabsHome" href="javascript:void(0)" class="activeTabs" @click="tabsClickHome">home</a>
+					<!-- home tab end -->
+					
+					<template v-for="children in childrens" v-if="children">
+						<a href="javascript:void(0)" @click="tabsClick(children)" :class="{activeTabs:children==active}">
+							{{children.name}}<i class="icon icon-times" @click.stop="deleteTabs(children)"></i>
+						</a>
+					</template>
+					<a href="javascript:void(0)"><i class="icon icon-forward"></i></a>
+				</div>
+				
+				<!-- home iframe start -->
+				<iframe id="ifrHome" class="ifr active" src="home"></iframe>
+				<!-- home iframe end -->
+				
+				<template v-for="children in childrens" v-if="children">
+					<iframe class="ifr ifr-hide" :class="{active:children==active}" :src="children.url"></iframe>
+				</template>
+				<!-- <iframe id="ifr" :src="src"></iframe> -->
+			</div>
+		</div>
+		
+		<div class="modal fade" id="infoModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+		        <h4 class="modal-title">my information</h4>
+		      </div>
+		      <div class="modal-body">
+		        <div class="input-group">
+		        	<span class="input-group-addon">name:</span>
+		        	<input type="text" class="form-control" placeholder="name" v-model="user.name">
+		        </div>
+		        <div class="input-group">
+		        	<span class="input-group-addon">password:</span>
+		        	<input type="password" class="form-control" placeholder="password" v-model="user.password">
+		        </div>
+		        <div class="input-group">
+		        	<span class="input-group-addon">realname:</span>
+		        	<input type="text" class="form-control" placeholder="realname" v-model="user.realname">
+		        </div>
+		        <div class="input-group">
+		        	<span class="input-group-addon">phone:</span>
+		        	<input type="text" class="form-control" placeholder="phone:" v-model="user.phone">
+		        </div>
+		        <div class="input-group">
+		        	<span class="input-group-addon">sex:</span>
+		        	<input type="text" class="form-control" placeholder="sex" v-model="user.sex">
+		        </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+		        <button type="button" class="btn btn-primary">save</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+	</div>
+</body>
+</html>

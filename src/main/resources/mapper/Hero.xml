@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+    <mapper namespace="com.zmy.springbootqx.mapper.HeroMapper">
+    	<select id="list" resultType="Hero">
+    		select * from hero
+    		<if test="keyword != null">
+    			where name like concat('%', #{keyword}, '%')
+    		</if>
+    	</select>
+    	<insert id="add">
+    		insert into hero(name, hp) values(#{name}, #{hp})
+    	</insert>
+    	<delete id="delete">
+    		delete from hero where id = #{id}
+    	</delete>
+    	<update id="update">
+    		update hero set name = #{name}, hp = #{hp} where id = #{id}
+    	</update>
+    	<select id="get" resultType="Hero">
+    		select * from hero where id = #{id}
+    	</select>
+    </mapper>

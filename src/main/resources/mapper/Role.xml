@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+    <mapper namespace="com.zmy.springbootqx.mapper.RoleMapper">
+    	<select id="exist" resultType="int">
+    		select count(*) from role where name = #{name}
+    	</select>
+    	
+    	<resultMap type="Role" id="roleBean">
+    		<id column="id" property="id"/>
+    		<result column="name" property="name"/>
+    		<result column="desc" property="desc"/>
+    		
+    		<collection property="permissions" ofType="Permission"
+    		javaType="java.util.List" select="getPermissionByRoleId" column="id">
+    			<id column="id" property="id"/>
+    			<result column="name" property="name"/>
+    			<result column="desc" property="desc"/>
+    			<result column="url" property="url"/>
+    		</collection>
+    	</resultMap>
+    	
+    	<select id="getPermissionByRoleId" resultType="Permission">
+    		select p.id,p.name,p.desc_ 'desc',p.url from permission p
+    		left join role_permission rp on p.id = rp.pid where rp.rid = #{rid}
+    	</select>
+    	
+    	<select id="list" resultMap="roleBean">
+    		select id,name,desc_ 'desc' from role
+    		<if test="keyword != null">
+    			where name like concat('%', #{keyword}, '%')
+    		</if>
+    	</select>
+    	
+    	<!-- <select id="list" resultType="Role">
+    		select id, name, desc_ 'desc' from role
+    		<if test="keyword != null">
+    			where name like concat('%', #{keyword}, '%')
+    		</if>
+    	</select> -->
+    	<insert id="add" useGeneratedKeys="true" keyProperty="id">
+    		insert into role(name, desc_) values(#{name}, #{desc})
+    	</insert>
+    	<delete id="delete">
+    		delete from role where id = #{id}
+    	</delete>
+    	<delete id="deletePermissionByRoleId">
+    		delete from role_permission where rid = #{id}
+    	</delete>
+    	<insert id="addPermissionByRoleId">
+    		insert into role_permission(rid,pid) values(#{rid},#{pid})
+    	</insert>
+    	<delete id="deleteUserByRoleId">
+    		delete from user_role where rid = #{id}
+    	</delete>
+    	<update id="update">
+    		update role set name = #{name}, desc_ = #{desc} where id = #{id}
+    	</update>
+    	<select id="get" resultMap="roleBean">
+    		select id, name, desc_ 'desc' from role where id = #{id}
+    	</select>
+    </mapper>

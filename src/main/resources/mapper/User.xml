@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+    <mapper namespace="com.zmy.springbootqx.mapper.UserMapper">
+    	<select id="login" resultType="User">
+    		select * from user where name = #{name} and password = #{password}
+    	</select>
+    	
+    	<select id="exist" resultType="int">
+    		select count(*) from user where name = #{name}
+    	</select>
+    	
+    	<resultMap type="User" id="userBean">
+    		<id column="id" property="id"/>
+    		<result column="name" property="name"/>
+    		<result column="password" property="password"/>
+    		<result column="phone" property="phone"/>
+    		<result column="realname" property="realname"/>
+    		<result column="sex" property="sex"/>
+    		
+    		<collection property="roles" ofType="Role"
+    		javaType="java.util.List" select="getRoleByUserId" column="id">
+    			<id column="id" property="id"/>
+    			<result column="name" property="name"/>
+    			<result column="desc" property="desc"/>
+    		</collection>
+    	</resultMap>
+    	
+    	<select id="getRoleByUserId" resultType="Role">
+    		select r.id,r.name,r.desc_ 'desc' from role r 
+    		left join user_role ur on r.id = ur.rid where ur.uid = #{uid}
+    	</select>
+    	
+    	<select id="list" resultMap="userBean">
+    		select * from user
+    		<if test="keyword != null">
+    			where name like concat('%', #{keyword}, '%')
+    		</if>
+    	</select>
+    	
+    	<!-- <select id="list" resultType="User">
+    		select * from user
+    		<if test="keyword != null">
+    			where name like concat('%', #{keyword}, '%') or realname like concat('%', #{keyword}, '%')
+    		</if>
+    	</select> -->
+    	
+    	<select id="get" resultMap="userBean">
+    		select * from user where id = #{id}
+    	</select>
+    	
+    	<delete id="delete">
+    		delete from user where id = #{id}
+    	</delete>
+    	
+    	<delete id="deleteRoleByUserId">
+    		delete from user_role where uid = #{id}
+    	</delete>
+    	
+    	<insert id="addRoleByUserId">
+    		insert into user_role(uid,rid) values(#{uid},#{rid})
+    	</insert>
+    	
+    	<update id="update">
+    		update user set name = #{name}, password = #{password}, realname = #{realname}, phone = #{phone}, sex = #{sex} where id = #{id}
+    	</update>
+    	
+    	<insert id="add" useGeneratedKeys="true" keyProperty="id">
+    		insert into user(name, password, realname, phone, sex) values(#{name}, #{password}, #{realname}, #{phone}, #{sex})
+    	</insert>
+    </mapper>

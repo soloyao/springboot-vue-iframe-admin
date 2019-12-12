@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="include::include"></div>
+	<script src="./static/js/common/component-pager.js"></script>
+	<script src="./static/js/common/component-table.js"></script>
+	<link href="./static/css/systemLog/systemLog.css" rel="stylesheet" />
+	<script src="./static/js/systemLog/systemLog.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div class="col-sm-12 content table-content load-indicator" :class="isLoading?'loading':''" data-loading="正在加载">
+			<div class="panel">
+				<div class="panel-heading">
+					<!-- top start -->
+					<div id="top-div">
+						<!-- search start -->
+						<div class="input-group search-div">
+							<input type="text" class="form-control" id="keyword" placeholder="you can input some keyword to search">
+							<span class="input-group-btn">
+								<button class="btn btn-primary" @click="search">search</button>
+								<button class="btn btn-default" @click="reset">reset</button>
+							</span>
+						</div>
+						<!-- search end -->
+					</div>
+					<!-- top end -->
+				</div>
+				<div class="panel-body">
+					<!-- table start -->
+					<component-table v-bind:ths.sync="listThs" v-bind:list.sync="itemList"></component-table>
+					<!-- table end -->
+				</div>
+				<div class="panel-footer">
+					<!-- page start -->
+					<component-pager v-bind.sync="pagination" v-on:list="list"></component-pager>
+					<!-- page end -->
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

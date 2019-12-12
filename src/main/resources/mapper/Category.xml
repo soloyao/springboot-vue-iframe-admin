@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+    <mapper namespace="com.zmy.springbootqx.mapper.CategoryMapper">
+    	<select id="list" resultType="Category">
+    		select * from category_
+    		<if test="keyword != null">
+    			where name like concat('%', #{keyword}, '%')
+    		</if>
+    	</select>
+    	<insert id="add">
+    		insert into category_(name, image) values(#{name}, #{image})
+    	</insert>
+    	<delete id="delete">
+    		delete from category_ where id = #{id}
+    	</delete>
+    	<update id="update">
+    		update category_ set name = #{name}, image = #{image} where id = #{id}
+    	</update>
+    	<select id="get" resultType="Category">
+    		select * from category_ where id = #{id}
+    	</select>
+    </mapper>

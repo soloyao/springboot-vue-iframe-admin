@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+    <mapper namespace="com.zmy.springbootqx.mapper.SystemLogMapper">
+    	<insert id="save">
+    		insert into systemlog(username,operation,method,ip,createtime) values(#{username},#{operation},#{method},#{ip},#{createtime})
+    	</insert>
+    	<select id="list" resultType="SystemLog">
+    		select id,username,operation,method,ip,DATE_FORMAT(createtime,'%Y-%m-%d %H:%i:%s') as createtime from systemlog
+    		<if test="keyword != null">
+    			where username like concat('%', #{keyword}, '%') or operation like concat('%', #{keyword}, '%')
+    		</if>
+    	</select>
+    </mapper>

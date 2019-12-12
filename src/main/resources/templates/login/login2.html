@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<title>admin system</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="./static/js/common/jquery.min.js"></script>
+	<script src="./static/js/common/zui.js"></script>
+	<script src="./static/js/common/vue.min.js"></script>
+	<script src="./static/js/common/axios.min.js"></script>
+	<script src="./static/js/common/myzui.js"></script>
+	<script src="./static/js/login/login.js"></script>
+	<link href="./static/css/zui.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="./static/css/login/default.css">
+	<link rel="stylesheet" type="text/css" href="./static/css/login/styles.css">
+</head>
+<body>
+<div id="app">
+	<article class="htmleaf-container">
+		<header class="htmleaf-header">
+			<h1>one system login<span>author : zmy(343722243@qq.com)</span></h1>
+			<div class="htmleaf-links">
+			</div>
+		</header>
+		<div class="panel-lite">
+		  <div class="thumbur">
+		  	<img src="./static/image/usericon.jpg" style="border-radius:50%;">
+		    <!-- <div class="icon-lock"></div> -->
+		  </div>
+		  <h4>Login</h4>
+		  <div class="form-group1">
+		    <input required="required" id="login-name" class="form-control1" v-model="user4Login.name" />
+		    <label class="form-label1">name</label>
+		  </div>
+		  <div class="form-group1">
+		    <input type="password" required="required" class="form-control1" v-model="user4Login.password" @keydown="loginKeyDown" />
+		    <label class="form-label1">password</label>
+		  </div><a href="#">forgot password?</a>
+		  <button class="floating-btn" @click="login"><i class="icon-arrow"></i></button>
+		</div>
+	</article>
+</div>
+</body>
+</html>

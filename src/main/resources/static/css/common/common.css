@@ -1,0 +1,139 @@
+div#app {
+	width: 100%;
+	padding: 20px 10px 20px 10px;
+	text-align: center;
+	position: absolute;
+	height: 100%;
+	overflow: auto;
+}
+#app .content {
+	height: 100%;
+}
+#app .table-content .panel-body{
+	height: calc(100% - 98px);
+}
+#app .table-content .panel-footer{
+	background:white;
+	padding:0px;
+	position:relative;
+}
+.panel-footer .pager{
+	margin:8px 0px 0px 0px;
+}
+#app .content .panel-body {
+	overflow: auto;
+}
+#app .content .panel .panel-heading{
+	background:white;
+}
+#app .panel {
+	height: 100%;
+}
+div.edit-panel-div {
+	width: 400px;
+	height: 100%;
+	background-color: white;
+	position: fixed;
+	top: 0;
+	right: -400px;
+	z-index: 19970227;
+	/* transform: translateX(100%); */
+	transition: .5s;
+	box-shadow: 1px 1px 50px rgba(0, 0, 0, .3);
+}
+div.edit-panel-div.active {
+	right: 0px;
+	/* transform: translateX(0); */
+}
+div.edit-panel-div-shim {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 1997;
+	opacity: 0;
+	background: black;
+	transition: .5s;
+}
+div.edit-panel-div-shim.active {
+	opacity: 0.5;
+	width: 100%;
+	height: 100%;
+}
+div.edit-panel-div-title {
+	position: absolute;
+	font-size: 14px;
+	color: white;
+	width: 100%;
+	height: 42px;
+	line-height: 42px;
+	padding: 0 80px 0 20px;
+	background-color: #60c0dc;
+	text-align: left;
+}
+div.edit-panel-div-content {
+	position: absolute;
+	top: 42px;
+	padding: 20px;
+	width: 100%;
+	height: calc(100% - 106px);
+}
+div.edit-panel-div-footer {
+	box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, .05);
+	background:white;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 64px;
+	line-height: 64px;
+	padding: 10px 0;
+}
+div.edit-panel-div-footer .btn {
+	margin-bottom: 20px;
+}
+div.edit-panel-div-footer .btn+.btn {
+	margin-left: 10px;
+}
+div#div4Add {
+	width: 400px;
+	margin: 0 auto;
+}
+div#pagination {
+	text-align: center;
+	line-height: 100px;
+}
+div#pagination a {
+	text-decoration: none;
+}
+td {
+	text-align: left;
+}
+
+a {
+	text-decoration: none;
+}
+#top-div {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.search-div {
+	width: 500px;
+}
+
+.logout-div {
+	margin-bottom: 20px;
+	width: 500px;
+	text-align: right;
+}
+
+.edit-panel-div-title.icon-times {
+	position: absolute;
+	right: 15px;
+	line-height: 42px;
+}
+
+.edit-panel-div-title.icon-times:hover {
+	color: red;
+	cursor: pointer;
+}

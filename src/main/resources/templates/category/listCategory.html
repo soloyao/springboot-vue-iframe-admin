@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="include::include"></div>
+	<script src="./static/js/common/myUpload.js"></script>
+	<script src="./static/js/common/component-pager.js"></script>
+	<script src="./static/js/common/component-table.js"></script>
+	<link href="./static/css/category/category.css" rel="stylesheet" />
+	<script src="./static/js/category/category.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div class="col-md-12 content table-content load-indicator" :class="isLoading?'loading':''" data-loading="正在加载">
+			<div class="panel">
+				<div class="panel-heading">
+					<!-- top start -->
+					<div id="top-div">
+						<!-- search start -->
+						<div class="input-group search-div">
+							<input type="text" class="form-control" id="keyword" placeholder="you can input some keyword to search">
+							<span class="input-group-btn">
+								<button class="btn btn-primary" @click="search">search</button>
+								<button class="btn btn-default" @click="reset">reset</button>
+								<button class="btn btn-success" @click="addEdit">add</button>
+								<button class="btn btn-danger" @click="getCheck">getCheck</button>
+							</span>
+						</div>
+						<!-- search end -->
+					</div>
+					<!-- top end -->
+				</div>
+				<div class="panel-body">
+					<!-- table start -->
+					<component-table v-bind:ths.sync="listThs" v-bind:list.sync="itemList" v-on:update-item="updateEdit" v-on:delete-item="deleteItem"></component-table>
+					<!-- table end -->
+				</div>
+				<div class="panel-footer">
+					<!-- page start -->
+					<component-pager v-bind.sync="pagination" v-on:list="list"></component-pager>
+					<!-- page end -->
+				</div>
+			</div>
+		</div>
+		
+		<!-- edit start -->
+		<div class="edit-panel-div" :class="isEditShow?'active':''">
+			<div class="edit-panel-div-title">
+				{{editTitle}}
+				<i class="icon icon-times" @click="cancel"></i>
+			</div>
+			<div class="edit-panel-div-content form-horizontal">
+				<div class="form-group">
+					<label for="name" class="col-sm-3 required">name</label>
+					<div class="col-sm-9">
+						<input class="form-control" v-model="category4Add.name" id="name" placeholder="name" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3">upload</label>
+					<div class="col-sm-9" style="text-align:left;">
+						<button class="btn btn-info" @click="upload"><i class="icon icon-cloud-upload"></i>upload image</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="card">
+						<img v-if="category4Add.image" :src="'upload/' + category4Add.image" class="img-thumbnail">
+					</div>
+				</div>
+			</div>
+			<div class="edit-panel-div-footer">
+				<button class="btn btn-success" @click="save">save</button>
+				<button class="btn btn-default" @click="cancel">cancel</button>
+			</div>
+		</div>
+		<div class="edit-panel-div-shim" @click="cancel" :class="isEditShow?'active':''"></div>
+		<!-- edit end -->
+	</div>
+</body>
+</html>

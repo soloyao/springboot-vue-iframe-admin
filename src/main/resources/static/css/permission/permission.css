@@ -1,0 +1,24 @@
+@import "../common/common.css";
+
+.list-group-item:first-child {
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.list-group-item:last-child {
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+.panel-heading i {
+	cursor: pointer;
+}
+
+.panel-heading i:hover {
+	color: #3280fc;
+}
+
+.panel-heading i {
+	font-size: 16px;
+	margin-right: 5px;
+}

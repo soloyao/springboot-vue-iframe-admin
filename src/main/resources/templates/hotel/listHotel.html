@@ -1,0 +1,152 @@
+<!DOCTYPE html>	
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="include::include"></div>
+	<script src="./static/js/common/myUpload.js"></script>
+	<script src="./static/js/common/component-pager.js"></script>
+	<script src="./static/js/common/component-table.js"></script>
+	<script src="https://webapi.amap.com/maps?v=1.4.15&key=3b549b12fc5da74a2f140e4673579aa9&plugin=AMap.ToolBar,AMap.MouseTool"></script>
+	<script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+	<link href="./static/css/hotel/hotel.css" rel="stylesheet" />
+	<script src="./static/js/hotel/hotel.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div class="col-md-12 content table-content load-indicator" :class="isLoading?'loading':''" data-loading="正在加载">
+			<div class="panel">
+				<div class="panel-heading">
+					<!-- top start -->
+					<div id="top-div">
+						<!-- search start -->
+						<div class="input-group search-div">
+							<input type="text" class="form-control" id="keyword" placeholder="you can input some keyword to search">
+							<span class="input-group-btn">
+								<button class="btn btn-primary" @click="search">search</button>
+								<button class="btn btn-default" @click="reset">reset</button>
+								<button class="btn btn-success" @click="addEdit">add</button>
+							</span>
+						</div>
+						<!-- search end -->
+					</div>
+					<!-- top end -->
+				</div>
+				<div class="panel-body">
+					<!-- items start -->
+					<div class="col-md-3 content">
+						<div class="panel" id="listPanel" style="border:none;">
+							<div class="panel-body" id="listPanelBody">
+								<div class="list list-condensed">
+									<div class="items items-hover">
+										<div v-if="itemList && itemList.length != 0" v-for="item in itemList" class="item" :class="{activeItem:item==activeItem}" @click="updateEdit(item)">
+											<div class="item-heading">
+												<div class="pull-right">
+													<!-- <i class="icon-edit" data-toggle="tooltip" data-placement="bottom" title="edit" @click="updateEdit(item)">edit</i> -->
+													<i class="icon-trash" data-toggle="tooltip" data-placement="bottom" title="delete" @click.stop="deleteItem(item)">delete</i>
+												</div>
+												<h4><a href="javascript:void(0)">{{item.name}}</a></h4>
+											</div>
+											<hr>
+											<div class="item-content">
+												<p>
+													<strong>联系电话</strong>
+													<span>{{item.phonenumber}}</span>
+												</p>
+												<p>
+													<strong>地址</strong>
+													<span>{{item.address}}</span>
+												</p>
+												<p v-if="item.image">
+													<strong><span class="label label-success">image</span></strong>
+												</p>
+											</div>
+											<div class="item-footer">
+												<span class="text-muted">{{item.createtime}}</span>
+											</div>
+										</div>
+										<div v-if="itemList && itemList.length == 0" style="color:#999;padding:15px;line-height:100px;text-align:center;">
+											暂无数据
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- table end -->
+					<!-- map start -->
+					<div class="col-md-9 content">
+						<div class="panel" id="mapContainerPanel">
+							<div class="panel-body" id="mapContainer">
+								
+							</div>
+						</div>
+					</div>
+					<!-- map end -->
+				</div>
+				<div class="panel-footer">
+					<!-- page start -->
+					<component-pager v-bind.sync="pagination" v-on:list="list"></component-pager>
+					<!-- page end -->
+				</div>
+			</div>
+		</div>
+		
+		<!-- edit start -->
+		<div class="edit-panel-div" :class="isEditShow?'active':''">
+			<div class="edit-panel-div-title">
+				{{editTitle}}
+				<i class="icon icon-times" @click="cancel"></i>
+			</div>
+			<div class="edit-panel-div-content form-horizontal">
+				<div class="form-group">
+					<label for="name" class="col-sm-3 required">name</label>
+					<div class="col-sm-9">
+						<input class="form-control" v-model="hotel4Add.name" id="name" placeholder="name" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="phonenumber" class="col-sm-3">phonenumber</label>
+					<div class="col-sm-9">
+						<input class="form-control" v-model="hotel4Add.phonenumber" id="phonenumber" placeholder="phonenumber" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="address" class="col-sm-3">address</label>
+					<div class="col-sm-9">
+						<input class="form-control" v-model="hotel4Add.address" id="address" placeholder="address" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="location" class="col-sm-3 required">location</label>
+					<div class="col-sm-9">
+						<input class="form-control" v-model="hotel4Add.location" id="loaction" readonly placeholder="location" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3">add</label>
+					<div class="col-sm-9" style="text-align:left;">
+						<button class="btn btn-info" @click="addLocation"><i class="icon icon-plus"></i>draw marker</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3">upload</label>
+					<div class="col-sm-9" style="text-align:left;">
+						<button class="btn btn-info" @click="upload"><i class="icon icon-cloud-upload"></i>upload image</button>
+					</div>
+				</div>
+				<div v-if="hotel4Add.image" class="form-group">
+					<div class="card">
+						<img @click="showImage" :src="'upload/' + hotel4Add.image" class="img-thumbnail">
+						<i class="icon icon-times icon-2x" @click="deleteItemImage"></i>
+					</div>
+				</div>
+			</div>
+			<div class="edit-panel-div-footer">
+				<button class="btn btn-success" @click="save">save</button>
+				<button class="btn btn-default" @click="cancel">cancel</button>
+			</div>
+		</div>
+		<!-- edit end -->
+		<div id="lightBoxToggle" :src="'upload/' + hotel4Add.image" style="width:0px;height:0px;"></div>
+	</div>
+</body>
+</html>

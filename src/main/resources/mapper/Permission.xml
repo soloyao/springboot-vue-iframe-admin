@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+    <mapper namespace="com.zmy.springbootqx.mapper.PermissionMapper">
+    	<select id="listByUser" resultType="Permission">
+    		select p.name,p.url,p.pid,p.id from user u 
+			left join user_role ur on u.id = ur.uid 
+			left join role_permission rp on ur.rid = rp.rid 
+			left join permission p on p.id = rp.pid where u.id = #{id}
+    	</select>
+    	<select id="exist" resultType="int">
+    		select count(*) from permission where name = #{name}
+    	</select>
+    	<select id="list" resultType="Permission">
+    		select id, name, desc_ 'desc', url, pid from permission
+    		where pid = #{pid}
+    		<if test="keyword != null">
+    			and name like concat('%', #{keyword}, '%')
+    		</if>
+    	</select>
+    	<select id="listPermissions" resultType="Permission">
+    		select id, name, desc_ 'desc', url, pid from permission
+    	</select>
+    	<select id="listParentPermissions" resultType="Permission">
+    		select id, name, desc_ 'desc', url from permission
+    		where pid = 0
+    	</select>
+    	<insert id="add">
+    		insert into permission(name, desc_, url, pid) values(#{name}, #{desc}, #{url}, #{pid})
+    	</insert>
+    	<delete id="delete">
+    		delete from permission where id = #{id}
+    	</delete>
+    	<delete id="deleteRoleByPermissionId">
+    		delete from role_permission where pid = #{id}
+    	</delete>
+    	<delete id="deleteChildrenByParentId">
+    		delete from permission where pid = #{id}
+    	</delete>
+    	<update id="update">
+    		update permission set name = #{name}, desc_ = #{desc}, url = #{url}, pid = #{pid} where id = #{id}
+    	</update>
+    	<select id="get" resultType="Permission">
+    		select id, name, desc_ 'desc', url, pid from permission where id = #{id}
+    	</select>
+    </mapper>

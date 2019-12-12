@@ -1,0 +1,14 @@
+@import "../common/common.css";
+
+div.assign-div {
+	text-align: left;
+	width: 300px;
+	margin: 0px auto;
+	padding-left: 50px;
+}
+
+.ztree {
+	width: 230px;
+	overflow: auto;
+	margin: 0 auto;
+}

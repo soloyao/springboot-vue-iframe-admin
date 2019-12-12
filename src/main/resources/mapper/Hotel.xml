@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+    <mapper namespace="com.zmy.springbootqx.mapper.HotelMapper">
+    	<select id="list" resultType="Hotel">
+    		select id,name,phonenumber,address,location,DATE_FORMAT(createtime,'%Y-%m-%d %H:%i:%s') as createtime,image from poi_hotel
+    		<if test="keyword != null">
+    			where name like concat('%', #{keyword}, '%') or address like concat('%', #{keyword}, '%')
+    		</if>
+    	</select>
+    	<insert id="add">
+    		insert into poi_hotel(name,phonenumber,address,location,createtime,image)
+    		values(#{name},#{phonenumber},#{address},#{location},#{createtime},#{image})
+    	</insert>
+    	<delete id="delete">
+    		delete from poi_hotel where id = #{id}
+    	</delete>
+    	<update id="update">
+    		update poi_hotel set name = #{name}, phonenumber = #{phonenumber},
+    		address = #{address}, location = #{location}, createtime = #{createtime}, image = #{image} where id = #{id}
+    	</update>
+    	<select id="get" resultType="Hotel">
+    	    select id,name,phonenumber,address,location,DATE_FORMAT(createtime,'%Y-%m-%d %H:%i:%s') as createtime,image from poi_hotel
+    		where id = #{id}
+    	</select>
+    </mapper>
