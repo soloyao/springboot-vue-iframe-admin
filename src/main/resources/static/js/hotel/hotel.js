@@ -1,11 +1,6 @@
 $(function() {
 		var data4Vue = {
 			itemList: [],
-			listThs: [
-				{name: 'id', width: 249, thname: 'id'},
-				{name: 'name', width: 829, thname: 'name'},
-				{name: 'operate', width: 580, thname: 'operate'}
-			],
 			hotel4Add: {id: 0, name: "", phonenumber: "", address: "", location: "", image: ""},
 			pagination: {},
 			keyword: "",
