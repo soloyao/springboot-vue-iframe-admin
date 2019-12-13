@@ -20,14 +20,20 @@ public class LoginConfiguration extends WebMvcConfigurerAdapter {
         //上传的图片在D盘下的OTA目录下，访问路径如：http://localhost:8081/qx/upload/d3cf0281-bb7f-40e0-ab77-406db95ccf2c.jpg
         //其中OTA表示访问的前缀。"file:D:/springbootUpload/"是文件真实的存储路径
         registry.addResourceHandler("/upload/**").addResourceLocations("file:D:/springbootUpload/");
-		super.addResourceHandlers(registry);
+        
+        //swagger拦截
+        registry.addResourceHandler("swagger-ui.html")
+        .addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**")
+        .addResourceLocations("classpath:/META-INF/resources/webjars/");
+        super.addResourceHandlers(registry);
 	}
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginInterceptor)
 		.addPathPatterns("/**")
-		.excludePathPatterns("/login", "/register", "/demo");
+		.excludePathPatterns("/login", "/register", "/demo", "/swagger-resources/**", "/v2/**", "/configuration/**", "/categories/**");
 		super.addInterceptors(registry);
 	}
 }

@@ -21,6 +21,9 @@ import com.zmy.springbootqx.annotation.LogAnnotation;
 import com.zmy.springbootqx.pojo.Hero;
 import com.zmy.springbootqx.service.HeroService;
 
+import springfox.documentation.annotations.ApiIgnore;
+
+@ApiIgnore
 @RestController
 public class HeroController {
 	@Autowired HeroService heroService;

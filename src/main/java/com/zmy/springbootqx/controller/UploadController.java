@@ -11,6 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.zmy.springbootqx.annotation.LogAnnotation;
 
+import springfox.documentation.annotations.ApiIgnore;
+
+@ApiIgnore
 @RestController
 public class UploadController {
 	@PostMapping("/upload")

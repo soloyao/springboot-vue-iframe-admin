@@ -24,6 +24,9 @@ import com.zmy.springbootqx.pojo.Role;
 import com.zmy.springbootqx.service.PermissionService;
 import com.zmy.springbootqx.service.RoleService;
 
+import springfox.documentation.annotations.ApiIgnore;
+
+@ApiIgnore
 @RestController
 public class RoleController {
 	@Autowired RoleService roleService;

@@ -26,6 +26,9 @@ import com.zmy.springbootqx.pojo.Permission;
 import com.zmy.springbootqx.pojo.User;
 import com.zmy.springbootqx.service.PermissionService;
 
+import springfox.documentation.annotations.ApiIgnore;
+
+@ApiIgnore
 @RestController
 public class PermissionController {
 	@Autowired PermissionService permissionService;

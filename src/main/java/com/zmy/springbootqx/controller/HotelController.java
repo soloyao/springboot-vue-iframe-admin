@@ -21,6 +21,9 @@ import com.zmy.springbootqx.annotation.LogAnnotation;
 import com.zmy.springbootqx.pojo.Hotel;
 import com.zmy.springbootqx.service.HotelService;
 
+import springfox.documentation.annotations.ApiIgnore;
+
+@ApiIgnore
 @RestController
 public class HotelController {
 	@Autowired HotelService hotelService;

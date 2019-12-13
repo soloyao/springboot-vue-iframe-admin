@@ -16,6 +16,9 @@ import com.zmy.springbootqx.annotation.LogAnnotation;
 import com.zmy.springbootqx.pojo.SystemLog;
 import com.zmy.springbootqx.service.SystemLogService;
 
+import springfox.documentation.annotations.ApiIgnore;
+
+@ApiIgnore
 @RestController
 public class SystemLogController {
 	@Autowired SystemLogService systemLogService;

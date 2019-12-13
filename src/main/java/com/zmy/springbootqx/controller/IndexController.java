@@ -6,6 +6,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zmy.springbootqx.annotation.LogAnnotation;
 
+import springfox.documentation.annotations.ApiIgnore;
+
+@ApiIgnore
 @Controller
 public class IndexController {
 	@GetMapping("/login")

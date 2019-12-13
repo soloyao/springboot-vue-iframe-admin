@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -22,10 +23,11 @@ import com.zmy.springbootqx.service.SystemLogService;
 @Aspect
 @Component
 public class WebLogAspect {
+	private static Logger logger = Logger.getLogger(WebLogAspect.class);
 	@Autowired SystemLogService systemLogService;
 	
 	@Before(("execution(* com.zmy.springbootqx.controller.*Controller.*(..)) && @annotation(logAnnotation)"))
-	public void doAfter(JoinPoint joinPoint, LogAnnotation logAnnotation) {
+	public void doBefore(JoinPoint joinPoint, LogAnnotation logAnnotation) {
 		try {
 			SystemLog systemLog = new SystemLog();
 			//接收到请求，记录请求内容
@@ -38,6 +40,8 @@ public class WebLogAspect {
 	        	User user = (User) session.getAttribute("user");
 	        	systemLog.setUsername(user.getName());
 	        }
+	        
+	        logger.info(logAnnotation.desc());
 	        
 	        systemLog.setOperation(logAnnotation.desc());
 	        systemLog.setMethod(joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());

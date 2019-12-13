@@ -27,6 +27,9 @@ import com.zmy.springbootqx.pojo.User;
 import com.zmy.springbootqx.service.RoleService;
 import com.zmy.springbootqx.service.UserService;
 
+import springfox.documentation.annotations.ApiIgnore;
+
+@ApiIgnore
 @RestController
 public class UserController {
 	@Autowired UserService userService;
