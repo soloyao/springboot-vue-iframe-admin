@@ -59,7 +59,7 @@ $(function() {
 			save: function() {
 				var _this = this;
 				if (!_this.role4Add.name || !_this.role4Add.desc) {
-					myzui._error("the params can not be empty");
+					myzui._error("必填参数不能为空");
 					return;
 				}
 				var url = "roles";
@@ -122,7 +122,7 @@ $(function() {
 				var _this = this;
 				var url = "roles";
 				if (!this.role4Add.name || !this.role4Add.desc) {
-					myzui._error("the param can not be empty");
+					myzui._error("必填参数不能为空");
 					return;
 				}
 				axios.post(url, this.role4Add).then(function(res) {
@@ -137,7 +137,7 @@ $(function() {
 			},
 			deleteRole: function(id) {
 				var _this = this;
-				myzui.confirm("confirm delete？", function() {
+				myzui.confirm("确认删除？", function() {
 					var url = "roles/" + id;
 					axios.delete(url).then(function(res) {
 						_this.list(1);

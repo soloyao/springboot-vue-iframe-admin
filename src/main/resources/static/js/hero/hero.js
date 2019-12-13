@@ -3,10 +3,10 @@ $(function() {
 //			heros: [],
 			itemList: [],
 			listThs: [
-				{name: 'id', width: 353, thname: 'id'},
-				{name: 'name', width: 495, thname: 'name'},
-				{name: 'hp', width: 243, thname: 'hp'},
-				{name: 'operate', width: 567, thname: 'operate'}
+				{name: '编号', width: 353, thname: 'id'},
+				{name: '名称', width: 495, thname: 'name'},
+				{name: '血量', width: 243, thname: 'hp'},
+				{name: '操作', width: 567, thname: 'operate'}
 			],
 			hero4Add: {id: 0, name: "", hp: 0},
 			pagination: {},
@@ -27,7 +27,7 @@ $(function() {
 				save: function() {
 					var _this = this;
 					if (!_this.hero4Add.name || _this.hero4Add.hp == 0) {
-						myzui._error("the params can not be empty");
+						myzui._error("必填参数不能为空");
 						return;
 					}
 					var url = "heros";
@@ -72,7 +72,7 @@ $(function() {
 				},
 				deleteItem: function(id) {
 					var _this = this;
-					myzui.confirm("confirm delete？", function() {
+					myzui.confirm("确认删除？", function() {
 						var url = "heros/" + id;
 						axios.delete(url).then(function(res) {
 							_this.list(1);

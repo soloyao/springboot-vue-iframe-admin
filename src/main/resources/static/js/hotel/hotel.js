@@ -71,14 +71,14 @@ $(function() {
 				save: function() {
 					var _this = this;
 					if (!_this.hotel4Add.name || !_this.hotel4Add.location) {
-						myzui._error("the params can not be empty");
+						myzui._error("必填参数不能为空");
 						return;
 					}
 					if (_this.hotel4Add.phonenumber) {
 						var isMobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
 				        var isPhone = /^(?:(?:0\d{2,3})-)?(?:\d{7,8})(-(?:\d{3,}))?$/;
 				        if (!isMobile.exec(_this.hotel4Add.phonenumber) && !isPhone.exec(_this.hotel4Add.phonenumber)) {
-				        	myzui._error("please input correct phonenumber");
+				        	myzui._error("请输入正确的手机号");
 				        	return;
 				        }
 					}
@@ -155,7 +155,7 @@ $(function() {
 				deleteItem: function(item) {
 					var _this = this;
 					_this.cancel();
-					myzui.confirm("confirm delete " + item.name + "？", function() {
+					myzui.confirm("确认删除" + item.name + "？", function() {
 						var url = "hotels/" + item.id;
 						axios.delete(url).then(function(res) {
 							_this.list(1);
@@ -164,12 +164,18 @@ $(function() {
 				},
 				reset: function() {
 					var _this = this;
+					_this.cancel();
 					$("#keyword").val("");
 					_this.keyword = $("#keyword").val();
 					_this.list(1);
 				},
 				search: function() {
+					if (!$("#keyword").val()) {
+						myzui._error("请输入关键词");
+						return;
+					}
 					var _this = this;
+					_this.cancel();
 					_this.keyword = $("#keyword").val();
 					if (_this.keyword) {
 						_this.list(1);

@@ -2,11 +2,11 @@ $(function() {
 		var data4Vue = {
 			itemList: [],
 			listThs: [
-				{name: 'id', width: 172, thname: 'id'},
-				{name: 'username', width: 198, thname: 'username'},
-				{name: 'operation', width: 502, thname: 'operation'},
+				{name: '编号', width: 172, thname: 'id'},
+				{name: '用户名', width: 198, thname: 'username'},
+				{name: '操作', width: 502, thname: 'operation'},
 				{name: 'ip', width: 270, thname: 'ip'},
-				{name: 'createtime', width: 415, thname: 'createtime'}
+				{name: '创建时间', width: 415, thname: 'createtime'}
 			],
 			pagination: {},
 			isLoading: false,

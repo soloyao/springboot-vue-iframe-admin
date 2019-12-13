@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -24,7 +24,7 @@ import com.zmy.springbootqx.service.SystemLogService;
 public class WebLogAspect {
 	@Autowired SystemLogService systemLogService;
 	
-	@After(("execution(* com.zmy.springbootqx.controller.*Controller.*(..)) && @annotation(logAnnotation)"))
+	@Before(("execution(* com.zmy.springbootqx.controller.*Controller.*(..)) && @annotation(logAnnotation)"))
 	public void doAfter(JoinPoint joinPoint, LogAnnotation logAnnotation) {
 		try {
 			SystemLog systemLog = new SystemLog();
@@ -43,7 +43,7 @@ public class WebLogAspect {
 	        systemLog.setMethod(joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
 	        systemLog.setIp(request.getRemoteHost());
 	        systemLog.setCreatetime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-//	        systemLogService.save(systemLog);
+	        systemLogService.save(systemLog);
 		} catch (Exception e) {
 			System.out.println("log error : " + e.getMessage());
 		}

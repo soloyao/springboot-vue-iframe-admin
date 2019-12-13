@@ -13,9 +13,9 @@
 			<!-- parent permission start -->
 			<div class="panel">
 				<div class="panel-heading" style="text-align:right;">
-					<i class="icon icon-plus" @click="addEditParent" data-toggle="tooltip" data-placement="bottom" title="add"></i>
-					<i class="icon icon-edit" @click="updateEditParent" data-toggle="tooltip" data-placement="bottom" title="update"></i>
-					<i class="icon icon-trash" @click="deletePermissionParent" data-toggle="tooltip" data-placement="bottom" title="delete"></i>
+					<i class="icon icon-plus" @click="addEditParent" data-toggle="tooltip" data-placement="bottom" title="新增父菜单"></i>
+					<i class="icon icon-edit" @click="updateEditParent" data-toggle="tooltip" data-placement="bottom" title="修改父菜单"></i>
+					<i class="icon icon-trash" @click="deletePermissionParent" data-toggle="tooltip" data-placement="bottom" title="删除父菜单"></i>
 				</div>
 				<div class="panel-body">
 					<div class="list-group">
@@ -34,11 +34,11 @@
 					<div id="top-div">
 						<!-- search start -->
 						<div class="input-group search-div">
-							<input type="text" class="form-control" id="keyword" placeholder="you can input some keyword to search">
+							<input type="text" class="form-control" id="keyword" placeholder="请输入关键词">
 							<span class="input-group-btn">
-								<button class="btn btn-primary" @click="search">search</button>
-								<button class="btn btn-default" @click="reset">reset</button>
-								<button class="btn btn-success" @click="addEdit">add</button>
+								<button class="btn btn-primary" @click="search">搜索</button>
+								<button class="btn btn-default" @click="reset">重置</button>
+								<button class="btn btn-success" @click="addEdit">新增</button>
 							</span>
 						</div>
 						<!-- search end -->
@@ -69,22 +69,22 @@
 					<div class="modal-body">
 						<div class="form-horizontal">
 							<div class="form-group">
-								<label for="parentName" class="col-sm-2 required">name</label>
+								<label for="parentName" class="col-sm-2 required">名称</label>
 								<div class="col-sm-9">
-									<input class="form-control" v-model="permissionParent4Add.name" id="parentName" placeholder="name" />
+									<input class="form-control" v-model="permissionParent4Add.name" id="parentName" placeholder="名称" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="parentDesc" class="col-sm-2 required">desc</label>
+								<label for="parentDesc" class="col-sm-2 required">描述</label>
 								<div class="col-sm-9">
-									<input class="form-control" v-model="permissionParent4Add.desc" id="parentDesc" placeholder="desc" />
+									<input class="form-control" v-model="permissionParent4Add.desc" id="parentDesc" placeholder="描述" />
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-default" data-dismiss="modal">close</button>
-						<button class="btn btn-primary" @click="saveParent">save</button>
+						<button class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button class="btn btn-primary" @click="saveParent">保存</button>
 					</div>
 				</div>
 			</div>
@@ -99,15 +99,15 @@
 			</div>
 			<div class="edit-panel-div-content form-horizontal">
 				<div class="form-group">
-					<label for="name" class="col-sm-3">name</label>
+					<label for="name" class="col-sm-3">名称</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="permission4Add.name" id="name" placeholder="name" />
+						<input class="form-control" v-model="permission4Add.name" id="name" placeholder="名称" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="desc" class="col-sm-3">desc</label>
+					<label for="desc" class="col-sm-3">描述</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="permission4Add.desc" id="desc" placeholder="desc" />
+						<input class="form-control" v-model="permission4Add.desc" id="desc" placeholder="描述" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -118,8 +118,8 @@
 				</div>
 			</div>
 			<div class="edit-panel-div-footer">
-				<button class="btn btn-success" @click="save">save</button>
-				<button class="btn btn-default" @click="cancel">cancel</button>
+				<button class="btn btn-success" @click="save">保存</button>
+				<button class="btn btn-default" @click="cancel">取消</button>
 			</div>
 		</div>
 		<div class="edit-panel-div-shim" @click="cancel" :class="isEditShow?'active':''"></div>

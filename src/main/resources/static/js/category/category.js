@@ -3,9 +3,9 @@ $(function() {
 //			categories: [],
 			itemList: [],
 			listThs: [
-				{name: 'id', width: 249, thname: 'id'},
-				{name: 'name', width: 829, thname: 'name'},
-				{name: 'operate', width: 580, thname: 'operate'}
+				{name: '编号', width: 249, thname: 'id'},
+				{name: '名称', width: 829, thname: 'name'},
+				{name: '操作', width: 580, thname: 'operate'}
 			],
 			category4Add: {id: 0, name: "", image: ""},
 			pagination: {},
@@ -48,7 +48,7 @@ $(function() {
 				save: function() {
 					var _this = this;
 					if (!_this.category4Add.name) {
-						myzui._error("the params can not be empty");
+						myzui._error("必填参数不能为空");
 						return;
 					}
 					var url = "categories";
@@ -100,7 +100,7 @@ $(function() {
 				},
 				deleteItem: function(id) {
 					var _this = this;
-					myzui.confirm("confirm delete？", function() {
+					myzui.confirm("确认删除？", function() {
 						var url = "categories/" + id;
 						axios.delete(url).then(function(res) {
 							_this.list(1);

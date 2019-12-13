@@ -42,11 +42,11 @@
 			</div>
 			<div class="page-content" :style="{width:showNav=='none'?'100%':'calc(100% - 180px)'}">
 				<div class="top">
-					<button class="btn btn-success" style="margin-left:10px;" @click="toggleNav" title="toggle menu" data-toggle="tooltip" data-placement="right">
+					<button class="btn btn-success" style="margin-left:10px;" @click="toggleNav" title="折叠导航栏" data-toggle="tooltip" data-placement="right">
 						<i class="icon icon-bars"></i>
 					</button>
 					<!-- <span class="top-btn-left top-btn"><i class="icon icon-bars" @click="toggleNav"></i></span> -->
-					<span class="top-btn-left top-btn"><i class="icon icon-refresh" @click="refreshNav" data-toggle="tooltip" title="refresh" data-placement="right"></i></span>
+					<span class="top-btn-left top-btn"><i class="icon icon-refresh" @click="refreshNav" data-toggle="tooltip" title="刷新当前页" data-placement="right"></i></span>
 					<div class="right-info">
 						<span class="right-info-date">
 							<!-- beautiful clock -->
@@ -87,21 +87,21 @@
 			                    <i class="right-info-user-icon icon icon-angle-down"></i>
 			                </button>
 			                <ul class="dropdown-menu" role="menu">
-			                    <li><a href="javascript:void(0);" @click="personalInfo"><span class="icon icon-user"></span>&nbsp;personal information</a></li>
+			                    <li><a href="javascript:void(0);" @click="personalInfo"><span class="icon icon-user"></span>&nbsp;个人信息</a></li>
 			                    <li class="divider"></li>
-			                    <li><a href="javascript:void(0)" @click="logout"><span class="icon icon-th-large"></span>&nbsp;logout</a></li>
+			                    <li><a href="javascript:void(0)" @click="logout"><span class="icon icon-th-large"></span>&nbsp;注销</a></li>
 			                </ul>
 						</div>
 					</div>
 					<span class="top-btn-right top-btn">
-						<i class="icon" :class="isFullScreen?'icon-collapse-full':'icon-expand-full'" title="toggle full screen" data-toggle="tooltip" data-placement="left" @click="fullScreen"></i>
+						<i class="icon" :class="isFullScreen?'icon-collapse-full':'icon-expand-full'" title="折叠全屏" data-toggle="tooltip" data-placement="left" @click="fullScreen"></i>
 					</span>
 				</div>
 				<div class="menuTabs">
 					<a href="javascript:void(0)"><i class="icon icon-backward"></i></a>
 					
 					<!-- home tab start -->
-					<a id="tabsHome" href="javascript:void(0)" class="activeTabs" @click="tabsClickHome">home</a>
+					<a id="tabsHome" href="javascript:void(0)" class="activeTabs" @click="tabsClickHome">首页</a>
 					<!-- home tab end -->
 					
 					<template v-for="children in childrens" v-if="children">

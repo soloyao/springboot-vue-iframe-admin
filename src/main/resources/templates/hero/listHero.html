@@ -16,11 +16,11 @@
 					<div id="top-div">
 						<!-- search start -->
 						<div class="input-group search-div">
-							<input type="text" class="form-control" id="keyword" placeholder="you can input some keyword to search">
+							<input type="text" class="form-control" id="keyword" placeholder="请输入关键词">
 							<span class="input-group-btn">
-								<button class="btn btn-primary" @click="search">search</button>
-								<button class="btn btn-default" @click="reset">reset</button>
-								<button class="btn btn-success" @click="addEdit">add</button>
+								<button class="btn btn-primary" @click="search">搜索</button>
+								<button class="btn btn-default" @click="reset">重置</button>
+								<button class="btn btn-success" @click="addEdit">新增</button>
 							</span>
 						</div>
 						<!-- search end -->
@@ -48,21 +48,21 @@
 			</div>
 			<div class="edit-panel-div-content form-horizontal">
 				<div class="form-group">
-					<label for="name" class="col-sm-3 required">name</label>
+					<label for="name" class="col-sm-3 required">名称</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="hero4Add.name" id="name" placeholder="name" />
+						<input class="form-control" v-model="hero4Add.name" id="name" placeholder="名称" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="hp" class="col-sm-3 required">hp</label>
+					<label for="hp" class="col-sm-3 required">血量</label>
 					<div class="col-sm-9">
-						<input class="form-control" type="number" v-model="hero4Add.hp" id="hp" placeholder="hp" />
+						<input class="form-control" type="number" v-model="hero4Add.hp" id="hp" placeholder="血量" />
 					</div>
 				</div>
 			</div>
 			<div class="edit-panel-div-footer">
-				<button class="btn btn-success" @click="save">save</button>
-				<button class="btn btn-default" @click="cancel">cancel</button>
+				<button class="btn btn-success" @click="save">保存</button>
+				<button class="btn btn-default" @click="cancel">取消</button>
 			</div>
 		</div>
 		<div class="edit-panel-div-shim" @click="cancel" :class="isEditShow?'active':''"></div>

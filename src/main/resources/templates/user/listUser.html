@@ -17,11 +17,11 @@
 					<div id="top-div">
 						<!-- search start -->
 						<div class="input-group search-div">
-							<input type="text" class="form-control" id="keyword" placeholder="you can input some keyword to search">
+							<input type="text" class="form-control" id="keyword" placeholder="请输入关键词">
 							<span class="input-group-btn">
-								<button class="btn btn-primary" @click="search">search</button>
-								<button class="btn btn-default" @click="reset">reset</button>
-								<button class="btn btn-success" @click="addEdit">add</button>
+								<button class="btn btn-primary" @click="search">搜索</button>
+								<button class="btn btn-default" @click="reset">重置</button>
+								<button class="btn btn-success" @click="addEdit">新增</button>
 							</span>
 						</div>
 						<!-- search end -->
@@ -33,13 +33,13 @@
 					<div style="height:38px;">
 						 <table class="table table-hover table-striped" style="margin:0px;">
 						 	<thead>
-						 		<th width="76">id</th>
-								<th width="190">name</th>
-								<th width="282">realname</th>
-								<th width="305">phone</th>
-								<th width="178">sex</th>
-								<th width="407">roles</th>
-								<th width="230">operate</th>
+						 		<th width="76">编号</th>
+								<th width="190">用户名</th>
+								<th width="282">姓名</th>
+								<th width="305">电话</th>
+								<th width="178">性别</th>
+								<th width="407">关联角色</th>
+								<th width="230">操作</th>
 						 	</thead>
 						 </table>
 					</div>
@@ -79,43 +79,43 @@
 			</div>
 			<div class="edit-panel-div-content form-horizontal">
 				<div class="form-group">
-					<label for="name" class="col-sm-3 required">name</label>
+					<label for="name" class="col-sm-3 required">名称</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="user4Add.name" id="name" placeholder="name" />
+						<input class="form-control" v-model="user4Add.name" id="name" placeholder="名称" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="password" class="col-sm-3 required">password</label>
+					<label for="password" class="col-sm-3 required">密码</label>
 					<div class="col-sm-9">
-						<input type="password" class="form-control" v-model="user4Add.password" id="password" placeholder="password" />
+						<input type="password" class="form-control" v-model="user4Add.password" id="password" placeholder="密码" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="realname" class="col-sm-3 required">realname</label>
+					<label for="realname" class="col-sm-3 required">实名</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="user4Add.realname" id="realname" placeholder="realname" />
+						<input class="form-control" v-model="user4Add.realname" id="realname" placeholder="实名" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="phone" class="col-sm-3 required">phone</label>
+					<label for="phone" class="col-sm-3 required">电话</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="user4Add.phone" id="phone" placeholder="phone" />
+						<input class="form-control" v-model="user4Add.phone" id="phone" placeholder="电话" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="sex" class="col-sm-3 required">sex</label>
+					<label for="sex" class="col-sm-3 required">性别</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="user4Add.sex" id="sex" placeholder="sex" />
+						<input class="form-control" v-model="user4Add.sex" id="sex" placeholder="性别" />
 					</div>
 				</div>
-				<span>assign role</span>
+				<span>关联角色</span>
 				<!-- ztree start -->
 				<ul id="tree" class="ztree"></ul>
 				<!-- ztree end -->
 			</div>
 			<div class="edit-panel-div-footer">
-				<button class="btn btn-success" @click="save">save</button>
-				<button class="btn btn-default" @click="cancel">cancel</button>
+				<button class="btn btn-success" @click="save">保存</button>
+				<button class="btn btn-default" @click="cancel">取消</button>
 			</div>
 		</div>
 		<div class="edit-panel-div-shim" @click="cancel" :class="isEditShow?'active':''"></div>

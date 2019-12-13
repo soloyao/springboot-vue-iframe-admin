@@ -6,11 +6,11 @@ $(function() {
 //		permissions: [],
 		itemList: [],
 		listThs: [
-			{name: 'id', width: 94, thname: 'id'},
-			{name: 'name', width: 310, thname: 'name'},
-			{name: 'desc', width: 311, thname: 'desc'},
+			{name: '编号', width: 94, thname: 'id'},
+			{name: '名称', width: 310, thname: 'name'},
+			{name: '描述', width: 311, thname: 'desc'},
 			{name: 'url', width: 382, thname: 'url'},
-			{name: 'operate', width: 284, thname: 'operate'}
+			{name: '操作', width: 284, thname: 'operate'}
 		],
 		permissionParent4Add: {id: 0, name: "", desc: "", pid: 0, url: "", pid: 0},
 		permission4Add: {id: 0, name: "", desc: "", url: "", pid: 0},
@@ -36,7 +36,7 @@ $(function() {
 			saveParent() {
 				var _this = this;
 				if (!_this.permissionParent4Add.name || !_this.permissionParent4Add.desc) {
-					myzui._error("the params can not be empty");
+					myzui._error("必填参数不能为空");
 					return;
 				}
 				var url = "permissions";
@@ -63,7 +63,7 @@ $(function() {
 			save: function() {
 				var _this = this;
 				if (!_this.permission4Add.name || !_this.permission4Add.desc || !_this.permission4Add.url) {
-					myzui._error("the params can not be empty");
+					myzui._error("必填参数不能为空");
 					return;
 				}
 				var url = "permissions";
@@ -152,7 +152,7 @@ $(function() {
 			deletePermissionParent: function() {
 				var id = this.parentPermission.id;
 				var _this = this;
-				myzui.confirm("confirm delete?", function() {
+				myzui.confirm("确认删除?", function() {
 					var url = "permissions/" + id;
 					axios.delete(url).then(function(res) {
 						_this.listParentPermission();
@@ -161,7 +161,7 @@ $(function() {
 			},
 			deleteItem: function(id) {
 				var _this = this;
-				myzui.confirm("confirm delete?", function() {
+				myzui.confirm("确认删除?", function() {
 					var url = "permissions/" + id;
 					axios.delete(url).then(function(res) {
 						_this.list(1);

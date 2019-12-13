@@ -40,7 +40,7 @@ Vue.component("component-table", {
 			"<table class='table table-hover table-striped' style='margin:0px;'>" +
 			"<thead>" +
 			"<tr>" +
-			"<th><div @click='checkboxAll' class='checkbox-primary'><label></label></div></th>" +
+			"<th><div @click='checkboxAll' class='checkbox-primary' style='width:16px;'><label></label></div></th>" +
 			"<th v-for='listTh in ths' :width='listTh.width'>{{listTh.name}}</th>" +
 			"</tr>" +
 			"</thead>" +
@@ -50,10 +50,11 @@ Vue.component("component-table", {
 			"<table class='table table-hover table-striped'>" +
 			"<tbody>" +
 			"<tr v-for='item in list'>" +
-			"<td><div @click='checkbox' class='checkbox-primary checkbox-children' :data-id='item.id'><label></label></div></td>" +
+			"<td><div @click='checkbox' class='checkbox-primary checkbox-children' style='width:16px;' :data-id='item.id'><label></label></div></td>" +
 			"<template v-for='th in ths'>" +
 			"<td v-if='item[th.thname]' :width='th[\"width\"]'>{{item[th['thname']]}}</td>" +
-			"<td v-else :width='th[\"width\"]'>" +
+			"<td v-if='!item[th.thname] && th.thname != \"operate\"'>{{item[th['thname']]}}</td>" +
+			"<td v-if='!item[th.thname] && th.thname == \"operate\"' :width='th[\"width\"]'>" +
 			"<button class='btn btn-xs btn-primary' @click='update(item)'><i class='icon icon-pencil'></i></button>" +
 			"<button class='btn btn-xs btn-danger' style='margin-left:5px;' @click='deleteItem(item)'><i class='icon icon-trash'></i></button>" +
 			"</td>" +

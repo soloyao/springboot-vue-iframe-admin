@@ -19,11 +19,11 @@
 					<div id="top-div">
 						<!-- search start -->
 						<div class="input-group search-div">
-							<input type="text" class="form-control" id="keyword" placeholder="you can input some keyword to search">
+							<input type="text" class="form-control" id="keyword" placeholder="请输入关键词">
 							<span class="input-group-btn">
-								<button class="btn btn-primary" @click="search">search</button>
-								<button class="btn btn-default" @click="reset">reset</button>
-								<button class="btn btn-success" @click="addEdit">add</button>
+								<button class="btn btn-primary" @click="search">搜索</button>
+								<button class="btn btn-default" @click="reset">重置</button>
+								<button class="btn btn-success" @click="addEdit">新增</button>
 							</span>
 						</div>
 						<!-- search end -->
@@ -40,8 +40,7 @@
 										<div v-if="itemList && itemList.length != 0" v-for="item in itemList" class="item" :class="{activeItem:item==activeItem}" @click="updateEdit(item)">
 											<div class="item-heading">
 												<div class="pull-right">
-													<!-- <i class="icon-edit" data-toggle="tooltip" data-placement="bottom" title="edit" @click="updateEdit(item)">edit</i> -->
-													<i class="icon-trash" data-toggle="tooltip" data-placement="bottom" title="delete" @click.stop="deleteItem(item)">delete</i>
+													<i class="icon-trash" data-toggle="tooltip" data-placement="bottom" title="删除" @click.stop="deleteItem(item)">删除</i>
 												</div>
 												<h4><a href="javascript:void(0)">{{item.name}}</a></h4>
 											</div>
@@ -71,7 +70,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- table end -->
+					<!-- items end -->
 					<!-- map start -->
 					<div class="col-md-9 content">
 						<div class="panel" id="mapContainerPanel">
@@ -98,39 +97,39 @@
 			</div>
 			<div class="edit-panel-div-content form-horizontal">
 				<div class="form-group">
-					<label for="name" class="col-sm-3 required">name</label>
+					<label for="name" class="col-sm-3 required">名称</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="hotel4Add.name" id="name" placeholder="name" />
+						<input class="form-control" v-model="hotel4Add.name" id="name" placeholder="名称" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="phonenumber" class="col-sm-3">phonenumber</label>
+					<label for="phonenumber" class="col-sm-3">联系电话</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="hotel4Add.phonenumber" id="phonenumber" placeholder="phonenumber" />
+						<input class="form-control" v-model="hotel4Add.phonenumber" id="phonenumber" placeholder="联系电话" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="address" class="col-sm-3">address</label>
+					<label for="address" class="col-sm-3">地址</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="hotel4Add.address" id="address" placeholder="address" />
+						<input class="form-control" v-model="hotel4Add.address" id="address" placeholder="地址" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="location" class="col-sm-3 required">location</label>
+					<label for="location" class="col-sm-3 required">坐标</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="hotel4Add.location" id="loaction" readonly placeholder="location" />
+						<input class="form-control" v-model="hotel4Add.location" id="loaction" readonly placeholder="坐标" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3">add</label>
+					<label class="col-sm-3">绘点</label>
 					<div class="col-sm-9" style="text-align:left;">
-						<button class="btn btn-info" @click="addLocation"><i class="icon icon-plus"></i>draw marker</button>
+						<button class="btn btn-info" @click="addLocation"><i class="icon icon-plus"></i>绘点</button>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3">upload</label>
+					<label class="col-sm-3">上传</label>
 					<div class="col-sm-9" style="text-align:left;">
-						<button class="btn btn-info" @click="upload"><i class="icon icon-cloud-upload"></i>upload image</button>
+						<button class="btn btn-info" @click="upload"><i class="icon icon-cloud-upload"></i>上传图片</button>
 					</div>
 				</div>
 				<div v-if="hotel4Add.image" class="form-group">
@@ -141,8 +140,8 @@
 				</div>
 			</div>
 			<div class="edit-panel-div-footer">
-				<button class="btn btn-success" @click="save">save</button>
-				<button class="btn btn-default" @click="cancel">cancel</button>
+				<button class="btn btn-success" @click="save">保存</button>
+				<button class="btn btn-default" @click="cancel">取消</button>
 			</div>
 		</div>
 		<!-- edit end -->

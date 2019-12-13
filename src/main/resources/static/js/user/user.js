@@ -48,11 +48,11 @@ $(function() {
 			save: function() {
 				var _this = this;
 				if (!this.user4Add.name || !this.user4Add.password || !this.user4Add.realname || !this.user4Add.phone || !this.user4Add.sex) {
-					myzui._error("the param can not be empty");
+					myzui._error("必填参数不能为空");
 					return;
 				}
 				if (zTreeObj.getCheckedNodes(true).length == 0) {
-					myzui._error("please assign a role to the user");
+					myzui._error("请给用户分配一个角色");
 					return;
 				}
 				var url = "users";
@@ -114,7 +114,7 @@ $(function() {
 				var _this = this;
 				var url = "users";
 				if (!this.user4Add.name || !this.user4Add.password || !this.user4Add.realname || !this.user4Add.phone || !this.user4Add.sex) {
-					myzui._error("the param can not be empty");
+					myzui._error("必填参数不能为空");
 					return;
 				}
 				axios.post(url, this.user4Add).then(function(res) {
@@ -129,7 +129,7 @@ $(function() {
 			},
 			deleteUser: function(id) {
 				var _this = this;
-				myzui.confirm("confirm delete？", function() {
+				myzui.confirm("确认删除？", function() {
 					var url = "users/" + id;
 					axios.delete(url).then(function(res) {
 						_this.list(1);
