@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.zmy.springbootqx.Application;
+import com.zmy.springbootqx.QxApplication;
 import com.zmy.springbootqx.mapper.PermissionMapper;
 import com.zmy.springbootqx.mapper.UserMapper;
 import com.zmy.springbootqx.pojo.User;
@@ -16,7 +16,7 @@ import com.zmy.springbootqx.service.PermissionService;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = QxApplication.class)
 public class TestJunit {
 	@Autowired UserMapper userMapper;
 	@Autowired PermissionMapper permissionMapper;
