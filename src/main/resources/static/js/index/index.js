@@ -23,7 +23,7 @@ $(function() {
 		},
 		methods: {
 			logout: function() {
-				myzui.confirm("confirm logout？", function() {
+				myzui.confirm("确认注销？", function() {
 					var url = "logout";
 					sessionStorage.clear();
 					axios.get(url).then(function() {
@@ -72,7 +72,7 @@ $(function() {
 				        elem.requestFullscreen();
 				    } else {
 				    	this.isFullScreen = false;
-				    	myzui._error("the document does not support full screen api");
+				    	myzui._error("浏览器不支持全屏，请勿使用ie浏览器并升级浏览器为最新版本");
 				    }
 				} else {
 					this.isFullScreen = false;
@@ -86,7 +86,7 @@ $(function() {
 				    } else if (elem.exitFullscreen) {
 				        elem.exitFullscreen();
 				    } else {
-				    	myzui._error("the document does not support full screen api");
+				    	myzui._error("浏览器不支持全屏，请勿使用ie浏览器并升级浏览器为最新版本");
 				    }
 				}
 			},

@@ -47,7 +47,7 @@ public class WebLogAspect {
 	        systemLog.setMethod(joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
 	        systemLog.setIp(request.getRemoteHost());
 	        systemLog.setCreatetime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-	        systemLogService.save(systemLog);
+//	        systemLogService.save(systemLog);
 		} catch (Exception e) {
 			System.out.println("log error : " + e.getMessage());
 		}

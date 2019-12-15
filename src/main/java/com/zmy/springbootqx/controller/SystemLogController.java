@@ -16,15 +16,24 @@ import com.zmy.springbootqx.annotation.LogAnnotation;
 import com.zmy.springbootqx.pojo.SystemLog;
 import com.zmy.springbootqx.service.SystemLogService;
 
-import springfox.documentation.annotations.ApiIgnore;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 
-@ApiIgnore
 @RestController
+@Api(value = "日志查询")
 public class SystemLogController {
 	@Autowired SystemLogService systemLogService;
 	
 	@GetMapping("/systemLogs")
 	@LogAnnotation(desc = "分页获取所有日志")
+	@ApiOperation(value = "分页获取所有日志")
+	@ApiImplicitParams({
+		@ApiImplicitParam(paramType = "query", name = "start", value = "当前页", defaultValue = "1", required = false, dataType = "int"),
+		@ApiImplicitParam(paramType = "query", name = "size", value = "一页大小", defaultValue = "10", required = false, dataType = "int"),
+		@ApiImplicitParam(paramType = "query", name = "keyword", value = "搜索关键词", defaultValue = "", required = false, dataType = "string")
+	})
 	public PageInfo<SystemLog> list(@RequestParam(value = "start", defaultValue = "1") int start,
 			@RequestParam(value = "size", defaultValue = "15") int size,
 			@RequestParam(value = "keyword", defaultValue = "") String keyword) {

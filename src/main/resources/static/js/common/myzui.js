@@ -98,8 +98,8 @@ myzui.confirm = function(question, callback, callback2) {
 						<h4 class="modal-title" id="myzui_confirm_title">&nbsp;</h4>\
 					</div>\
 					<div class="modal-footer">\
-						<button type="button" class="btn btn-default" data-dismiss="modal" id="myzui_confirm_cancel">cancel</button>\
-						<button type="button" class="btn btn-danger" id="myzui_confirm_ok">confirm</button>\
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="myzui_confirm_cancel">取消</button>\
+						<button type="button" class="btn btn-danger" id="myzui_confirm_ok">确认</button>\
 					</div>\
 				</div>\
 			</div>\
