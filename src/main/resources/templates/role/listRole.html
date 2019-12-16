@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div id="app">
-		<div class="col-sm-12 content table-content load-indicator" :class="isLoading?'loading':''" data-loading="正在加载">
+		<div class="col-md-10 content table-content load-indicator" :class="isLoading?'loading':''" data-loading="正在加载">
 			<div class="panel">
 				<div class="panel-heading">
 					<!-- top start -->
@@ -22,6 +22,7 @@
 								<button class="btn btn-primary" @click="search">搜索</button>
 								<button class="btn btn-default" @click="reset">重置</button>
 								<button class="btn btn-success" @click="addEdit">新增</button>
+								<button class="btn btn-danger" @click="getCheck">获取选中行</button>
 							</span>
 						</div>
 						<!-- search end -->
@@ -33,6 +34,7 @@
 					<div style="height:38px;">
 						<table class="table table-hover table-striped" style="margin:0px;">
 							<thead>
+								<th><div @click="checkboxAll" class="checkbox-primary checkbox-parent" style="width:16px;"><label></label></div></th>
 								<th width="56">编号</th>
 								<th width="301">名称</th>
 								<th width="301">描述</th>
@@ -45,6 +47,7 @@
 						<table class="table table-hover table-striped">
 							<tbody>
 								<tr v-for="role in roles">
+									<td><div @click="checkbox" class="checkbox-primary checkbox-children" style="width:16px;" :data-id="role.id"><label></label></div></td>
 									<td width="56">{{role.id}}</td>
 									<td width="301">{{role.name}}</td>
 									<td width="301">{{role.desc}}</td>
@@ -63,6 +66,20 @@
 					<!-- page start -->
 					<component-pager v-bind.sync="pagination" v-on:list="list"></component-pager>
 					<!-- page end -->
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-2 content">
+			<div class="panel">
+				<div class="panel-heading" style="text-align:left;">
+					<button class="btn btn-success" @click="saveBatch">批量分配权限</button>
+				</div>
+				<div class="panel-body">
+					<span>关联权限</span>
+					<!-- ztree batch start -->
+					<ul id="treeBatch" class="ztree"></ul>
+					<!-- ztree batch end -->
 				</div>
 			</div>
 		</div>

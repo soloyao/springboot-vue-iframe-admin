@@ -19,13 +19,13 @@ Vue.component("component-table", {
 		deleteItem(item) {
 			this.$emit("delete-item", item.id);
 		},
-		checkboxAll(e) {
-			var el = e.target;
-			$(el).parent(".checkbox-primary").toggleClass("checked");
+		checkboxAll() {
 			if (!this.checkboxAllFlag) {
+				$(".checkbox-parent").addClass("checked");
 				$(".checkbox-children").addClass("checked");
 				this.checkboxAllFlag = true;
 			} else {
+				$(".checkbox-parent").removeClass("checked");
 				$(".checkbox-children").removeClass("checked");
 				this.checkboxAllFlag = false;
 			}
@@ -33,6 +33,17 @@ Vue.component("component-table", {
 		checkbox(e) {
 			var el = e.target;
 			$(el).parent(".checkbox-primary").toggleClass("checked");
+			var allFlag = true;
+			$(".checkbox-children").map(function(item, ele) {
+				if (!$(ele).hasClass("checked")) {
+					allFlag = false;
+				}
+			});
+			if (allFlag) {
+				$(".checkbox-parent").addClass("checked");
+			} else {
+				$(".checkbox-parent").removeClass("checked");
+			}
 		}
 	},
 	template: "<div id='component-table' style='height:100%;'>" +
@@ -40,7 +51,7 @@ Vue.component("component-table", {
 			"<table class='table table-hover table-striped' style='margin:0px;'>" +
 			"<thead>" +
 			"<tr>" +
-			"<th><div @click='checkboxAll' class='checkbox-primary' style='width:16px;'><label></label></div></th>" +
+			"<th><div @click='checkboxAll' class='checkbox-primary checkbox-parent' style='width:16px;'><label></label></div></th>" +
 			"<th v-for='listTh in ths' :width='listTh.width'>{{listTh.name}}</th>" +
 			"</tr>" +
 			"</thead>" +

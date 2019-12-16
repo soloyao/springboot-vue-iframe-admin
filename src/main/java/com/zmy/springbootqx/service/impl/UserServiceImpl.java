@@ -2,6 +2,7 @@ package com.zmy.springbootqx.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +61,25 @@ public class UserServiceImpl implements UserService {
 		}
 		//修改用户基础信息
 		userMapper.update(user);
+	}
+	
+	@Override
+	public void updateBatch(Set<String> userIds, Set<String> roleIds) {
+		//删除当前用户关联角色
+		for (String userId : userIds) {
+			userMapper.deleteRoleByUserId(Integer.parseInt(userId));
+		}
+		//修改用户关联角色
+		if (null != roleIds) {//为空则表示去掉用户所有角色
+			for (String userId : userIds) {
+				for (String roleId : roleIds) {
+					UserRole userRole = new UserRole();
+					userRole.setRid(Integer.parseInt(roleId));
+					userRole.setUid(Integer.parseInt(userId));
+					userMapper.addRoleByUserId(userRole);
+				}
+			}
+		}
 	}
 
 	@Override

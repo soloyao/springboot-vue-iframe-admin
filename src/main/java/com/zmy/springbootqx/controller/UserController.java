@@ -2,8 +2,10 @@ package com.zmy.springbootqx.controller;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -89,6 +91,23 @@ public class UserController {
 	public List<Role> get() {
 		List<Role> roles = roleService.list(null);
 		return roles;
+	}
+	
+	@PostMapping("/usersBatch")
+	@LogAnnotation(desc = "批量分配用户角色")
+	public String addBatch(@RequestBody JSONObject params) {
+		String[] userStrs = params.get("userIds").toString().split(",");
+		Set<String> userIds = new HashSet<String>();
+		for (String userStr : userStrs) {
+			userIds.add(userStr);
+		}
+		String[] roleStrs = params.get("roleIds").toString().split(",");
+		Set<String> roleIds = new HashSet<String>();
+		for (String roleStr : roleStrs) {
+			roleIds.add(roleStr);
+		}
+		userService.updateBatch(userIds, roleIds);
+		return "success";
 	}
 	
 	@PostMapping("/users")

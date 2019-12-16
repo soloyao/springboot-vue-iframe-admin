@@ -1,8 +1,10 @@
 package com.zmy.springbootqx.controller;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -62,6 +64,23 @@ public class RoleController {
 	public List<Permission> get() {
 		List<Permission> permissions = permissionService.listPermissions();
 		return permissions;
+	}
+	
+	@PostMapping("/rolesBatch")
+	@LogAnnotation(desc = "批量分配角色权限")
+	public String addBatch(@RequestBody JSONObject params) {
+		String[] roleStrs = params.get("roleIds").toString().split(",");
+		Set<String> roleIds = new HashSet<String>();
+		for (String roleStr : roleStrs) {
+			roleIds.add(roleStr);
+		}
+		String[] permissionStrs = params.get("permissionIds").toString().split(",");
+		Set<String> permissionIds = new HashSet<String>();
+		for (String permissionStr : permissionStrs) {
+			permissionIds.add(permissionStr);
+		}
+		roleService.updateBatch(roleIds, permissionIds);
+		return "success";
 	}
 	
 	@PostMapping("/roles")

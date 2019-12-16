@@ -5,6 +5,7 @@ div#app {
 	position: absolute;
 	height: 100%;
 	overflow: auto;
+	background:#fafafa;
 }
 #app .content {
 	height: 100%;

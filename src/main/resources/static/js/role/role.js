@@ -25,7 +25,36 @@ $(function() {
 			}
 		}
 	};
-	var zTreeNodes;
+	var zTreeNodes = [];
+	
+	var zTreeObjBatch;
+	var settingBatch = {
+		check: {
+			enable: true,
+			chkStyle: "checkbox"
+		},
+		view: {
+			selectedMulti: false
+		},
+		data: {
+			simpleData: {
+				enable: true,
+				idKey: "id",
+				pIdKey: "pid",
+				rootPId: 0
+			},
+			key: {
+				url: "xUrl"
+			}
+		},
+		callback: {
+			onClick: function(e, treeId, treeNode, clickFlag) {
+				zTreeObjBatch.checkNode(treeNode, !treeNode.checked, true);
+			}
+		}
+	};
+	var zTreeNodesBatch = [];
+	
 	var data4Vue = {
 		permissions: [],
 		roles: [],
@@ -35,7 +64,8 @@ $(function() {
 		isEditShow: false,
 		isLoading: false,
 		editTitle: "",
-		size: 15
+		size: 15,
+		checkboxAllFlag: false
 	};
 	
 	var vue = new Vue({
@@ -46,14 +76,76 @@ $(function() {
 			this.listPermissions();
 		},
 		methods: {
+			getCheck() {
+				var str = $("tbody .checked").map(function(item, ele) {
+					console.log($(ele).data("id"));
+					return $(ele).data("id");
+				}).get().join(",");
+				console.log(str);
+			},
+			checkboxAll: function(e) {
+				if (!this.checkboxAllFlag) {
+					$(".checkbox-parent").addClass("checked");
+					$(".checkbox-children").addClass("checked");
+					this.checkboxAllFlag = true;
+				} else {
+					$(".checkbox-parent").removeClass("checked");
+					$(".checkbox-children").removeClass("checked");
+					this.checkboxAllFlag = false;
+				}
+			},
+			checkbox: function(e) {
+				var el = e.target;
+				$(el).parent(".checkbox-primary").toggleClass("checked");
+				var allFlag = true;
+				$(".checkbox-children").map(function(item, ele) {
+					if (!$(ele).hasClass("checked")) {
+						allFlag = false;
+					}
+				});
+				if (allFlag) {
+					$(".checkbox-parent").addClass("checked");
+				} else {
+					$(".checkbox-parent").removeClass("checked");
+				}
+			},
 			listPermissions: function() {
 				var _this = this;
 				var url ="listPermissions";
 				axios.get(url).then(function(res) {
 					_this.permissions = res.data;
+					zTreeNodesBatch = res.data;
 					zTreeNodes = res.data;
+					zTreeObjBatch = $.fn.zTree.init($("#treeBatch"), settingBatch, zTreeNodesBatch);
+					zTreeObjBatch.checkAllNodes(false);
 					zTreeObj = $.fn.zTree.init($("#tree"), setting, zTreeNodes);
+					zTreeObjBatch.expandAll(true);
 					zTreeObj.expandAll(true);
+				});
+			},
+			saveBatch() {
+				var _this = this;
+				var nodes = zTreeObjBatch.transformToArray(zTreeObjBatch.getNodes());
+				var arr = [];
+				for (var i = 0, l = nodes.length; i < l; i++) {
+					if(nodes[i].checked && nodes[i].id != "pid"){
+						arr.push(nodes[i].id);
+					}
+				}
+				var permissionIds = arr.join(",");
+				var roleIds = $("tbody .checked").map(function(item, ele) {
+					return $(ele).data("id");
+				}).get().join(",");
+				if (!roleIds || !permissionIds) {
+					myzui._error("所选角色或权限不能为空");
+					return;
+				}
+				axios.post("rolesBatch", {roleIds: roleIds, permissionIds: permissionIds}).then(function(res) {
+					myzui._success("权限分配成功");
+					zTreeObjBatch.checkAllNodes(false);
+					_this.list(1);
+					_this.checkboxAllFlag = true;
+					_this.checkboxAll();
 				});
 			},
 			save: function() {

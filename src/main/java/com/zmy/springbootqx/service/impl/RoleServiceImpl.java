@@ -2,6 +2,7 @@ package com.zmy.springbootqx.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,25 @@ public class RoleServiceImpl implements RoleService {
 		roleMapper.update(role);
 	}
 
+	@Override
+	public void updateBatch(Set<String> roleIds, Set<String> permissionIds) {
+		//删除当前角色关联权限
+		for (String roleId : roleIds) {
+			roleMapper.deletePermissionByRoleId(Integer.parseInt(roleId));
+		}
+		//修改角色关联权限
+		if (null != permissionIds) {//为空则表示去掉角色所有权限
+			for (String roleId : roleIds) {
+				for (String permissionId : permissionIds) {
+					RolePermission rolePermission = new RolePermission();
+					rolePermission.setPid(Integer.parseInt(permissionId));
+					rolePermission.setRid(Integer.parseInt(roleId));
+					roleMapper.addPermissionByRoleId(rolePermission);
+				}
+			}
+		}
+	}
+	
 	@Override
 	public int exist(Role role) {
 		return roleMapper.exist(role);
