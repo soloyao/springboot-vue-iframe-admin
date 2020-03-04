@@ -107,6 +107,12 @@ $(function() {
 				if (children == _this.active) {
 					_this.active = arr[arr.length - 1];
 				}
+				if (typeof _this.active == "undefined") {
+					_this.active = _this.home;
+					$("#tabsHome").addClass("activeTabs");
+					$("#ifrHome").addClass("active");
+					$("#ifrHome").removeClass("ifr-hide");
+				}
 			},
 			tabsClick: function(children) {
 				this.active = children;
