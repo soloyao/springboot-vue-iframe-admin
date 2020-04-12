@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="include::include"></div>
+	<script>
+		$(function() {
+			var user = {
+					loginUsername: "admin",
+					loginPassword: "123456"
+			};
+			axios({
+				url: "druid/submitLogin",
+				method: "post",
+				data: user,
+				 transformRequest: [function (data) {
+		                let ret = ''
+		                for (let it in data) {
+		                  ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+		                }
+		                return ret
+		              }],
+		              headers: {
+		                'Content-Type': 'application/x-www-form-urlencoded'
+		              }
+			}).then(function(res) {
+				if (res.data == "success") {
+					location.href = "druid/index.html";
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>

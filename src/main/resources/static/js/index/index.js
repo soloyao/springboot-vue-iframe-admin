@@ -44,18 +44,17 @@ $(function() {
 					var i = 0;
 					_this.items.map(function(item) {
 						item.icon = icon[i++];
-						/*item.children.map(function(it) {
-							it.icon = icon[i++];
-						});*/
 					});
-//					_this.childrens.push(_this.items[0].children[0]);
-//					_this.active = _this.items[0].children[0];
 				});
 			},
 			toggleNav: function() {
 				this.showNav = this.showNav == "block" ? "none" : "block";
 			},
 			refreshNav: function() {
+				if (this.active == null) {
+					$("iframe[src='home'").attr("src", "home").ready();
+					return;
+				}
 				if (typeof this.active != "undefined") {
 					$("iframe[src='" + this.active.url + "']").attr("src", this.active.url).ready();
 				}

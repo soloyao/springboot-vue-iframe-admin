@@ -1,42 +1,60 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Flip Card Clock</title>
-<link rel="stylesheet" href="./static/css/zui.css">
-<link rel="stylesheet" href="./static/css/common/zui.uploader.css">
-<script src="./static/js/common/jquery.min.js"></script>
-<script src="./static/js/common/zui.js"></script>
-<script src="./static/js/common/zui.uploader.js"></script>
+    <meta charset="UTF-8">
+    <title>che2</title>
+    <script>
+        function tipUsername(){
+			document.getElementById("span_username").innerHTML =
+			"<font style='font-size: 15px; color: darkgrey; '>*请输入用户名</font>"
+		}
+        function checkUsername(){
+            var username=document.getElementById("username").value;
+            if(username.length < 4){
+               document.getElementById("span_username").innerHTML=
+               "用户名长度大于4!"
+            }else{
+               document.getElementById("span_username").innerHTML=
+               ""
+            }
+         }
+        function tipPassword() {
+        	document.getElementById("span_password").innerHTML = "<font style='font-size:15px;color:darkgrey;'>*请输入密码</font>";
+        }
+        function checkPassword() {
+        	var password = document.getElementById("password").value;
+        	if (password.length < 6) {
+        		document.getElementById("span_password").innerHTML = "密码长度大于6!";
+        	} else {
+        		document.getElementById("span_password").innerHTMl = "";
+        	}
+        }
+        function tipRePassword() {
+        	document.getElementById("span_repassword").innerHTMl = "<font style='font-size:15px;color:darkgrey;'>*请确认重复密码</font>";
+        }
+  		function checkRePassword(){
+             var password=document.getElementById("password").value;
+             var repassword=document.getElementById("repassword").value;
+             if(password==repassword){
+              document.getElementById("span_password").innerHTML=
+               "正确"
+            }else{
+               document.getElementById("span_password").innerHTML=
+               "错误"
+            }
+         }
+     </script>
+
 </head>
 <body>
-<img data-toggle="lightbox" src="./static/image/logo_bg.jpg" data-image="./static/image/logo_bg.jpg" data-caption="小图看大图" class="img-thumbnail" alt="" width="200">
-<img id="lightBoxToggle" src="./static/image/logo_bg.jpg" class="img-thumbnail" alt="" width="200">
-<button id="demo">demo</button>
-<script>
-$(function() {
-	$("#lightBoxToggle").lightbox({
-		image: "./static/image/logo_bg.jpg"
-	});
-	
-	$("#demo").click(function() {
-		// 获取实例对象
-		var myLightBox = $('#lightBoxToggle').data('zui.lightbox');
-		// 立即显示
-		myLightBox.show();
-		// 更新图片和描述文本并立即显示
-		//myLightBox.show("./static/image/logo_bg.jpg", '新的图片');
-	});
-	
-	/* $("#lightBoxToggle").click(function() {
-		// 获取实例对象
-		var myLightBox = $('#lightBoxToggle').data('zui.lightbox');
-		// 立即显示
-		//myLightBox.show();
-		// 更新图片和描述文本并立即显示
-		myLightBox.show("./static/image/logo_bg.jpg", '新的图片');
-	}); */
-});
-</script>
-</body>
+账号：<input type="text"  id="username" onfocus="tipUsername()" onblur="checkUsername()"/>
+<span id="span_username"></span>
+<br />
+密码：<input type="text"  id="password" onfocus="tipPassword()" onblur="checkPassword()"/>
+<span id="span_password"></span>
+<br />
+确认密码：<input type="text"  id="repassword" onfocus="tipRePassword()" onblur="checkRePassword()"/>
+<span id="span_repassword"></span>
+<br />
+</boby>
 </html>

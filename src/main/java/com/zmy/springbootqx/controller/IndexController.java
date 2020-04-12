@@ -43,6 +43,13 @@ public class IndexController {
 		return mav;
 	}
 	
+	@GetMapping("/druidServer")
+	@LogAnnotation(desc = "跳转至数据监控页面")
+	public ModelAndView druidServer() {
+		ModelAndView mav = new ModelAndView("druid/druidServer");
+		return mav;
+	}
+	
 	@GetMapping("/listCategory")
 	@LogAnnotation(desc = "跳转至分类管理页面")
 	public ModelAndView listCategory() {
