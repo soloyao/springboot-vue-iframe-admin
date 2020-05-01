@@ -1,11 +1,14 @@
 package com.zmy.springbootqx.service.impl;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -56,6 +59,18 @@ public class PermissionServiceImpl implements PermissionService {
 		return permissionMapper.exist(permission);
 	}
 
+	@Override
+	public Set<String> listPermStringSetsByUser(User user) {
+		List<Permission> permissions = permissionMapper.listByUser(user);
+		Set<String> permStringSets = new HashSet<String>();
+		for (Permission permission : permissions) {
+			if (!StringUtils.isEmpty(permission.getUrl())) {
+				permStringSets.add(permission.getUrl());
+			}
+		}
+		return permStringSets;
+	}
+	
 	@Override
 	public JSONArray listByUser(User user) {
 		List<Permission> list = permissionMapper.listByUser(user);

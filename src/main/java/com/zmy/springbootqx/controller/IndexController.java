@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zmy.springbootqx.annotation.LogAnnotation;
+import com.zmy.springbootqx.annotation.PermissionAnnotation;
 
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -15,18 +16,6 @@ public class IndexController {
 	@LogAnnotation(desc = "跳转至登录页面")
 	public ModelAndView login() {
 		ModelAndView mav = new ModelAndView("login/login2");
-		return mav;
-	}
-	
-	@GetMapping("/demo")
-	public ModelAndView demo() {
-		ModelAndView mav = new ModelAndView("demo");
-		return mav;
-	}
-	
-	@GetMapping("/demo2")
-	public ModelAndView demo2() {
-		ModelAndView mav = new ModelAndView("demo2");
 		return mav;
 	}
 	
@@ -43,6 +32,7 @@ public class IndexController {
 		return mav;
 	}
 	
+	@PermissionAnnotation(permName = "druidServer")
 	@GetMapping("/druidServer")
 	@LogAnnotation(desc = "跳转至数据监控页面")
 	public ModelAndView druidServer() {
@@ -50,6 +40,7 @@ public class IndexController {
 		return mav;
 	}
 	
+	@PermissionAnnotation(permName = "listCategory")
 	@GetMapping("/listCategory")
 	@LogAnnotation(desc = "跳转至分类管理页面")
 	public ModelAndView listCategory() {
@@ -57,6 +48,7 @@ public class IndexController {
 		return mav;
 	}
 	
+	@PermissionAnnotation(permName = "listUser")
 	@GetMapping("/listUser")
 	@LogAnnotation(desc = "跳转至用户管理页面")
 	public ModelAndView listUser() {
@@ -64,6 +56,7 @@ public class IndexController {
 		return mav;
 	}
 	
+	@PermissionAnnotation(permName = "listRole")
 	@GetMapping("/listRole")
 	@LogAnnotation(desc = "跳转至角色管理页面")
 	public ModelAndView listRole() {
@@ -71,6 +64,7 @@ public class IndexController {
 		return mav;
 	}
 	
+	@PermissionAnnotation(permName = "listPermission")
 	@GetMapping("/listPermission")
 	@LogAnnotation(desc = "跳转至菜单管理页面")
 	public ModelAndView listPermission() {
@@ -78,6 +72,7 @@ public class IndexController {
 		return mav;
 	}
 	
+	@PermissionAnnotation(permName = "listHotel")
 	@GetMapping("/listHotel")
 	@LogAnnotation(desc = "跳转至旅馆管理页面")
 	public ModelAndView listHotel() {
@@ -85,6 +80,7 @@ public class IndexController {
 		return mav;
 	}
 	
+	@PermissionAnnotation(permName = "listHero")
 	@GetMapping("/listHero")
 	@LogAnnotation(desc = "跳转至英雄管理页面")
 	public ModelAndView listHero() {
@@ -92,6 +88,7 @@ public class IndexController {
 		return mav;
 	}
 	
+	@PermissionAnnotation(permName = "listSystemLog")
 	@GetMapping("/listSystemLog")
 	@LogAnnotation(desc = "跳转至日志管理页面")
 	public ModelAndView listSystemLog() {

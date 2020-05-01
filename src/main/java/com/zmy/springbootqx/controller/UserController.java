@@ -24,8 +24,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zmy.springbootqx.annotation.LogAnnotation;
+import com.zmy.springbootqx.pojo.Permission;
 import com.zmy.springbootqx.pojo.Role;
 import com.zmy.springbootqx.pojo.User;
+import com.zmy.springbootqx.service.PermissionService;
 import com.zmy.springbootqx.service.RoleService;
 import com.zmy.springbootqx.service.UserService;
 
@@ -36,6 +38,7 @@ import springfox.documentation.annotations.ApiIgnore;
 public class UserController {
 	@Autowired UserService userService;
 	@Autowired RoleService roleService;
+	@Autowired PermissionService permissionService;
 	
 	@PostMapping("/login")
 	@LogAnnotation(desc = "登录")
@@ -45,6 +48,8 @@ public class UserController {
 		if (null == loginUser) {
 			json.put("code", 1);
 		} else {
+			Set<String> perms = permissionService.listPermStringSetsByUser(loginUser);
+			session.setAttribute("perms", perms);
 			session.setAttribute("user", loginUser);
 			json.put("user", loginUser);
 			json.put("code", 0);

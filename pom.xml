@@ -6,7 +6,7 @@
   <name>springboot-qx</name>
   <description>springboot-qx</description>
   
-  <parent>
+  	<parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.9.RELEASE</version>
@@ -48,12 +48,10 @@
     	<dependency>
     		<groupId>org.aspectj</groupId>
     		<artifactId>aspectjrt</artifactId>
-    		<version>1.6.11</version>
     	</dependency>
     	<dependency>
     		<groupId>org.aspectj</groupId>
     		<artifactId>aspectjweaver</artifactId>
-    		<version>1.6.11</version>
     	</dependency>
     	<dependency>
     		<groupId>cglib</groupId>
@@ -63,7 +61,6 @@
     	<dependency>
     		<groupId>org.springframework</groupId>
     		<artifactId>spring-aop</artifactId>
-    		<version>4.3.9.RELEASE</version>
     	</dependency>
     	<!-- spring aop end -->
     	
@@ -86,13 +83,11 @@
 		<dependency> 
 			<groupId>net.sourceforge.nekohtml</groupId> 
 			<artifactId>nekohtml</artifactId> 
-			<version>1.9.22</version>
 		</dependency>
     	<!-- junit -->
     	<dependency>
 		      <groupId>junit</groupId>
 		      <artifactId>junit</artifactId>
-		      <version>4.12</version>
 	    </dependency>
 	    <!-- springboot test -->
         <dependency>
@@ -110,7 +105,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.21</version>
             <scope>runtime</scope>
         </dependency>
         <!-- Druid -->
