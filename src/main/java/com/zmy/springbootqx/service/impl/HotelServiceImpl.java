@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.zmy.springbootqx.mapper.HotelMapper;
 import com.zmy.springbootqx.pojo.Hotel;
 import com.zmy.springbootqx.service.HotelService;
+import com.zmy.springbootqx.util.Result;
 
 @Service
 public class HotelServiceImpl implements HotelService{
@@ -22,20 +23,23 @@ public class HotelServiceImpl implements HotelService{
 	}
 
 	@Override
-	public void add(Hotel hotel) {
+	public Object add(Hotel hotel) {
 		hotel.setCreatetime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		hotelMapper.add(hotel);
+		return Result.success();
 	}
 
 	@Override
-	public void delete(int id) {
+	public Object delete(int id) {
 		hotelMapper.delete(id);
+		return Result.success();
 	}
 
 	@Override
-	public void update(Hotel hotel) {
+	public Object update(Hotel hotel) {
 		hotel.setCreatetime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		hotelMapper.update(hotel);
+		return Result.success();
 	}
 
 	@Override

@@ -32,6 +32,7 @@ import io.swagger.annotations.ApiOperation;
 public class CategoryController {
 	@Autowired CategoryService categoryService;
 	
+	@PermissionAnnotation(permName = "listCategory")
 	@GetMapping("/categories")
 	@LogAnnotation(desc = "分页获取所有类别")
 	@ApiOperation(value = "分页获取所有类别")
@@ -53,6 +54,7 @@ public class CategoryController {
 		return page;
 	}
 	
+	@PermissionAnnotation(permName = "listCategory")
 	@GetMapping("/categories/{id}")
 	@LogAnnotation(desc = "获取单个类别")
 	@ApiOperation(value = "获取单个类别")
@@ -64,36 +66,36 @@ public class CategoryController {
 		return category;
 	}
 	
+	@PermissionAnnotation(permName = "listCategory")
 	@PostMapping("/categories")
 	@LogAnnotation(desc = "新增分类")
 	@ApiOperation(value = "新增分类")
 	@ApiImplicitParams({
 		@ApiImplicitParam(paramType = "body", name = "category", value = "类别对象", required = true, dataType = "Category")
 	})
-	public String add(@RequestBody Category category) {
-		categoryService.add(category);
-		return "success";
+	public Object add(@RequestBody Category category) {
+		return categoryService.add(category);
 	}
 	
+	@PermissionAnnotation(permName = "listCategory")
 	@PutMapping("/categories")
 	@LogAnnotation(desc = "修改分类")
 	@ApiOperation(value = "修改分类")
 	@ApiImplicitParams({
 		@ApiImplicitParam(paramType = "body", name = "category", value = "类别对象", required = true, dataType = "Category")
 	})
-	public String update(@RequestBody Category category) {
-		categoryService.update(category);
-		return "success";
+	public Object update(@RequestBody Category category) {
+		return categoryService.update(category);
 	}
 	
+	@PermissionAnnotation(permName = "listCategory")
 	@DeleteMapping("/categories/{id}")
 	@LogAnnotation(desc = "删除分类")
 	@ApiOperation(value = "删除分类")
 	@ApiImplicitParams({
 		@ApiImplicitParam(paramType = "path", name = "id", value = "类别编号", required = true, dataType = "int")
 	})
-	public String delete(@PathVariable("id") int id) {
-		categoryService.delete(id);
-		return "success";
+	public Object delete(@PathVariable("id") int id) {
+		return categoryService.delete(id);
 	}
 }

@@ -52,22 +52,19 @@ public class HotelController {
 	
 	@PostMapping("/hotels")
 	@LogAnnotation(desc = "新增旅馆")
-	public String add(@RequestBody Hotel hotel) {
-		hotelService.add(hotel);
-		return "success";
+	public Object add(@RequestBody Hotel hotel) {
+		return hotelService.add(hotel);
 	}
 	
 	@PutMapping("/hotels")
 	@LogAnnotation(desc = "修改旅馆")
-	public String update(@RequestBody Hotel hotel) {
-		hotelService.update(hotel);
-		return "success";
+	public Object update(@RequestBody Hotel hotel) {
+		return hotelService.update(hotel);
 	}
 	
 	@DeleteMapping("/hotels/{id}")
 	@LogAnnotation(desc = "删除旅馆")
-	public String delete(@PathVariable("id") int id) {
-		hotelService.delete(id);
-		return "success";
+	public Object delete(@PathVariable("id") int id) {
+		return hotelService.delete(id);
 	}
 }

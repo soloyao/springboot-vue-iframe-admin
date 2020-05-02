@@ -7,8 +7,8 @@ import com.zmy.springbootqx.pojo.Category;
 
 public interface CategoryService {
 	List<Category> list(Map<String, String> paramMap);
-	void add(Category category);
-	void update(Category category);
-	void delete(int id);
+	Object add(Category category);
+	Object update(Category category);
+	Object delete(int id);
 	Category get(int id);
 }

@@ -4,8 +4,79 @@
 	<div th:replace="include::include"></div>
 	<script src="./static/js/common/component-pager.js"></script>
 	<script src="./static/js/common/component-table.js"></script>
-	<link href="./static/css/systemLog/systemLog.css" rel="stylesheet" />
-	<script src="./static/js/systemLog/systemLog.js"></script>
+	<link href="./static/css/common/common.css" rel="stylesheet" />
+	<script>
+	$(function() {
+		var data4Vue = {
+			items: [],
+			pagination: {},
+			isLoading: false,
+			keyword: "",
+			size: 15
+		};
+		
+		var vue = new Vue({
+			el: "#app",
+			data: data4Vue,
+			mounted: function() {
+				this.list(1);
+			},
+			methods: {
+				//表格前面的全选框
+                checkboxAll() {
+                    if (!this.checkboxAllFlag) {
+                        $(".checkbox-parent").addClass("checked");
+                        $(".checkbox-children").addClass("checked");
+                        this.checkboxAllFlag = true;
+                    } else {
+                        $(".checkbox-parent").removeClass("checked");
+                        $(".checkbox-children").removeClass("checked");
+                        this.checkboxAllFlag = false;
+                    }
+                },
+                //单行前面的单选框
+                checkbox(e) {
+                    var el = e.target;
+                    $(el).parent(".checkbox-primary").toggleClass("checked");
+                    var allFlag = true;
+                    $(".checkbox-children").map(function(item, ele) {
+                        if (!$(ele).hasClass("checked")) {
+                            allFlag = false;
+                        }
+                    });
+                    if (allFlag) {
+                        $(".checkbox-parent").addClass("checked");
+                    } else {
+                        $(".checkbox-parent").removeClass("checked");
+                    }
+                },
+				list: function(start) {
+					var _this = this;
+					_this.isLoading = true;
+					var url = "systemLogs?start=" + start + "&keyword=" + _this.keyword + "&size=" + _this.size;
+					axios.get(url).then(function(res) {
+						_this.pagination = res.data;
+						_this.items = res.data.list;
+						_this.isLoading = false;
+					});
+				},
+				reset: function() {
+					var _this = this;
+					$("#keyword").val("");
+					_this.keyword = $("#keyword").val();
+					_this.list(1);
+				},
+				search: function() {
+					var _this = this;
+					_this.keyword = $("#keyword").val();
+					if (_this.keyword) {
+						_this.list(1);
+					}
+				}
+			}
+		});
+	});
+	</script>
 </head>
 <body>
 	<div id="app">
@@ -27,9 +98,39 @@
 					<!-- top end -->
 				</div>
 				<div class="panel-body">
-					<!-- table start -->
-					<component-table v-bind:ths.sync="listThs" v-bind:list.sync="itemList"></component-table>
-					<!-- table end -->
+					<div style="height:100%;overflow:auto;">
+						<table class="table table-hover table-striped" style="margin:0px;">
+							<thead>
+								<tr>
+									<th style="width:16px;">
+										<div @click="checkboxAll" class="checkbox-primary checkbox-parent"><label></label></div>
+									</th>
+									<th>编号</th>
+									<th>用户名</th>
+									<th>操作</th>
+									<th>IP地址</th>
+									<th>操作时间</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-if="items && items.length > 0" v-for="item in items">
+									<td style="width:16px;">
+										<div @click="checkbox" class="checkbox-primary checkbox-children" :data-id="item.id">
+		                                    <label></label>
+		                                </div>
+									</td>
+									<td>{{item.id}}</td>
+									<td>{{item.username}}</td>
+									<td>{{item.operation}}</td>
+									<td>{{item.ip}}</td>
+									<td>{{item.createtime}}</td>
+								</tr>
+								<tr v-if="items && items.length == 0">
+		                            <td colspan="20" align="center" style="text-align: center;">暂无数据</td>
+		                        </tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 				<div class="panel-footer">
 					<!-- page start -->

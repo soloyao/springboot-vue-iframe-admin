@@ -138,3 +138,127 @@ a {
 	color: red;
 	cursor: pointer;
 }
+
+#lightboxModal {
+	z-index: 19999999;
+}
+
+.required:after {
+	position: absolute;
+   	top: 0;
+    right: -10px;
+    display: inline-block;
+    font-size: 17px;
+    color: #ea644a;
+    content: '*';
+}
+
+.activeItem{
+	background:#eee !important;
+}
+
+hr{
+	margin: 15px 0px;
+}
+
+.item {
+	cursor:pointer;
+}
+
+.items i{
+	/* font-size:16px; */
+	cursor:pointer;
+}
+
+.items i:hover{
+	color:red;
+}
+
+div#app .list{
+	text-align:left;
+}
+
+.panel-body .panel {
+	margin:0px;
+}
+
+#listPanel{
+	height:100%;
+}
+
+#listPanelBody {
+	height:100% !important;
+	padding:0px;
+	overflow:auto;
+}
+
+#listPanelBody .item{
+	border:1px solid #eee;
+	margin-bottom:8px;
+	box-shadow:0 2px 4px rgba(0,0,0,0.2);
+}
+
+#mapContainerPanel{
+	height:100%;
+}
+
+#mapContainer {
+	height:100% !important;
+	padding: 0px;
+	overflow: hidden !important;
+}
+
+.card {
+	position:relative;
+}
+
+.card img{
+	cursor:pointer;
+}
+
+.card .icon-times{
+	position:absolute;
+	top:0px;
+	right:0px;
+	z-index:2;
+	background:white;
+	cursor:pointer;
+}
+.card .icon-times:hover{
+	color:red;
+}
+
+.edit-panel-div-title .icon-times {
+	position: absolute;
+	right: 15px;
+	line-height: 42px;
+}
+
+.edit-panel-div-title .icon-times:hover {
+	color: red;
+	cursor: pointer;
+}
+
+
+.list-group-item:first-child {
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.list-group-item:last-child {
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+.panel-heading i {
+	cursor: pointer;
+}
+
+.panel-heading i:hover {
+	color: #3280fc;
+}
+
+.panel-heading i {
+	font-size: 16px;
+	margin-right: 5px;
+}

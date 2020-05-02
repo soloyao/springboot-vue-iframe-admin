@@ -4,9 +4,171 @@
 	<div th:replace="include::include"></div>
 	<script src="./static/js/common/myUpload.js"></script>
 	<script src="./static/js/common/component-pager.js"></script>
-	<script src="./static/js/common/component-table.js"></script>
-	<link href="./static/css/category/category.css" rel="stylesheet" />
-	<script src="./static/js/category/category.js"></script>
+	<link href="./static/css/common/common.css" rel="stylesheet" />
+	<script>
+	$(function() {
+		var data4Vue = {
+			items: [],
+			item4Add: {id: 0, name: "", image: ""},
+			pagination: {},
+			keyword: "",
+			isEditShow: false,
+			isLoading: false,
+			editTitle: "",
+			size: 15,
+			checkboxAllFlag: false
+		};
+		
+		var vue = new Vue({
+			el: "#app",
+			data: data4Vue,
+			mounted: function() {
+				this.list(1);
+				$("#lightBoxToggle").lightbox();
+			},
+			methods: {
+				//表格前面的全选框
+                checkboxAll() {
+                    if (!this.checkboxAllFlag) {
+                        $(".checkbox-parent").addClass("checked");
+                        $(".checkbox-children").addClass("checked");
+                        this.checkboxAllFlag = true;
+                    } else {
+                        $(".checkbox-parent").removeClass("checked");
+                        $(".checkbox-children").removeClass("checked");
+                        this.checkboxAllFlag = false;
+                    }
+                },
+                //单行前面的单选框
+                checkbox(e) {
+                    var el = e.target;
+                    $(el).parent(".checkbox-primary").toggleClass("checked");
+                    var allFlag = true;
+                    $(".checkbox-children").map(function(item, ele) {
+                        if (!$(ele).hasClass("checked")) {
+                            allFlag = false;
+                        }
+                    });
+                    if (allFlag) {
+                        $(".checkbox-parent").addClass("checked");
+                    } else {
+                        $(".checkbox-parent").removeClass("checked");
+                    }
+                },
+				showImage: function() {
+					var myLightBox = $("#lightBoxToggle").data("zui.lightbox");
+					myLightBox.show("upload/" + this.item4Add.image);
+				},
+				deleteItemImage: function() {
+					this.item4Add.image = "";
+				},
+				upload: function() {
+					var _this = this;
+					$.uploader("../upload", function(data) {
+						_this.item4Add.image = data;
+					}, {
+						filters: {
+							mime_types: [
+								{title: '图片', extensions: 'jpg,png'}
+							]
+						},
+						limitFilesCount: 1
+					}, true);
+				},
+				save: function() {
+					var _this = this;
+					if (!_this.item4Add.name) {
+						myzui._error("必填参数不能为空");
+						return;
+					}
+					var url = "categories";
+					if (_this.item4Add.id == 0) { //add
+						axios.post(url, this.item4Add).then(function(res) {
+							if (res.data.code == 0) {
+								myzui._success("新增成功");
+								_this.list(1);
+								_this.item4Add = {id: 0, name: "", image: ""};
+								_this.isEditShow = false;
+							} else {
+								myzui._error("新增失败");
+							}
+						});
+					} else { //update
+						axios.put(url, _this.item4Add).then(function(res) {
+							if (res.data.code == 0) {
+								myzui._success("修改成功");
+								_this.list(1);
+								_this.item4Add = {id: 0, name: "", image: ""};
+								_this.isEditShow = false;
+							} else {
+								myzui._error("修改失败");
+							}
+						});
+					}
+				},
+				cancel: function() {
+					this.isEditShow = false;
+				},
+				addItem: function() {
+					this.isEditShow = true;
+					this.editTitle = "新建";
+					this.item4Add = {id: 0, name: "", image: ""};
+				},
+				getCheck() {
+					var str = $("tbody .checked").map(function(item, ele) {
+						console.log($(ele).data("id"));
+						return $(ele).data("id");
+					}).get().join(",");
+					console.log(str);
+				},
+				updateItem: function(category) {
+					this.isEditShow = true;
+					this.editTitle = "修改";
+					this.item4Add.id = category.id;
+					this.item4Add.name = category.name;
+					this.item4Add.image = category.image;
+				},
+				list: function(start) {
+					var _this = this;
+					_this.isLoading = true;
+					var url = "categories?start=" + start + "&keyword=" + _this.keyword + "&size=" + _this.size;
+					axios.get(url).then(function(res) {
+						_this.pagination = res.data;
+						_this.items = res.data.list;
+						_this.isLoading = false;
+					});
+				},
+				deleteItem: function(id) {
+					var _this = this;
+					myzui.confirm("确认删除？", function() {
+						var url = "categories/" + id;
+						axios.delete(url).then(function(res) {
+							if (res.data.code == 0) {
+								myzui._success("删除成功");
+								_this.list(1);
+							} else {
+								myzui._error("删除失败");
+							}
+						});
+					});
+				},
+				reset: function() {
+					var _this = this;
+					$("#keyword").val("");
+					_this.keyword = $("#keyword").val();
+					_this.list(1);
+				},
+				search: function() {
+					var _this = this;
+					_this.keyword = $("#keyword").val();
+					if (_this.keyword) {
+						_this.list(1);
+					}
+				}
+			}
+		});
+	});
+	</script>
 </head>
 <body>
 	<div id="app">
@@ -21,7 +183,7 @@
 							<span class="input-group-btn">
 								<button class="btn btn-primary" @click="search">搜索</button>
 								<button class="btn btn-default" @click="reset">重置</button>
-								<button class="btn btn-success" @click="addEdit">新增</button>
+								<button class="btn btn-success" @click="addItem">新增</button>
 								<button class="btn btn-danger" @click="getCheck">获取选中行</button>
 							</span>
 						</div>
@@ -30,9 +192,38 @@
 					<!-- top end -->
 				</div>
 				<div class="panel-body">
-					<!-- table start -->
-					<component-table v-bind:ths.sync="listThs" v-bind:list.sync="itemList" v-on:update-item="updateEdit" v-on:delete-item="deleteItem"></component-table>
-					<!-- table end -->
+					<div style="height:100%;overflow:auto;">
+						<table class="table table-hover table-striped" style="margin:0px;">
+							<thead>
+								<tr>
+									<th style="width:16px;">
+										<div @click="checkboxAll" class="checkbox-primary checkbox-parent"><label></label></div>
+									</th>
+									<th>编号</th>
+									<th>名称</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-if="items && items.length > 0" v-for="item in items">
+									<td style="width:16px;">
+										<div @click="checkbox" class="checkbox-primary checkbox-children" :data-id="item.id">
+		                                    <label></label>
+		                                </div>
+									</td>
+									<td>{{item.id}}</td>
+									<td>{{item.name}}</td>
+									<td>
+										<button class="btn btn-xs btn-primary" @click="updateItem(item)"><i class="icon icon-pencil"></i>编辑</button>
+										<button class="btn btn-xs btn-danger" @click="deleteItem(item.id)"><i class="icon icon-trash"></i>删除</button>
+									</td>
+								</tr>
+								<tr v-if="items && items.length == 0">
+		                            <td colspan="20" align="center" style="text-align: center;">暂无数据</td>
+		                        </tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 				<div class="panel-footer">
 					<!-- page start -->
@@ -50,9 +241,9 @@
 			</div>
 			<div class="edit-panel-div-content form-horizontal">
 				<div class="form-group">
-					<label for="name" class="col-sm-3 required">名称</label>
+					<label class="col-sm-3 required">名称</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="category4Add.name" id="name" placeholder="名称" />
+						<input class="form-control" v-model="item4Add.name" placeholder="名称" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -61,9 +252,9 @@
 						<button class="btn btn-info" @click="upload"><i class="icon icon-cloud-upload"></i>上传图片</button>
 					</div>
 				</div>
-				<div v-if="category4Add.image" class="form-group">
+				<div v-if="item4Add.image" class="form-group">
 					<div class="card">
-						<img @click="showImage" :src="'upload/' + category4Add.image" class="img-thumbnail" style="margin:0 auto;">
+						<img @click="showImage" :src="'upload/' + item4Add.image" class="img-thumbnail" style="margin:0 auto;">
 						<i class="icon icon-times icon-2x" @click="deleteItemImage"></i>
 					</div>
 				</div>
@@ -75,7 +266,7 @@
 		</div>
 		<div class="edit-panel-div-shim" @click="cancel" :class="isEditShow?'active':''"></div>
 		<!-- edit end -->
-		<div id="lightBoxToggle" :src="'upload/' + category4Add.image" style="width:0px;height:0px;"></div>
+		<div id="lightBoxToggle" :src="'upload/' + item4Add.image" style="width:0px;height:0px;"></div>
 	</div>
 </body>
 </html>

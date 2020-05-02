@@ -11,7 +11,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @ApiIgnore
 @Controller
-public class IndexController {
+public class PageController {
 	@GetMapping("/login")
 	@LogAnnotation(desc = "跳转至登录页面")
 	public ModelAndView login() {

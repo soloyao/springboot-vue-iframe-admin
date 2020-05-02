@@ -8,7 +8,204 @@
 	<script src="https://webapi.amap.com/maps?v=1.4.15&key=3b549b12fc5da74a2f140e4673579aa9&plugin=AMap.ToolBar,AMap.MouseTool"></script>
 	<script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
 	<link href="./static/css/hotel/hotel.css" rel="stylesheet" />
-	<script src="./static/js/hotel/hotel.js"></script>
+	<script>
+	$(function() {
+		var data4Vue = {
+			items: [],
+			item4Add: {id: 0, name: "", phonenumber: "", address: "", location: "", image: ""},
+			pagination: {},
+			keyword: "",
+			isEditShow: false,
+			isLoading: false,
+			editTitle: "",
+			size: 15,
+			map: null,
+			mouseTool: null,
+			marker: null,
+			activeItem: null
+		};
+		
+		var vue = new Vue({
+			el: "#app",
+			data: data4Vue,
+			mounted: function() {
+				$("[data-toggle='tooltip']").tooltip();
+				this.list(1);
+				this.map = new AMap.Map("mapContainer", {
+					zoom: 16
+				});
+				this.mouseTool = new AMap.MouseTool(this.map);
+				
+				$("#lightBoxToggle").lightbox();
+			},
+			methods: {
+				showImage: function() {
+					var myLightBox = $("#lightBoxToggle").data("zui.lightbox");
+					myLightBox.show("upload/" + this.item4Add.image);
+				},
+				deleteItemImage: function() {
+					this.item4Add.image = "";
+				},
+				upload: function() {
+					var _this = this;
+					$.uploader("../upload", function(data) {
+						_this.item4Add.image = data;
+					}, {
+						filters: {
+							mime_types: [
+								{title: '图片', extensions: 'jpg,png'}
+							]
+						},
+						limitFilesCount: 1
+					}, true);
+				},
+				addLocation: function() {
+					if (this.marker) {
+						this.map.remove(this.marker);
+						this.marker = null;
+					}
+					this.map.setDefaultCursor("crosshair");
+					this.mouseTool.marker();
+					var _this = this;
+					AMap.event.addListenerOnce(this.mouseTool, 'draw', function(obj) {
+						_this.mouseTool.close(false);
+						_this.marker = obj.obj;
+						_this.item4Add.location = _this.marker.getPosition().toString();
+						_this.map.setDefaultCursor();
+					});
+				},
+				save: function() {
+					var _this = this;
+					if (!_this.item4Add.name || !_this.item4Add.location) {
+						myzui._error("必填参数不能为空");
+						return;
+					}
+					if (_this.item4Add.phonenumber) {
+						var isMobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
+				        var isPhone = /^(?:(?:0\d{2,3})-)?(?:\d{7,8})(-(?:\d{3,}))?$/;
+				        if (!isMobile.exec(_this.item4Add.phonenumber) && !isPhone.exec(_this.item4Add.phonenumber)) {
+				        	myzui._error("请输入正确的手机号");
+				        	return;
+				        }
+					}
+					var url = "hotels";
+					if (_this.item4Add.id == 0) { //add
+						axios.post(url, this.item4Add).then(function(res) {
+							if (res.data.code == 0) {
+								myzui._success("新增成功");
+								_this.list(1);
+								_this.item4Add = {id: 0, name: "", phonenumber: "", address: "", location: "", image: ""};
+								_this.isEditShow = false;
+								if (_this.marker) {
+									_this.map.remove(_this.marker);
+								}
+							} else {
+								myzui._error("新增失败");
+							}
+						});
+					} else { //update
+						axios.put(url, _this.item4Add).then(function(res) {
+							if (res.data.code == 0) {
+								myzui._success("修改成功");
+								_this.list(1);
+								_this.item4Add = {id: 0, name: "", phonenumber: "", address: "", location: "", image: ""};
+								_this.isEditShow = false;
+								if (_this.marker) {
+									_this.map.remove(_this.marker);
+								}
+							} else {
+								myzui._error("修改失败");
+							}
+						});
+					}
+				},
+				cancel: function() {
+					var _this = this;
+					_this.activeItem = null;
+					this.isEditShow = false;
+					this.mouseTool.close(true);
+					this.map.setDefaultCursor();
+					if (this.marker) {
+						_this.map.remove(_this.marker);
+					}
+				},
+				addEdit: function() {
+					this.isEditShow = true;
+					this.activeItem = null;
+					this.editTitle = "新增";
+					this.item4Add= {id: 0, name: '', phonenumber: '', address: '', location: '', image: ""};
+					if (this.marker) {
+						this.map.remove(this.marker);
+					}
+				},
+				updateEdit: function(hotel) {
+					var _this = this;
+					_this.activeItem = hotel;
+					this.isEditShow = true;
+					this.editTitle = "修改";
+					this.item4Add.id = hotel.id;
+					this.item4Add.name = hotel.name;
+					this.item4Add.phonenumber = hotel.phonenumber;
+					this.item4Add.address = hotel.address;
+					this.item4Add.location = hotel.location;
+					this.item4Add.image = hotel.image;
+					if (this.marker) {
+						_this.map.remove(_this.marker);
+					}
+					this.marker = new AMap.Marker({
+						position: hotel.location.split(",")
+					});
+					this.map.add(this.marker);
+					this.map.setZoomAndCenter(18, hotel.location.split(","));
+				},
+				list: function(start) {
+					var _this = this;
+					_this.isLoading = true;
+					var url = "hotels?start=" + start + "&keyword=" + _this.keyword + "&size=" + _this.size;
+					axios.get(url).then(function(res) {
+						_this.pagination = res.data;
+						_this.items = res.data.list;
+						_this.isLoading = false;
+					});
+				},
+				deleteItem: function(item) {
+					var _this = this;
+					_this.cancel();
+					myzui.confirm("确认删除" + item.name + "？", function() {
+						var url = "hotels/" + item.id;
+						axios.delete(url).then(function(res) {
+							if (res.data.code == 0) {
+								myzui._success("删除成功");
+								_this.list(1);
+							} else {
+								myzui._error("删除失败");
+							}
+						});
+					});
+				},
+				reset: function() {
+					var _this = this;
+					_this.cancel();
+					$("#keyword").val("");
+					_this.keyword = $("#keyword").val();
+					_this.list(1);
+				},
+				search: function() {
+					if (!$("#keyword").val()) {
+						myzui._error("请输入关键词");
+						return;
+					}
+					var _this = this;
+					_this.cancel();
+					_this.keyword = $("#keyword").val();
+					if (_this.keyword) {
+						_this.list(1);
+					}
+				}
+			}
+		});
+	});
+	</script>
 </head>
 <body>
 	<div id="app">
@@ -37,7 +234,7 @@
 							<div class="panel-body" id="listPanelBody">
 								<div class="list list-condensed">
 									<div class="items items-hover">
-										<div v-if="itemList && itemList.length != 0" v-for="item in itemList" class="item" :class="{activeItem:item==activeItem}" @click="updateEdit(item)">
+										<div v-if="items && items.length != 0" v-for="item in items" class="item" :class="{activeItem:item==activeItem}" @click="updateEdit(item)">
 											<div class="item-heading">
 												<div class="pull-right">
 													<i class="icon-trash" data-toggle="tooltip" data-placement="bottom" title="删除" @click.stop="deleteItem(item)">删除</i>
@@ -62,7 +259,7 @@
 												<span class="text-muted">{{item.createtime}}</span>
 											</div>
 										</div>
-										<div v-if="itemList && itemList.length == 0" style="color:#999;padding:15px;line-height:100px;text-align:center;">
+										<div v-if="items && items.length == 0" style="color:#999;padding:15px;line-height:100px;text-align:center;">
 											暂无数据
 										</div>
 									</div>
@@ -99,25 +296,25 @@
 				<div class="form-group">
 					<label for="name" class="col-sm-3 required">名称</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="hotel4Add.name" id="name" placeholder="名称" />
+						<input class="form-control" v-model="item4Add.name" id="name" placeholder="名称" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="phonenumber" class="col-sm-3">联系电话</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="hotel4Add.phonenumber" id="phonenumber" placeholder="联系电话" />
+						<input class="form-control" v-model="item4Add.phonenumber" id="phonenumber" placeholder="联系电话" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="address" class="col-sm-3">地址</label>
 					<div class="col-sm-9">
-						<input class="form-control" v-model="hotel4Add.address" id="address" placeholder="地址" />
+						<input class="form-control" v-model="item4Add.address" id="address" placeholder="地址" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="location" class="col-sm-3 required">坐标</label>
 					<div class="col-sm-9">
-						<input class="form-control requiredInput" v-model="hotel4Add.location" id="loaction" readonly placeholder="坐标" />
+						<input class="form-control requiredInput" v-model="item4Add.location" id="loaction" readonly placeholder="坐标" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -132,9 +329,9 @@
 						<button class="btn btn-info" @click="upload"><i class="icon icon-cloud-upload"></i>上传图片</button>
 					</div>
 				</div>
-				<div v-if="hotel4Add.image" class="form-group">
+				<div v-if="item4Add.image" class="form-group">
 					<div class="card">
-						<img @click="showImage" :src="'upload/' + hotel4Add.image" class="img-thumbnail" style="margin:0 auto;">
+						<img @click="showImage" :src="'upload/' + item4Add.image" class="img-thumbnail" style="margin:0 auto;">
 						<i class="icon icon-times icon-2x" @click="deleteItemImage"></i>
 					</div>
 				</div>
@@ -145,7 +342,7 @@
 			</div>
 		</div>
 		<!-- edit end -->
-		<div id="lightBoxToggle" :src="'upload/' + hotel4Add.image" style="width:0px;height:0px;"></div>
+		<div id="lightBoxToggle" :src="'upload/' + item4Add.image" style="width:0px;height:0px;"></div>
 	</div>
 </body>
 </html>

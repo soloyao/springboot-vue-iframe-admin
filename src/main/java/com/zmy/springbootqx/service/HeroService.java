@@ -7,8 +7,8 @@ import com.zmy.springbootqx.pojo.Hero;
 
 public interface HeroService {
 	List<Hero> list(Map<String, String> paramMap);
-	void add(Hero hero);
-	void delete(int id);
-	void update(Hero hero);
+	Object add(Hero hero);
+	Object delete(int id);
+	Object update(Hero hero);
 	Hero get(int id);
 }

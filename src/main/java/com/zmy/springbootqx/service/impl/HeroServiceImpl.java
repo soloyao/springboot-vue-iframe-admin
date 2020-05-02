@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.zmy.springbootqx.mapper.HeroMapper;
 import com.zmy.springbootqx.pojo.Hero;
 import com.zmy.springbootqx.service.HeroService;
+import com.zmy.springbootqx.util.Result;
 
 @Service
 public class HeroServiceImpl implements HeroService {
@@ -20,18 +21,21 @@ public class HeroServiceImpl implements HeroService {
 	}
 
 	@Override
-	public void add(Hero hero) {
+	public Object add(Hero hero) {
 		heroMapper.add(hero);
+		return Result.success();
 	}
 
 	@Override
-	public void delete(int id) {
+	public Object delete(int id) {
 		heroMapper.delete(id);
+		return Result.success();
 	}
 
 	@Override
-	public void update(Hero hero) {
+	public Object update(Hero hero) {
 		heroMapper.update(hero);
+		return Result.success();
 	}
 
 	@Override

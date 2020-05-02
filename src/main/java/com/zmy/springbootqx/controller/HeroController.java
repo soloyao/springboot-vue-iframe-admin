@@ -52,22 +52,19 @@ public class HeroController {
 	
 	@PostMapping("/heros")
 	@LogAnnotation(desc = "新增英雄")
-	public String add(@RequestBody Hero hero) {
-		heroService.add(hero);
-		return "success";
+	public Object add(@RequestBody Hero hero) {
+		return heroService.add(hero);
 	}
 	
 	@PutMapping("/heros")
 	@LogAnnotation(desc = "修改英雄")
-	public String update(@RequestBody Hero hero) {
-		heroService.update(hero);
-		return "success";
+	public Object update(@RequestBody Hero hero) {
+		return heroService.update(hero);
 	}
 	
 	@DeleteMapping("/heros/{id}")
 	@LogAnnotation(desc = "删除英雄")
-	public String delete(@PathVariable("id") int id) {
-		heroService.delete(id);
-		return "success";
+	public Object delete(@PathVariable("id") int id) {
+		return heroService.delete(id);
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.zmy.springbootqx.mapper.CategoryMapper;
 import com.zmy.springbootqx.pojo.Category;
 import com.zmy.springbootqx.service.CategoryService;
+import com.zmy.springbootqx.util.Result;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -20,18 +21,21 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public void add(Category category) {
+	public Object add(Category category) {
 		categoryMapper.add(category);
+		return Result.success();
 	}
 
 	@Override
-	public void update(Category category) {
+	public Object update(Category category) {
 		categoryMapper.update(category);
+		return Result.success();
 	}
 
 	@Override
-	public void delete(int id) {
+	public Object delete(int id) {
 		categoryMapper.delete(id);
+		return Result.success();
 	}
 
 	@Override
