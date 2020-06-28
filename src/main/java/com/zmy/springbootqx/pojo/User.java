@@ -2,6 +2,18 @@ package com.zmy.springbootqx.pojo;
 
 import java.util.List;
 
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: User.java
+ * @Description: 用户实体类
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:11:01
+ */
 public class User {
 	private int id;
 	private String name;

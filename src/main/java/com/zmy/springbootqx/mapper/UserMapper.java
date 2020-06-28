@@ -8,6 +8,18 @@ import org.apache.ibatis.annotations.Mapper;
 import com.zmy.springbootqx.pojo.User;
 import com.zmy.springbootqx.pojo.UserRole;
 
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: UserMapper.java
+ * @Description: 用户数据访问层
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:08:57
+ */
 @Mapper
 public interface UserMapper {
 	User login(User user);

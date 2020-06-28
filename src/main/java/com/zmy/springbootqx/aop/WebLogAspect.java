@@ -20,6 +20,18 @@ import com.zmy.springbootqx.pojo.SystemLog;
 import com.zmy.springbootqx.pojo.User;
 import com.zmy.springbootqx.service.SystemLogService;
 
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: WebLogAspect.java
+ * @Description: AOP实现日志记录
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:02:48
+ */
 @Aspect
 @Component
 public class WebLogAspect {

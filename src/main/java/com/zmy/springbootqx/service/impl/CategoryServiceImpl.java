@@ -11,6 +11,18 @@ import com.zmy.springbootqx.pojo.Category;
 import com.zmy.springbootqx.service.CategoryService;
 import com.zmy.springbootqx.util.Result;
 
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: CategoryServiceImpl.java
+ * @Description: 类别业务接口实现类
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:12:32
+ */
 @Service
 public class CategoryServiceImpl implements CategoryService {
 	@Autowired CategoryMapper categoryMapper;

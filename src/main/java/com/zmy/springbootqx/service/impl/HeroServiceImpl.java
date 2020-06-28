@@ -11,6 +11,18 @@ import com.zmy.springbootqx.pojo.Hero;
 import com.zmy.springbootqx.service.HeroService;
 import com.zmy.springbootqx.util.Result;
 
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: HeroServiceImpl.java
+ * @Description: 英雄业务接口实现类
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:12:43
+ */
 @Service
 public class HeroServiceImpl implements HeroService {
 	@Autowired HeroMapper heroMapper;

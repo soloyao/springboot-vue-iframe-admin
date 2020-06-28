@@ -24,7 +24,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zmy.springbootqx.annotation.LogAnnotation;
-import com.zmy.springbootqx.pojo.Permission;
 import com.zmy.springbootqx.pojo.Role;
 import com.zmy.springbootqx.pojo.User;
 import com.zmy.springbootqx.service.PermissionService;
@@ -33,6 +32,18 @@ import com.zmy.springbootqx.service.UserService;
 
 import springfox.documentation.annotations.ApiIgnore;
 
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: UserController.java
+ * @Description: 用户管理控制层
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:07:22
+ */
 @ApiIgnore
 @RestController
 public class UserController {

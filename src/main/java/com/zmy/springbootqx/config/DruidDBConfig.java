@@ -10,6 +10,18 @@ import org.springframework.context.annotation.Primary;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: DruidDBConfig.java
+ * @Description: Druid数据库连接池配置类
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:03:31
+ */
 @Configuration
 public class DruidDBConfig {
 	private Logger logger = Logger.getLogger(DruidDBConfig.class);

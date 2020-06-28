@@ -1,5 +1,17 @@
 package com.zmy.springbootqx.pojo;
 
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: Hotel.java
+ * @Description: 旅馆实体类
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:10:15
+ */
 public class Hotel {
 	private int id;
 	private String name;

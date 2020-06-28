@@ -17,6 +17,18 @@ import com.zmy.springbootqx.pojo.Permission;
 import com.zmy.springbootqx.pojo.User;
 import com.zmy.springbootqx.service.PermissionService;
 
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: PermissionServiceImpl.java
+ * @Description: 权限业务接口实现类
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:13:08
+ */
 @Service
 public class PermissionServiceImpl implements PermissionService {
 	@Autowired PermissionMapper permissionMapper;

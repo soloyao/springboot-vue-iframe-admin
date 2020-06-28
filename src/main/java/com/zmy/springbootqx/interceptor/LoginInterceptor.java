@@ -16,7 +16,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.zmy.springbootqx.annotation.PermissionAnnotation;
 import com.zmy.springbootqx.pojo.User;
 
-
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: LoginInterceptor.java
+ * @Description: 登录拦截器
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:07:45
+ */
 @Component
 public class LoginInterceptor implements HandlerInterceptor{
 

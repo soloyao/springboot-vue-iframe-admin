@@ -7,6 +7,18 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.zmy.springbootqx.pojo.Category;
 
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: CategoryMapper.java
+ * @Description: 类别数据访问层
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:07:54
+ */
 @Mapper
 public interface CategoryMapper {
 	List<Category> list(Map<String, String> paramMap);

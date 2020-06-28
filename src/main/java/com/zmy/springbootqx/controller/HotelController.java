@@ -23,6 +23,18 @@ import com.zmy.springbootqx.service.HotelService;
 
 import springfox.documentation.annotations.ApiIgnore;
 
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: HotelController.java
+ * @Description: 旅馆管理控制层
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:06:29
+ */
 @ApiIgnore
 @RestController
 public class HotelController {

@@ -1,7 +1,16 @@
 package com.zmy.springbootqx.util;
 
 /**
- * 提示信息工具类
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: Result.java
+ * @Description: 提示信息工具类
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:14:06
  */
 public class Result {
     public static int SUCCESS_CODE = 0;

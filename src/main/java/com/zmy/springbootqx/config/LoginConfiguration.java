@@ -8,7 +8,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import com.zmy.springbootqx.interceptor.LoginInterceptor;
 
-
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: LoginConfiguration.java
+ * @Description: 拦截配置类
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:05:03
+ */
 @Configuration
 public class LoginConfiguration extends WebMvcConfigurerAdapter {
 	@Autowired LoginInterceptor loginInterceptor;

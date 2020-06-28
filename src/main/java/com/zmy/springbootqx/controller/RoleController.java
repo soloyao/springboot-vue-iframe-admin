@@ -28,6 +28,18 @@ import com.zmy.springbootqx.service.RoleService;
 
 import springfox.documentation.annotations.ApiIgnore;
 
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: RoleController.java
+ * @Description: 角色控制层
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:06:59
+ */
 @ApiIgnore
 @RestController
 public class RoleController {

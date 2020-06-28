@@ -13,6 +13,18 @@ import com.zmy.springbootqx.pojo.Role;
 import com.zmy.springbootqx.pojo.RolePermission;
 import com.zmy.springbootqx.service.RoleService;
 
+/**
+ * 
+ * Copyright: Copyright (c) 2020 Mengyao Zeng
+ *
+ * @ClassName: RoleServiceImpl.java
+ * @Description: 角色业务接口实现类
+ * 
+ * @version: v1.0.0
+ * @author: Mengyao Zeng
+ * @email: 343722243@qq.com
+ * @date: 2020年6月28日 上午11:13:20
+ */
 @Service
 public class RoleServiceImpl implements RoleService {
 	@Autowired RoleMapper roleMapper;
