@@ -24,6 +24,13 @@ import springfox.documentation.annotations.ApiIgnore;
 @ApiIgnore
 @Controller
 public class PageController {
+	@GetMapping("/")
+	@LogAnnotation(desc = "跳转至默认首页")
+	public ModelAndView defaultIndex() {
+		ModelAndView mav = new ModelAndView("index/index");
+		return mav;
+	}
+	
 	@GetMapping("/login")
 	@LogAnnotation(desc = "跳转至登录页面")
 	public ModelAndView login() {
