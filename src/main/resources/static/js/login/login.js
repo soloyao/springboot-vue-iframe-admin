@@ -1,15 +1,23 @@
 $(function() {
 	var data4Vue = {
-		user4Login: {name: "", password: ""}
+		user4Login: {name: "", password: ""},
+		count: 0
 	};
 	
 	var vue = new Vue({
 		el: "#app",
 		data: data4Vue,
 		mounted: function() {
+			this.getCount();
 			$("#login-name").get(0).select();
 		},
 		methods: {
+			getCount: function() {
+				var url = "count";
+				axios.get(url).then(function(res) {
+					console.log(res);
+				});
+			},
 			loginKeyDown: function(e) {
 				if (e.keyCode == 13) {
 					this.login();

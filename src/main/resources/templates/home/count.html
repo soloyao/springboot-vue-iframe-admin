@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>访问统计</title>
+    <script th:inline="javascript">
+        function load(){
+            var count = [[${count}]];
+            document.getElementById("visit").innerHTML = count.toString();
+        }
+    </script>
+</head>
+<body onload="load()">
+<h1>Hello, world!</h1>
+<p>&emsp;&emsp;本页面已被访问<span id="visit"></span>次。</p>
+</body>
+</html>
