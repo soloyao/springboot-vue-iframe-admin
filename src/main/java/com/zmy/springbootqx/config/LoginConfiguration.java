@@ -44,7 +44,7 @@ public class LoginConfiguration extends WebMvcConfigurerAdapter {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginInterceptor)
 		.addPathPatterns("/**")
-		.excludePathPatterns("/login", "/register", "/demo", "/swagger-resources/**", "/v2/**", "/configuration/**");
+		.excludePathPatterns("/login", "/register", "/demo", "/swagger-resources/**", "/v2/**", "/configuration/**", "/count");
 		super.addInterceptors(registry);
 	}
 }

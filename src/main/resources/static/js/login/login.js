@@ -15,7 +15,12 @@ $(function() {
 			getCount: function() {
 				var url = "count";
 				axios.get(url).then(function(res) {
-					console.log(res);
+					var data = res.data;
+					if (data.code == 0) {
+						vue.count = data.data;
+					} else {
+						vue.count = 0;
+					}
 				});
 			},
 			loginKeyDown: function(e) {
