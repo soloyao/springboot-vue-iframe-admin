@@ -1,6 +1,6 @@
 $(function() {
 	var data4Vue = {
-		user4Login: {name: "", password: ""},
+		user4Login: {name: "admin", password: "admin"},
 		count: 0
 	};
 	
