@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zmy.springbootqx.util.Result;
 
+import springfox.documentation.annotations.ApiIgnore;
+
+@ApiIgnore
 @RestController
 public class VisitController {
 
