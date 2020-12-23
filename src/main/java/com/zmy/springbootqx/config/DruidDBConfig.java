@@ -26,15 +26,27 @@ import com.alibaba.druid.pool.DruidDataSource;
 public class DruidDBConfig {
 	private Logger logger = Logger.getLogger(DruidDBConfig.class);
 	
+	/**
+	 * url
+	 */
 	@Value("${spring.datasource.url}")
 	private String dbUrl;
 	
+	/**
+	 * 数据库用户名
+	 */
 	@Value("${spring.datasource.username}")
 	private String username;
 	
+	/**
+	 * 数据库密码
+	 */
 	@Value("${spring.datasource.password}")
 	private String password;
 	
+	/**
+	 *  
+	 */
 	@Value("${spring.datasource.driverClassName}")
 	private String driverClassName;
 	

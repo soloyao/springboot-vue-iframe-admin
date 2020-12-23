@@ -26,5 +26,9 @@ import java.lang.annotation.Target;
 @Inherited
 @Documented
 public @interface LogAnnotation {
+	/**
+	 * 日志的描述内容
+	 * @return
+	 */
 	String desc();
 }

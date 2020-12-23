@@ -47,6 +47,13 @@ public class RoleController {
 	@Autowired PermissionService permissionService;
 	JSONObject json = new JSONObject();
 	
+	/**
+	 * 分页获取所有角色
+	 * @param start
+	 * @param size
+	 * @param keyword
+	 * @return
+	 */
 	@GetMapping("/roles")
 	@LogAnnotation(desc = "分页获取所有角色")
 	public PageInfo<Role> list(@RequestParam(value = "start", defaultValue = "1") int start,
@@ -62,6 +69,11 @@ public class RoleController {
 		return page;
 	}
 	
+	/**
+	 * 获取单个角色
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/roles/{id}")
 	@LogAnnotation(desc = "获取单个角色")
 	public String get(@PathVariable("id") int id) {
@@ -72,12 +84,21 @@ public class RoleController {
 		return json.toJSONString();
 	}
 	
+	/**
+	 * 获取所有菜单
+	 * @return
+	 */
 	@GetMapping("/listPermissions")
 	public List<Permission> get() {
 		List<Permission> permissions = permissionService.listPermissions();
 		return permissions;
 	}
 	
+	/**
+	 * 批量分配角色权限
+	 * @param params
+	 * @return
+	 */
 	@PostMapping("/rolesBatch")
 	@LogAnnotation(desc = "批量分配角色权限")
 	public String addBatch(@RequestBody JSONObject params) {
@@ -95,6 +116,11 @@ public class RoleController {
 		return "success";
 	}
 	
+	/**
+	 * 新增角色
+	 * @param role
+	 * @return
+	 */
 	@PostMapping("/roles")
 	@LogAnnotation(desc = "新增角色")
 	public String add(@RequestBody Role role) {
@@ -110,6 +136,11 @@ public class RoleController {
 		return json.toJSONString();
 	}
 	
+	/**
+	 * 修改角色
+	 * @param role
+	 * @return
+	 */
 	@PutMapping("/roles")
 	@LogAnnotation(desc = "修改角色")
 	public String update(@RequestBody Role role) {
@@ -117,6 +148,11 @@ public class RoleController {
 		return "success";
 	}
 	
+	/**
+	 * 删除角色
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping("/roles/{id}")
 	@LogAnnotation(desc = "删除角色")
 	public String delete(@PathVariable("id") int id) {

@@ -40,6 +40,13 @@ import springfox.documentation.annotations.ApiIgnore;
 public class HeroController {
 	@Autowired HeroService heroService;
 	
+	/**
+	 * 分页获取所有英雄
+	 * @param start 当前页
+	 * @param size 一页记录条数
+	 * @param keyword 搜索关键词
+	 * @return 分页对象
+	 */
 	@GetMapping("/heros")
 	@LogAnnotation(desc = "分页获取所有英雄")
 	public PageInfo<Hero> list(@RequestParam(value = "start", defaultValue = "1") int start,
@@ -55,6 +62,11 @@ public class HeroController {
 		return page;
 	}
 	
+	/**
+	 * 获取单个英雄对象
+	 * @param id 英雄ID
+	 * @return 英雄对象
+	 */
 	@GetMapping("/heros/{id}")
 	@LogAnnotation(desc = "获取单个英雄")
 	public Hero get(@PathVariable("id") int id) {
@@ -62,18 +74,33 @@ public class HeroController {
 		return hero;
 	}
 	
+	/**
+	 * 新增英雄
+	 * @param hero 英雄对象
+	 * @return Result对象（成功或失败）
+	 */
 	@PostMapping("/heros")
 	@LogAnnotation(desc = "新增英雄")
 	public Object add(@RequestBody Hero hero) {
 		return heroService.add(hero);
 	}
 	
+	/**
+	 * 修改英雄
+	 * @param hero 英雄对象
+	 * @return Result对象（成功或失败）
+	 */
 	@PutMapping("/heros")
 	@LogAnnotation(desc = "修改英雄")
 	public Object update(@RequestBody Hero hero) {
 		return heroService.update(hero);
 	}
 	
+	/**
+	 * 删除英雄
+	 * @param id 英雄ID
+	 * @return Result对象（成功或失败）
+	 */
 	@DeleteMapping("/heros/{id}")
 	@LogAnnotation(desc = "删除英雄")
 	public Object delete(@PathVariable("id") int id) {

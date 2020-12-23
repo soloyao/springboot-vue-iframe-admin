@@ -28,6 +28,13 @@ import springfox.documentation.annotations.ApiIgnore;
 @ApiIgnore
 @RestController
 public class UploadController {
+	
+	/**
+	 * 上传文件
+	 * @param request
+	 * @param file
+	 * @return
+	 */
 	@PostMapping("/upload")
 	@LogAnnotation(desc = "上传文件")
 	public String upload(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
@@ -45,4 +52,5 @@ public class UploadController {
 		}
 		return fileName;
 	}
+	
 }

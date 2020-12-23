@@ -51,6 +51,12 @@ public class UserController {
 	@Autowired RoleService roleService;
 	@Autowired PermissionService permissionService;
 	
+	/**
+	 * 登录
+	 * @param user
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/login")
 	@LogAnnotation(desc = "登录")
 	public String login(@RequestBody User user, HttpSession session) {
@@ -68,6 +74,10 @@ public class UserController {
 		return json.toJSONString();
 	}
 	
+	/**
+	 * 注销
+	 * @param session
+	 */
 	@GetMapping("/logout")
 	@LogAnnotation(desc = "注销")
 	public void logout(HttpSession session) {
@@ -77,6 +87,13 @@ public class UserController {
 		}
 	}
 	
+	/**
+	 * 分页获取所有用户
+	 * @param start
+	 * @param size
+	 * @param keyword
+	 * @return
+	 */
 	@GetMapping("/users")
 	@LogAnnotation(desc = "分页获取所有用户")
 	public PageInfo<User> list(@RequestParam(value = "start", defaultValue = "1") int start,
@@ -92,6 +109,11 @@ public class UserController {
 		return page;
 	}
 	
+	/**
+	 * 获取单个用户
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/users/{id}")
 	@LogAnnotation(desc = "获取单个用户")
 	public String get(@PathVariable("id") int id) {
@@ -103,12 +125,21 @@ public class UserController {
 		return json.toJSONString();
 	}
 	
+	/**
+	 * 获取所有角色
+	 * @return
+	 */
 	@GetMapping("/listRoles")
 	public List<Role> get() {
 		List<Role> roles = roleService.list(null);
 		return roles;
 	}
 	
+	/**
+	 * 批量分配用户角色
+	 * @param params
+	 * @return
+	 */
 	@PostMapping("/usersBatch")
 	@LogAnnotation(desc = "批量分配用户角色")
 	public String addBatch(@RequestBody JSONObject params) {
@@ -126,6 +157,12 @@ public class UserController {
 		return "success";
 	}
 	
+	/**
+	 * 新增用户
+	 * @param user
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 */
 	@PostMapping("/users")
 	@LogAnnotation(desc = "新增用户")
 	public String add(@RequestBody User user) throws NoSuchAlgorithmException {
@@ -142,6 +179,12 @@ public class UserController {
 		return json.toJSONString();
 	}
 	
+	/**
+	 * 修改用户
+	 * @param user
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 */
 	@PutMapping("/users")
 	@LogAnnotation(desc = "修改用户")
 	public String update(@RequestBody User user) throws NoSuchAlgorithmException {
@@ -149,6 +192,11 @@ public class UserController {
 		return "success";
 	}
 	
+	/**
+	 * 删除用户
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping("/users/{id}")
 	@LogAnnotation(desc = "删除用户")
 	public String delete(@PathVariable("id") int id) {

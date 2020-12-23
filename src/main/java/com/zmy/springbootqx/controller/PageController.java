@@ -24,6 +24,10 @@ import springfox.documentation.annotations.ApiIgnore;
 @ApiIgnore
 @Controller
 public class PageController {
+	/**
+	 * 跳转至默认首页
+	 * @return
+	 */
 	@GetMapping("/")
 	@LogAnnotation(desc = "跳转至默认首页")
 	public ModelAndView defaultIndex() {
@@ -31,6 +35,10 @@ public class PageController {
 		return mav;
 	}
 	
+	/**
+	 * 跳转至登录页面
+	 * @return
+	 */
 	@GetMapping("/login")
 	@LogAnnotation(desc = "跳转至登录页面")
 	public ModelAndView login() {
@@ -38,12 +46,20 @@ public class PageController {
 		return mav;
 	}
 	
+	/**
+	 * 跳转至home页面
+	 * @return
+	 */
 	@GetMapping("/home")
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("home/home");
 		return mav;
 	}
 	
+	/**
+	 * 跳转至首页
+	 * @return
+	 */
 	@GetMapping("/index")
 	@LogAnnotation(desc = "跳转至首页")
 	public ModelAndView index() {
@@ -51,6 +67,10 @@ public class PageController {
 		return mav;
 	}
 	
+	/**
+	 * 跳转至数据监控页面
+	 * @return
+	 */
 	@PermissionAnnotation(permName = "druidServer")
 	@GetMapping("/druidServer")
 	@LogAnnotation(desc = "跳转至数据监控页面")
@@ -59,6 +79,10 @@ public class PageController {
 		return mav;
 	}
 	
+	/**
+	 * 跳转至类别管理页面
+	 * @return
+	 */
 	@PermissionAnnotation(permName = "listCategory")
 	@GetMapping("/listCategory")
 	@LogAnnotation(desc = "跳转至分类管理页面")
@@ -67,6 +91,10 @@ public class PageController {
 		return mav;
 	}
 	
+	/**
+	 * 跳转至用户管理页面
+	 * @return
+	 */
 	@PermissionAnnotation(permName = "listUser")
 	@GetMapping("/listUser")
 	@LogAnnotation(desc = "跳转至用户管理页面")
@@ -75,6 +103,10 @@ public class PageController {
 		return mav;
 	}
 	
+	/**
+	 * 跳转至角色管理页面
+	 * @return
+	 */
 	@PermissionAnnotation(permName = "listRole")
 	@GetMapping("/listRole")
 	@LogAnnotation(desc = "跳转至角色管理页面")
@@ -83,6 +115,10 @@ public class PageController {
 		return mav;
 	}
 	
+	/**
+	 * 跳转至菜单管理页面
+	 * @return
+	 */
 	@PermissionAnnotation(permName = "listPermission")
 	@GetMapping("/listPermission")
 	@LogAnnotation(desc = "跳转至菜单管理页面")
@@ -91,6 +127,10 @@ public class PageController {
 		return mav;
 	}
 	
+	/**
+	 * 跳转至旅馆管理页面
+	 * @return
+	 */
 	@PermissionAnnotation(permName = "listHotel")
 	@GetMapping("/listHotel")
 	@LogAnnotation(desc = "跳转至旅馆管理页面")
@@ -99,6 +139,10 @@ public class PageController {
 		return mav;
 	}
 	
+	/**
+	 * 跳转至英雄管理页面
+	 * @return
+	 */
 	@PermissionAnnotation(permName = "listHero")
 	@GetMapping("/listHero")
 	@LogAnnotation(desc = "跳转至英雄管理页面")
@@ -107,6 +151,10 @@ public class PageController {
 		return mav;
 	}
 	
+	/**
+	 * 跳转至日志管理页面
+	 * @return
+	 */
 	@PermissionAnnotation(permName = "listSystemLog")
 	@GetMapping("/listSystemLog")
 	@LogAnnotation(desc = "跳转至日志管理页面")

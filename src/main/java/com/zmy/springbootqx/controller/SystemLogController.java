@@ -38,6 +38,13 @@ import io.swagger.annotations.ApiOperation;
 public class SystemLogController {
 	@Autowired SystemLogService systemLogService;
 	
+	/**
+	 * 分页获取所有日志
+	 * @param start
+	 * @param size
+	 * @param keyword
+	 * @return
+	 */
 	@GetMapping("/systemLogs")
 	@LogAnnotation(desc = "分页获取所有日志")
 	@ApiOperation(value = "分页获取所有日志")

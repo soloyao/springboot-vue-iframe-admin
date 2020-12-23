@@ -46,6 +46,11 @@ public class PermissionController {
 	@Autowired PermissionService permissionService;
 	JSONObject json = new JSONObject();
 	
+	/**
+	 * 根据用户获取对应菜单
+	 * @param session session对象
+	 * @return 菜单集合
+	 */
 	@GetMapping("/permissionsByUser")
 	@LogAnnotation(desc = "根据用户获取对应菜单")
 	public JSONArray getPermissionsByUser(HttpSession session) {
@@ -53,12 +58,24 @@ public class PermissionController {
 		return permissionService.listByUser(user);
 	}
 	
+	/**
+	 * 获取所有的父菜单
+	 * @return 父菜单集合
+	 */
 	@GetMapping("/parentPermissions")
 	@LogAnnotation(desc = "获取所有的父菜单")
 	public List<Permission> list() {
 		return permissionService.listParentPermissions();
 	}
 	
+	/**
+	 * 分页获取所有菜单
+	 * @param start
+	 * @param size
+	 * @param keyword
+	 * @param pid
+	 * @return 分页对象
+	 */
 	@GetMapping("/permissions")
 	@LogAnnotation(desc = "分页获取所有菜单")
 	public PageInfo<Permission> list(@RequestParam(value = "start", defaultValue = "1") int start,
@@ -76,6 +93,11 @@ public class PermissionController {
 		return page;
 	}
 	
+	/**
+	 * 获取单个菜单
+	 * @param id
+	 * @return 菜单对象
+	 */
 	@GetMapping("/permissions/{id}")
 	@LogAnnotation(desc = "获取单个菜单")
 	public Permission get(@PathVariable("id") int id) {
@@ -83,6 +105,11 @@ public class PermissionController {
 		return permission;
 	}
 	
+	/**
+	 * 新增菜单
+	 * @param permission
+	 * @return 
+	 */
 	@PostMapping("/permissions")
 	@LogAnnotation(desc = "新增菜单")
 	public String add(@RequestBody Permission permission) {
@@ -98,6 +125,11 @@ public class PermissionController {
 		return json.toJSONString();
 	}
 	
+	/**
+	 * 修改菜单
+	 * @param permission
+	 * @return
+	 */
 	@PutMapping("/permissions")
 	@LogAnnotation(desc = "修改菜单")
 	public String update(@RequestBody Permission permission) {
@@ -105,6 +137,11 @@ public class PermissionController {
 		return "success";
 	}
 	
+	/**
+	 * 删除菜单
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping("/permissions/{id}")
 	@LogAnnotation(desc = "删除菜单")
 	public String delete(@PathVariable("id") int id) {

@@ -44,6 +44,13 @@ import io.swagger.annotations.ApiOperation;
 public class CategoryController {
 	@Autowired CategoryService categoryService;
 	
+	/**
+	 * 分页获取所有类别
+	 * @param start 当前页
+	 * @param size 一页记录条数
+	 * @param keyword 关键词
+	 * @return 分页对象
+	 */
 	@PermissionAnnotation(permName = "listCategory")
 	@GetMapping("/categories")
 	@LogAnnotation(desc = "分页获取所有类别")
@@ -66,6 +73,11 @@ public class CategoryController {
 		return page;
 	}
 	
+	/**
+	 * 获取单个类别对象
+	 * @param id 类别ID
+	 * @return 类别对象
+	 */
 	@PermissionAnnotation(permName = "listCategory")
 	@GetMapping("/categories/{id}")
 	@LogAnnotation(desc = "获取单个类别")
@@ -78,6 +90,11 @@ public class CategoryController {
 		return category;
 	}
 	
+	/**
+	 * 新增分类
+	 * @param category 类别对象
+	 * @return Result对象（成功或失败）
+	 */
 	@PermissionAnnotation(permName = "listCategory")
 	@PostMapping("/categories")
 	@LogAnnotation(desc = "新增分类")
@@ -89,6 +106,11 @@ public class CategoryController {
 		return categoryService.add(category);
 	}
 	
+	/**
+	 * 修改分类
+	 * @param category 类别对象
+	 * @return Result对象（成功或失败）
+	 */
 	@PermissionAnnotation(permName = "listCategory")
 	@PutMapping("/categories")
 	@LogAnnotation(desc = "修改分类")
@@ -100,6 +122,11 @@ public class CategoryController {
 		return categoryService.update(category);
 	}
 	
+	/**
+	 * 删除分类
+	 * @param id 类别ID
+	 * @return Result对象（成功或失败）
+	 */
 	@PermissionAnnotation(permName = "listCategory")
 	@DeleteMapping("/categories/{id}")
 	@LogAnnotation(desc = "删除分类")

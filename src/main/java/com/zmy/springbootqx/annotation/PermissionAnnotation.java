@@ -26,5 +26,9 @@ import java.lang.annotation.Target;
 @Inherited
 @Documented
 public @interface PermissionAnnotation {
+	/**
+	 * 权限的key
+	 * @return
+	 */
 	String permName();
 }

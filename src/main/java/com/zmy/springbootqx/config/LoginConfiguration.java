@@ -24,6 +24,9 @@ import com.zmy.springbootqx.interceptor.LoginInterceptor;
 public class LoginConfiguration extends WebMvcConfigurerAdapter {
 	@Autowired LoginInterceptor loginInterceptor;
 	
+	/**
+	 * 添加资源拦截处理器
+	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		//和页面有关的静态目录都放在项目的static目录下
@@ -40,11 +43,14 @@ public class LoginConfiguration extends WebMvcConfigurerAdapter {
         super.addResourceHandlers(registry);
 	}
 	
+	/**
+	 * 添加拦截器
+	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(loginInterceptor)
-		.addPathPatterns("/**")
-		.excludePathPatterns("/login", "/register", "/demo", "/swagger-resources/**", "/v2/**", "/configuration/**", "/count");
+		registry.addInterceptor(loginInterceptor)//添加登录拦截器
+		.addPathPatterns("/**")//所有页面需要验证
+		.excludePathPatterns("/login", "/register", "/demo", "/swagger-resources/**", "/v2/**", "/configuration/**", "/count");//这些url不需要拦截
 		super.addInterceptors(registry);
 	}
 }
