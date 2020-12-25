@@ -55,4 +55,15 @@ public class HeroServiceImpl implements HeroService {
 		return heroMapper.get(id);
 	}
 
+	@Override
+	public List<Hero> listByIds(String[] heroIds) {
+		return heroMapper.listByIds(heroIds);
+	}
+
+	@Override
+	public String addForeach(List<Hero> heros) {
+		int success_number = heroMapper.addForeach(heros);
+		return success_number > 0 ? "success" : "error";
+	}
+
 }

@@ -15,7 +15,7 @@ package com.zmy.springbootqx.pojo;
 public class Hero {
 	private int id;
 	private String name;
-	private float hp;
+	private Float hp;
 	public int getId() {
 		return id;
 	}
@@ -28,10 +28,14 @@ public class Hero {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public float getHp() {
+	public Float getHp() {
 		return hp;
 	}
-	public void setHp(float hp) {
+	public void setHp(Float hp) {
 		this.hp = hp;
+	}
+	@Override
+	public String toString() {
+		return "Hero [id=" + id + ", name=" + name + ", hp=" + hp + "]";
 	}
 }

@@ -22,4 +22,19 @@
     	<select id="get" resultType="Hero">
     		select * from hero where id = #{id}
     	</select>
+    	<select id="listByIds" resultType="Hero">
+    		select * from hero where id in
+    		<foreach collection="array" item = "id" index = "index" open = "(" close = ")" separator=",">
+    			#{id}
+    		</foreach>
+    	</select>
+  		<insert id="addForeach" parameterType="java.util.List" useGeneratedKeys="false">
+  			insert into hero(name, hp) values
+  			<foreach collection="list" item="item" index="index" separator=",">
+  				(
+  					#{item.name},
+  					#{item.hp}
+  				)
+  			</foreach>
+  		</insert>
     </mapper>

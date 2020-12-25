@@ -23,4 +23,6 @@ public interface HeroService {
 	Object delete(int id);
 	Object update(Hero hero);
 	Hero get(int id);
+	List<Hero> listByIds(String[] heroIds);
+	String addForeach(List<Hero> heros);
 }

@@ -26,4 +26,6 @@ public interface HeroMapper {
 	void delete(int id);
 	void update(Hero hero);
 	Hero get(int id);
+	List<Hero> listByIds(String[] heroIds);
+	int addForeach(List<Hero> heros);
 }

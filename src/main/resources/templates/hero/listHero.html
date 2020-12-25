@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<div th:replace="include::include"></div>
+	<script src="./static/js/common/myUpload.js"></script>
 	<script src="./static/js/common/component-pager.js"></script>
 	<link href="./static/css/common/common.css" rel="stylesheet" />
 	<script>
@@ -135,6 +136,40 @@
 						if (_this.keyword) {
 							_this.list(1);
 						}
+					},
+					excelUpload: function() {
+						var _this = this;
+						$.uploader("../uploadExcelHero", function(res) {
+							if (res == "success") {
+								myzui._success("数据导入成功");
+								_this.list(1);
+							} else {
+								myzui._error(res);
+							}
+						}, {
+							filters: {
+								mime_types: [
+									{title: 'Excel文件', extensions: 'xls,xlsx'}
+								]
+							},
+							limitFilesCount: 1
+						}, true);
+					},
+					excelDownload: function() {
+						var heroIds = $("tbody .checked .checked-span").map(function(item, el) {
+							return $(el).html();
+						}).get().join(",");
+						if (!heroIds) {
+							myzui._error("请选择需要导出的数据行");
+							return;
+						}
+						axios.post("downloadExcelHero", {heroIds: heroIds}).then(function(res) {
+							if (res.data.code == 1) {
+								myzui._error(res.data.msg);
+								return;
+							}
+							myzui._success(res.data.data);
+						});
 					}
 				}
 			});
@@ -155,6 +190,8 @@
 								<button class="btn btn-primary" @click="search">搜索</button>
 								<button class="btn btn-default" @click="reset">重置</button>
 								<button class="btn btn-success" @click="addItem">新增</button>
+								<button class="btn btn-primary" @click="excelUpload">导入Excel</button>
+								<button class="btn btn-success" @click="excelDownload">导出Excel</button>
 							</span>
 						</div>
 						<!-- search end -->
@@ -178,7 +215,8 @@
 							<tbody>
 								<tr v-if="items && items.length > 0" v-for="item in items">
 									<td style="width:16px;">
-										<div @click="checkbox" class="checkbox-primary checkbox-children" :data-id="item.id">
+										<div @click="checkbox" class="checkbox-primary checkbox-children">
+											<span class="checked-span" hidden>{{item.id}}</span>
 		                                    <label></label>
 		                                </div>
 									</td>

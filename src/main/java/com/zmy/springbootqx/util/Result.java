@@ -37,6 +37,10 @@ public class Result {
     public static Result fail(String message) {
         return new Result(FAIL_CODE, message, null);
     }
+    
+    public static Result fail() {
+    	return new Result(FAIL_CODE, null, null);
+    }
 
     public static int getSUCCESS_CODE() {
         return SUCCESS_CODE;
