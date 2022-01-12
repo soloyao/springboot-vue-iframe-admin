@@ -36,11 +36,11 @@ public class LoginInterceptor implements HandlerInterceptor{
 			throws Exception {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		if (null == user) {
+		if (null == user) {//校验用户是否登录
 			response.sendRedirect(request.getContextPath() + "/login");
 			return false;
 		} else {
-			
+			//校验权限
 			HandlerMethod handlerMethod = (HandlerMethod) handler;
 			Method method = handlerMethod.getMethod();
 			PermissionAnnotation permissionAnnotation = method.getAnnotation(PermissionAnnotation.class);

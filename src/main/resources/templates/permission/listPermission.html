@@ -27,7 +27,7 @@
 			</div>
 			<!-- parent permission end -->
 		</div>
-		<div class="col-md-10 content table-content load-indicator" :class="isLoading?'loading':''" data-loading="正在加载">
+		<div class="col-md-5 content table-content load-indicator" :class="isLoading?'loading':''" data-loading="正在加载">
 			<div class="panel">
 				<div class="panel-heading">
 					<!-- top start -->
@@ -47,12 +47,101 @@
 				</div>
 				<div class="panel-body">
 					<!-- table start -->
-					<component-table v-bind:ths.sync="listThs" v-bind:list.sync="itemList" v-on:update-item="updateEdit" v-on:delete-item="deleteItem"></component-table>
+					<div style="height:38px;">
+						<table class="table table-hover table-striped" style="margin:0px;">
+							<thead>
+								<th><div @click="checkboxAll" class="checkbox-primary checkbox-parent" style="width:16px;"><label></label></div></th>
+								<th width="94">编号</th>
+								<th width="310">名称</th>
+								<th width="311">描述</th>
+								<th width="382">url</th>
+								<th width="284">操作</th>
+							</thead>
+						</table>
+					</div>
+					<div style="height:calc(100% - 38px);overflow:auto;">
+						<table class="table table-hover table-striped">
+							<tbody>
+								<tr v-for="(item,$index) in itemList" @click="childClick(item,$index)" :class="{active:item==childActive}">
+									<td><div @click="checkbox" class="checkbox-primary checkbox-children" style="width:16px;"><label></label></div></td>
+									<td width="94">{{item.id}}</td>
+									<td width="310">{{item.name}}</td>
+									<td width="311">{{item.desc}}</td>
+									<td width="382">{{item.url}}</td>
+									<td width="284">
+										<button class="btn btn-xs btn-primary" @click="updateEdit(item)"><i class="icon icon-pencil"></i></button>
+										<button class="btn btn-xs btn-danger" @click="deleteItem(item.id)"><i class="icon icon-trash"></i></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- <component-table v-bind:ths.sync="listThs" v-bind:list.sync="itemList" v-on:update-item="updateEdit" v-on:delete-item="deleteItem"></component-table> -->
 					<!-- table end -->
 				</div>
 				<div class="panel-footer">
 					<!-- page start -->
 					<component-pager v-bind.sync="pagination" v-on:list="list"></component-pager>
+					<!-- page end -->
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-5 content table-content load-indicator" :class="isBtnLoading?'loading':''" data-loading="正在加载">
+			<div class="panel">
+				<div class="panel-heading">
+					<!-- top start -->
+					<div id="top-div">
+						<!-- search start -->
+						<div class="input-group search-div">
+							<input type="text" class="form-control" id="keyword" placeholder="请输入关键词">
+							<span class="input-group-btn">
+								<!-- <button class="btn btn-primary" @click="search">搜索</button>
+								<button class="btn btn-default" @click="reset">重置</button> -->
+								<button class="btn btn-success" @click="addEditBtn">新增</button>
+							</span>
+						</div>
+						<!-- search end -->
+					</div>
+					<!-- top end -->
+				</div>
+				<div class="panel-body">
+					<!-- table start -->
+					<div style="height:38px;">
+						<table class="table table-hover table-striped" style="margin:0px;">
+							<thead>
+								<th><div @click="checkboxAll" class="checkbox-primary checkbox-parent" style="width:16px;"><label></label></div></th>
+								<th width="94">编号</th>
+								<th width="310">名称</th>
+								<th width="311">描述</th>
+								<th width="382">url</th>
+								<th width="284">操作</th>
+							</thead>
+						</table>
+					</div>
+					<div style="height:calc(100% - 38px);overflow:auto;">
+						<table class="table table-hover table-striped">
+							<tbody>
+								<tr v-for="item in btnList">
+									<td><div @click="checkbox" class="checkbox-primary checkbox-children" style="width:16px;"><label></label></div></td>
+									<td width="94">{{item.id}}</td>
+									<td width="310">{{item.name}}</td>
+									<td width="311">{{item.desc}}</td>
+									<td width="382">{{item.url}}</td>
+									<td width="284">
+										<button class="btn btn-xs btn-primary" @click="updateEditBtn(item)"><i class="icon icon-pencil"></i></button>
+										<button class="btn btn-xs btn-danger" @click="deleteItem(item.id)"><i class="icon icon-trash"></i></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- <component-table v-bind:ths.sync="listThs" v-bind:list.sync="itemList" v-on:update-item="updateEdit" v-on:delete-item="deleteItem"></component-table> -->
+					<!-- table end -->
+				</div>
+				<div class="panel-footer">
+					<!-- page start -->
+					<component-pager v-bind.sync="paginationBtn" v-on:list="listBtn"></component-pager>
 					<!-- page end -->
 				</div>
 			</div>
@@ -123,7 +212,7 @@
 			</div>
 		</div>
 		<div class="edit-panel-div-shim" @click="cancel" :class="isEditShow?'active':''"></div>
-		<!-- edit end -->
+		<!-- children edit end -->
 	</div>
 </body>
 </html>

@@ -60,12 +60,14 @@ public class UserController {
 	@PostMapping("/login")
 	@LogAnnotation(desc = "登录")
 	public String login(@RequestBody User user, HttpSession session) {
-		User loginUser = userService.login(user);
 		String sessionCode = (String) session.getAttribute("VerifyCode");
 		JSONObject json = new JSONObject();
-		if (!sessionCode.equals(user.getCode())) {
+		String code = user.getCode();
+		if (!sessionCode.equalsIgnoreCase(code)) {
 			json.put("code", 2);//验证码错误
+			return json.toJSONString();
 		}
+		User loginUser = userService.login(user);
 		if (null == loginUser) {
 			json.put("code", 1);//用户名或密码错误
 		} else {

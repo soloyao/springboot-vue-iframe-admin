@@ -42,6 +42,10 @@ $(function() {
 					this.login();
 				}
 			},
+			failClear: function() {
+				this.getCode();
+				this.user4Login.code = "";
+			},
 			login: function() {
 				var _this = this;
 				var url = "login";
@@ -65,8 +69,10 @@ $(function() {
 						}, 1000);
 					} else if (code == '1') {
 						myzui._error1("登录失败，用户名或密码错误");
+						_this.failClear();
 					} else if (code == '2') {
 						myzui._error1("登录失败，验证码错误");
+						_this.failClear();
 					}
 				});
 			}
