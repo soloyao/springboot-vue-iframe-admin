@@ -50,7 +50,7 @@ public class LoginConfiguration extends WebMvcConfigurerAdapter {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginInterceptor)//添加登录拦截器
 		.addPathPatterns("/**")//所有页面需要验证
-		.excludePathPatterns("/login", "/register", "/demo", "/swagger-resources/**", "/v2/**", "/configuration/**", "/count");//这些url不需要拦截
+		.excludePathPatterns("/login", "/register", "/verifyCode", "/demo", "/swagger-resources/**", "/v2/**", "/configuration/**", "/count");//这些url不需要拦截
 		super.addInterceptors(registry);
 	}
 }

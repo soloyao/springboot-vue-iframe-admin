@@ -23,6 +23,10 @@
 					<div class="form_text_ipt">
 						<input type="password" placeholder="password" v-model="user4Login.password" @keydown="loginKeyDown" />
 					</div>
+					<div class="form_text_ipt">
+						<input type="text" style="width:200px;" placeholder="code" v-model="user4Login.code" @keydown="loginKeyDown" />
+						<img id="verifyImg" v-bind:src="codeImg" />
+					</div>
 					<div class="form_btn">
 						<button @click="login">login</button>
 					</div>

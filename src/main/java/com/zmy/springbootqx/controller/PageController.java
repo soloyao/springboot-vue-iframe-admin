@@ -42,7 +42,7 @@ public class PageController {
 	@GetMapping("/login")
 	@LogAnnotation(desc = "跳转至登录页面")
 	public ModelAndView login() {
-		ModelAndView mav = new ModelAndView("login/login2");
+		ModelAndView mav = new ModelAndView("login/login");
 		return mav;
 	}
 	
@@ -53,6 +53,12 @@ public class PageController {
 	@GetMapping("/home")
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("home/home");
+		return mav;
+	}
+	
+	@GetMapping("/demo")
+	public ModelAndView demo() {
+		ModelAndView mav = new ModelAndView("demo");
 		return mav;
 	}
 	

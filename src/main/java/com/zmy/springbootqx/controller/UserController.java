@@ -61,9 +61,13 @@ public class UserController {
 	@LogAnnotation(desc = "登录")
 	public String login(@RequestBody User user, HttpSession session) {
 		User loginUser = userService.login(user);
+		String sessionCode = (String) session.getAttribute("VerifyCode");
 		JSONObject json = new JSONObject();
+		if (!sessionCode.equals(user.getCode())) {
+			json.put("code", 2);//验证码错误
+		}
 		if (null == loginUser) {
-			json.put("code", 1);
+			json.put("code", 1);//用户名或密码错误
 		} else {
 			Set<String> perms = permissionService.listPermStringSetsByUser(loginUser);
 			session.setAttribute("perms", perms);

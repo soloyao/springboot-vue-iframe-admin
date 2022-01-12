@@ -22,6 +22,15 @@ public class User {
 	private String realname;
 	private String sex;
 	private List<Role> roles;
+	
+	private String code;
+	
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
 	public List<Role> getRoles() {
 		return roles;
 	}
