@@ -41,11 +41,12 @@
 			</div>
 			<div class="page-content" :style="{width:showNav=='none'?'100%':'calc(100% - 180px)'}">
 				<div class="top">
-					<button class="btn btn-success" style="margin-left:10px;" @click="toggleNav" title="ÊäòÂè†ÂØºËà™Ê†è" data-toggle="tooltip" data-placement="right">
+					<button class="btn btn-success" style="margin-left:10px;" @click="toggleNav" title="’€µ˛µº∫Ω¿∏" data-toggle="tooltip" data-placement="right">
 						<i class="icon icon-bars"></i>
 					</button>
 					<!-- <span class="top-btn-left top-btn"><i class="icon icon-bars" @click="toggleNav"></i></span> -->
-					<span class="top-btn-left top-btn"><i class="icon icon-refresh" @click="refreshNav" data-toggle="tooltip" title="Âà∑Êñ∞ÂΩìÂâçÈ°µ" data-placement="right"></i></span>
+					<span class="top-btn-left top-btn"><i class="icon icon-refresh" @click="refreshNav" data-toggle="tooltip" title="À¢–¬µ±«∞“≥" data-placement="right"></i></span>
+					<span class="top-btn-left top-btn"><i class="icon icon-star" @click="changeColor" data-toggle="tooltip" title="ªª…´" data-placement="right"></i></span>
 					<div class="right-info">
 						<span class="right-info-date">
 							<!-- beautiful clock -->
@@ -86,21 +87,21 @@
 			                    <i class="right-info-user-icon icon icon-angle-down"></i>
 			                </button>
 			                <ul class="dropdown-menu" role="menu">
-			                    <li><a href="javascript:void(0);" @click="personalInfo"><span class="icon icon-user"></span>&nbsp;‰∏™‰∫∫‰ø°ÊÅØ</a></li>
+			                    <li><a href="javascript:void(0);" @click="personalInfo"><span class="icon icon-user"></span>&nbsp;∏ˆ»À–≈œ¢</a></li>
 			                    <li class="divider"></li>
-			                    <li><a href="javascript:void(0)" @click="logout"><span class="icon icon-th-large"></span>&nbsp;Ê≥®ÈîÄ</a></li>
+			                    <li><a href="javascript:void(0)" @click="logout"><span class="icon icon-th-large"></span>&nbsp;◊¢œ˙</a></li>
 			                </ul>
 						</div>
 					</div>
 					<span class="top-btn-right top-btn">
-						<i class="icon" :class="isFullScreen?'icon-collapse-full':'icon-expand-full'" title="ÊäòÂè†ÂÖ®Â±è" data-toggle="tooltip" data-placement="left" @click="fullScreen"></i>
+						<i class="icon" :class="isFullScreen?'icon-collapse-full':'icon-expand-full'" title="’€µ˛»´∆¡" data-toggle="tooltip" data-placement="left" @click="fullScreen"></i>
 					</span>
 				</div>
 				<div class="menuTabs">
 					<a href="javascript:void(0)"><i class="icon icon-backward"></i></a>
 					
 					<!-- home tab start -->
-					<a id="tabsHome" href="javascript:void(0)" class="activeTabs" @click="tabsClickHome">È¶ñÈ°µ</a>
+					<a id="tabsHome" href="javascript:void(0)" class="activeTabs" @click="tabsClickHome"> ◊“≥</a>
 					<!-- home tab end -->
 					
 					<template v-for="children in childrens" v-if="children">
@@ -126,7 +127,7 @@
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">√ó</span><span class="sr-only">ÂÖ≥Èó≠</span></button>
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">°¡</span><span class="sr-only">πÿ±’</span></button>
 		        <h4 class="modal-title">my information</h4>
 		      </div>
 		      <div class="modal-body">

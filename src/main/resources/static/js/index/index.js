@@ -10,6 +10,7 @@ $(function() {
 		user: user,
 		isFullScreen: false,
 		showNav: "block",
+		colorFlag: false,
 		items: [] //左边导航处所有的菜单
 	};
 	
@@ -22,6 +23,18 @@ $(function() {
 			timeInit();
 		},
 		methods: {
+			changeColor() {
+				var _this = this;
+				if (!this.colorFlag) {
+					$(".center").css({"filter" : "invert(100%)"});
+					$("#infoModal").css({"filter" : "invert(100%)"});
+					_this.colorFlag = true;
+				} else {
+					$(".center").css({"filter" : "invert(0%)"});
+					$("#infoModal").css({"filter" : "invert(0%)"});
+					_this.colorFlag = false;
+				}
+			},
 			logout: function() {
 				myzui.confirm("确认注销？", function() {
 					var url = "logout";
