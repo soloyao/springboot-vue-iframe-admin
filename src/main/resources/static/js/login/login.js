@@ -64,9 +64,12 @@ $(function() {
 						myzui._success1("登录成功");
 						var user = data.user;
 						sessionStorage.setItem("user", JSON.stringify(user));
-						setTimeout(() => {
-							location.href = "index";
-						}, 1000);
+						setTimeout(function() {
+						    location.href = "index";
+                        }, 1000);
+						// setTimeout(() => {
+						// 	location.href = "index";
+						// }, 1000);
 					} else if (code == '1') {
 						myzui._error1("登录失败，用户名或密码错误");
 						_this.failClear();

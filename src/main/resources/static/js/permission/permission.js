@@ -29,7 +29,8 @@ $(function() {
 		cid: 0,
 		size: 15
 	};
-	
+
+
 	var vue = new Vue({
 		el: "#app",
 		data: data4Vue,
