@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zmy.springbootqx.annotation.LogAnnotation;
+import com.zmy.springbootqx.annotation.PermissionAnnotation;
 import com.zmy.springbootqx.pojo.Permission;
 import com.zmy.springbootqx.pojo.User;
 import com.zmy.springbootqx.service.PermissionService;
@@ -51,6 +52,7 @@ public class PermissionController {
 	 * @param session session对象
 	 * @return 菜单集合
 	 */
+	@PermissionAnnotation(permName = "listPermission")
 	@GetMapping("/permissionsByUser")
 	@LogAnnotation(desc = "根据用户获取对应菜单")
 	public JSONObject getPermissionsByUser(HttpSession session) {
@@ -62,6 +64,7 @@ public class PermissionController {
 	 * 获取所有的父菜单
 	 * @return 父菜单集合
 	 */
+	@PermissionAnnotation(permName = "listPermission")
 	@GetMapping("/parentPermissions")
 	@LogAnnotation(desc = "获取所有的父菜单")
 	public List<Permission> list() {
@@ -76,6 +79,7 @@ public class PermissionController {
 	 * @param pid
 	 * @return 分页对象
 	 */
+	@PermissionAnnotation(permName = "listPermission")
 	@GetMapping("/permissions")
 	@LogAnnotation(desc = "分页获取所有菜单")
 	public PageInfo<Permission> list(@RequestParam(value = "start", defaultValue = "1") int start,
@@ -98,6 +102,7 @@ public class PermissionController {
 	 * @param id
 	 * @return 菜单对象
 	 */
+	@PermissionAnnotation(permName = "listPermission")
 	@GetMapping("/permissions/{id}")
 	@LogAnnotation(desc = "获取单个菜单")
 	public Permission get(@PathVariable("id") int id) {
@@ -110,6 +115,7 @@ public class PermissionController {
 	 * @param permission
 	 * @return 
 	 */
+	@PermissionAnnotation(permName = "addList")
 	@PostMapping("/permissions")
 	@LogAnnotation(desc = "新增菜单")
 	public String add(@RequestBody Permission permission) {
@@ -130,6 +136,7 @@ public class PermissionController {
 	 * @param permission
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "updateList")
 	@PutMapping("/permissions")
 	@LogAnnotation(desc = "修改菜单")
 	public String update(@RequestBody Permission permission) {
@@ -142,6 +149,7 @@ public class PermissionController {
 	 * @param id
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "deleteList")
 	@DeleteMapping("/permissions/{id}")
 	@LogAnnotation(desc = "删除菜单")
 	public String delete(@PathVariable("id") int id) {

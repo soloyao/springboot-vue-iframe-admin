@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zmy.springbootqx.annotation.LogAnnotation;
+import com.zmy.springbootqx.annotation.PermissionAnnotation;
 import com.zmy.springbootqx.pojo.Hero;
 import com.zmy.springbootqx.service.HeroService;
 
@@ -47,6 +48,7 @@ public class HeroController {
 	 * @param keyword 搜索关键词
 	 * @return 分页对象
 	 */
+	@PermissionAnnotation(permName = "listHero")
 	@GetMapping("/heros")
 	@LogAnnotation(desc = "分页获取所有英雄")
 	public PageInfo<Hero> list(@RequestParam(value = "start", defaultValue = "1") int start,
@@ -67,6 +69,7 @@ public class HeroController {
 	 * @param id 英雄ID
 	 * @return 英雄对象
 	 */
+	@PermissionAnnotation(permName = "listHero")
 	@GetMapping("/heros/{id}")
 	@LogAnnotation(desc = "获取单个英雄")
 	public Hero get(@PathVariable("id") int id) {
@@ -79,6 +82,7 @@ public class HeroController {
 	 * @param hero 英雄对象
 	 * @return Result对象（成功或失败）
 	 */
+	@PermissionAnnotation(permName = "addHero")
 	@PostMapping("/heros")
 	@LogAnnotation(desc = "新增英雄")
 	public Object add(@RequestBody Hero hero) {
@@ -90,6 +94,7 @@ public class HeroController {
 	 * @param hero 英雄对象
 	 * @return Result对象（成功或失败）
 	 */
+	@PermissionAnnotation(permName = "updateHero")
 	@PutMapping("/heros")
 	@LogAnnotation(desc = "修改英雄")
 	public Object update(@RequestBody Hero hero) {
@@ -101,6 +106,7 @@ public class HeroController {
 	 * @param id 英雄ID
 	 * @return Result对象（成功或失败）
 	 */
+	@PermissionAnnotation(permName = "deleteHero")
 	@DeleteMapping("/heros/{id}")
 	@LogAnnotation(desc = "删除英雄")
 	public Object delete(@PathVariable("id") int id) {

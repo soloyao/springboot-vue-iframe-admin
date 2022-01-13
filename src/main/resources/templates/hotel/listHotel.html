@@ -14,6 +14,7 @@
 			items: [],
 			item4Add: {id: 0, name: "", phonenumber: "", address: "", location: "", image: ""},
 			pagination: {},
+			btnPermissions: [],
 			keyword: "",
 			isEditShow: false,
 			isLoading: false,
@@ -35,10 +36,21 @@
 					zoom: 16
 				});
 				this.mouseTool = new AMap.MouseTool(this.map);
-				
+				this.initNav();
 				$("#lightBoxToggle").lightbox();
 			},
 			methods: {
+				initNav: function() {
+					var _this = this;
+					var url ="permissionsByUser";
+					axios.get(url).then(function(res) {
+						var data = res.data;
+						if (data.pers == null && data.btns == null) {
+							return;
+						}
+						_this.btnPermissions = data.btns;
+					});
+				},
 				showImage: function() {
 					var myLightBox = $("#lightBoxToggle").data("zui.lightbox");
 					myLightBox.show("upload/" + this.item4Add.image);
@@ -220,7 +232,7 @@
 							<span class="input-group-btn">
 								<button class="btn btn-primary" @click="search">搜索</button>
 								<button class="btn btn-default" @click="reset">重置</button>
-								<button class="btn btn-success" @click="addEdit">新增</button>
+								<button class="btn btn-success" @click="addEdit" :class="{'m-hide':btnPermissions.indexOf('addHotel') == -1}">新增</button>
 							</span>
 						</div>
 						<!-- search end -->
@@ -237,7 +249,7 @@
 										<div v-if="items && items.length != 0" v-for="item in items" class="item" :class="{activeItem:item==activeItem}" @click="updateEdit(item)">
 											<div class="item-heading">
 												<div class="pull-right">
-													<i class="icon-trash" data-toggle="tooltip" data-placement="bottom" title="删除" @click.stop="deleteItem(item)">删除</i>
+													<i class="icon-trash" data-toggle="tooltip" data-placement="bottom" title="删除" @click.stop="deleteItem(item)" :class="{'m-hide':btnPermissions.indexOf('exportHero') == -1}">删除</i>
 												</div>
 												<h4><a href="javascript:void(0)">{{item.name}}</a></h4>
 											</div>

@@ -21,6 +21,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zmy.springbootqx.annotation.LogAnnotation;
+import com.zmy.springbootqx.annotation.PermissionAnnotation;
 import com.zmy.springbootqx.pojo.Permission;
 import com.zmy.springbootqx.pojo.Role;
 import com.zmy.springbootqx.service.PermissionService;
@@ -54,6 +55,7 @@ public class RoleController {
 	 * @param keyword
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "listRole")
 	@GetMapping("/roles")
 	@LogAnnotation(desc = "分页获取所有角色")
 	public PageInfo<Role> list(@RequestParam(value = "start", defaultValue = "1") int start,
@@ -74,6 +76,7 @@ public class RoleController {
 	 * @param id
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "listRole")
 	@GetMapping("/roles/{id}")
 	@LogAnnotation(desc = "获取单个角色")
 	public String get(@PathVariable("id") int id) {
@@ -88,6 +91,7 @@ public class RoleController {
 	 * 获取所有菜单
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "listHero")
 	@GetMapping("/listPermissions")
 	public List<Permission> get() {
 		List<Permission> permissions = permissionService.listPermissions();
@@ -99,6 +103,7 @@ public class RoleController {
 	 * @param params
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "batchPerRole")
 	@PostMapping("/rolesBatch")
 	@LogAnnotation(desc = "批量分配角色权限")
 	public String addBatch(@RequestBody JSONObject params) {
@@ -121,6 +126,7 @@ public class RoleController {
 	 * @param role
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "addRole")
 	@PostMapping("/roles")
 	@LogAnnotation(desc = "新增角色")
 	public String add(@RequestBody Role role) {
@@ -141,6 +147,7 @@ public class RoleController {
 	 * @param role
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "updateRole")
 	@PutMapping("/roles")
 	@LogAnnotation(desc = "修改角色")
 	public String update(@RequestBody Role role) {
@@ -153,6 +160,7 @@ public class RoleController {
 	 * @param id
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "deleteRole")
 	@DeleteMapping("/roles/{id}")
 	@LogAnnotation(desc = "删除角色")
 	public String delete(@PathVariable("id") int id) {

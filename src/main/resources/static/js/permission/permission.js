@@ -15,6 +15,7 @@ $(function() {
 			{name: 'url', width: 382, thname: 'url'},
 			{name: '操作', width: 284, thname: 'operate'}
 		],
+		btnPermissions: [],
 		permissionParent4Add: {id: 0, name: "", desc: "", url: "", pid: 0},
 		permission4Add: {id: 0, name: "", desc: "", url: "", pid: 0},
 		pagination: {},
@@ -38,8 +39,20 @@ $(function() {
 			this.listParentPermission();
 			//this.list(1);
 			$("[data-toggle='tooltip']").tooltip();
+			this.initNav();
 		},
 		methods: {
+			initNav: function() {
+				var _this = this;
+				var url ="permissionsByUser";
+				axios.get(url).then(function(res) {
+					var data = res.data;
+					if (data.pers == null && data.btns == null) {
+						return;
+					}
+					_this.btnPermissions = data.btns;
+				});
+			},
 			saveParent() {
 				var _this = this;
 				if (!_this.permissionParent4Add.name || !_this.permissionParent4Add.desc) {

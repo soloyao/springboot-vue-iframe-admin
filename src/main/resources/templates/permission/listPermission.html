@@ -12,10 +12,10 @@
 		<div class="col-md-2 content">
 			<!-- parent permission start -->
 			<div class="panel">
-				<div class="panel-heading" style="text-align:right;">
-					<i class="icon icon-plus" @click="addEditParent" data-toggle="tooltip" data-placement="bottom" title="新增父菜单"></i>
-					<i class="icon icon-edit" @click="updateEditParent" data-toggle="tooltip" data-placement="bottom" title="修改父菜单"></i>
-					<i class="icon icon-trash" @click="deletePermissionParent" data-toggle="tooltip" data-placement="bottom" title="删除父菜单"></i>
+				<div class="panel-heading" style="text-align:left;">
+					<i class="icon icon-plus" @click="addEditParent" data-toggle="tooltip" data-placement="bottom" title="新增父菜单" :class="{'m-hide':btnPermissions.indexOf('addList') == -1}"></i>
+					<i class="icon icon-edit" @click="updateEditParent" data-toggle="tooltip" data-placement="bottom" title="修改父菜单" :class="{'m-hide':btnPermissions.indexOf('updateList') == -1}"></i>
+					<i class="icon icon-trash" @click="deletePermissionParent" data-toggle="tooltip" data-placement="bottom" title="删除父菜单" :class="{'m-hide':btnPermissions.indexOf('deleteList') == -1}"></i>
 				</div>
 				<div class="panel-body">
 					<div class="list-group">
@@ -34,11 +34,9 @@
 					<div id="top-div">
 						<!-- search start -->
 						<div class="input-group search-div">
-							<input type="text" class="form-control" id="keyword" placeholder="请输入关键词">
-							<span class="input-group-btn">
-								<button class="btn btn-primary" @click="search">搜索</button>
-								<button class="btn btn-default" @click="reset">重置</button>
-								<button class="btn btn-success" @click="addEdit">新增</button>
+							<!-- <input type="text" class="form-control" id="keyword" placeholder="请输入关键词"> -->
+							<span class="input-group-btn" style="text-align:left;">
+								<button class="btn btn-success" @click="addEdit" :class="{'m-hide':btnPermissions.indexOf('addMenu') == -1}">新增</button>
 							</span>
 						</div>
 						<!-- search end -->
@@ -69,8 +67,8 @@
 									<td width="311">{{item.desc}}</td>
 									<td width="382">{{item.url}}</td>
 									<td width="284">
-										<button class="btn btn-xs btn-primary" @click="updateEdit(item)"><i class="icon icon-pencil"></i></button>
-										<button class="btn btn-xs btn-danger" @click="deleteItem(item.id)"><i class="icon icon-trash"></i></button>
+										<button class="btn btn-xs btn-primary" @click="updateEdit(item)" :class="{'m-hide':btnPermissions.indexOf('updateMenu') == -1}"><i class="icon icon-pencil"></i></button>
+										<button class="btn btn-xs btn-danger" @click="deleteItem(item.id)" :class="{'m-hide':btnPermissions.indexOf('deleteMenu') == -1}"><i class="icon icon-trash"></i></button>
 									</td>
 								</tr>
 							</tbody>
@@ -94,11 +92,11 @@
 					<div id="top-div">
 						<!-- search start -->
 						<div class="input-group search-div">
-							<input type="text" class="form-control" id="keyword" placeholder="请输入关键词">
-							<span class="input-group-btn">
+							<!-- <input type="text" class="form-control" id="keyword" placeholder="请输入关键词"> -->
+							<span class="input-group-btn" style="text-align:left;">
 								<!-- <button class="btn btn-primary" @click="search">搜索</button>
 								<button class="btn btn-default" @click="reset">重置</button> -->
-								<button class="btn btn-success" @click="addEditBtn">新增</button>
+								<button class="btn btn-success" @click="addEditBtn" :class="{'m-hide':btnPermissions.indexOf('addBtn') == -1}">新增</button>
 							</span>
 						</div>
 						<!-- search end -->
@@ -129,8 +127,8 @@
 									<td width="311">{{item.desc}}</td>
 									<td width="382">{{item.url}}</td>
 									<td width="284">
-										<button class="btn btn-xs btn-primary" @click="updateEditBtn(item)"><i class="icon icon-pencil"></i></button>
-										<button class="btn btn-xs btn-danger" @click="deleteItem(item.id)"><i class="icon icon-trash"></i></button>
+										<button class="btn btn-xs btn-primary" @click="updateEditBtn(item)" :class="{'m-hide':btnPermissions.indexOf('updateBtn') == -1}"><i class="icon icon-pencil"></i></button>
+										<button class="btn btn-xs btn-danger" @click="deleteItem(item.id)" :class="{'m-hide':btnPermissions.indexOf('deleteBtn') == -1}"><i class="icon icon-trash"></i></button>
 									</td>
 								</tr>
 							</tbody>

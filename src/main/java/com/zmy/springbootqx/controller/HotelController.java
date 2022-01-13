@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zmy.springbootqx.annotation.LogAnnotation;
+import com.zmy.springbootqx.annotation.PermissionAnnotation;
 import com.zmy.springbootqx.pojo.Hotel;
 import com.zmy.springbootqx.service.HotelService;
 
@@ -47,6 +48,7 @@ public class HotelController {
 	 * @param keyword 搜索关键词
 	 * @return 分页对象
 	 */
+	@PermissionAnnotation(permName = "listHotel")
 	@GetMapping("/hotels")
 	@LogAnnotation(desc = "分页获取所有旅馆数据")
 	public PageInfo<Hotel> list(@RequestParam(value = "start", defaultValue = "1") int start,
@@ -67,6 +69,7 @@ public class HotelController {
 	 * @param id 旅馆ID
 	 * @return 旅馆对象
 	 */
+	@PermissionAnnotation(permName = "listHotel")
 	@GetMapping("/hotels/{id}")
 	@LogAnnotation(desc = "获取单个旅馆")
 	public Hotel get(@PathVariable("id") int id) {
@@ -79,6 +82,7 @@ public class HotelController {
 	 * @param hotel 旅馆对象
 	 * @return Result对象（成功或失败）
 	 */
+	@PermissionAnnotation(permName = "addHotel")
 	@PostMapping("/hotels")
 	@LogAnnotation(desc = "新增旅馆")
 	public Object add(@RequestBody Hotel hotel) {
@@ -90,6 +94,7 @@ public class HotelController {
 	 * @param hotel 旅馆对象
 	 * @return Result对象（成功或失败）
 	 */
+	@PermissionAnnotation(permName = "updateHotel")
 	@PutMapping("/hotels")
 	@LogAnnotation(desc = "修改旅馆")
 	public Object update(@RequestBody Hotel hotel) {
@@ -101,6 +106,7 @@ public class HotelController {
 	 * @param id 旅馆ID
 	 * @return Result对象（成功或失败）
 	 */
+	@PermissionAnnotation(permName = "deleteHotel")
 	@DeleteMapping("/hotels/{id}")
 	@LogAnnotation(desc = "删除旅馆")
 	public Object delete(@PathVariable("id") int id) {

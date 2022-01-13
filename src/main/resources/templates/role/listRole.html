@@ -21,7 +21,7 @@
 							<span class="input-group-btn">
 								<button class="btn btn-primary" @click="search">搜索</button>
 								<button class="btn btn-default" @click="reset">重置</button>
-								<button class="btn btn-success" @click="addEdit">新增</button>
+								<button class="btn btn-success" @click="addEdit" :class="{'m-hide':btnPermissions.indexOf('addRole') == -1}">新增</button>
 								<button class="btn btn-danger" @click="getCheck">获取选中行</button>
 							</span>
 						</div>
@@ -53,8 +53,8 @@
 									<td width="301">{{role.desc}}</td>
 									<td width="840"><template v-for="permission in role.permissions">{{permission.name}},</template></td>
 									<td width="170">
-										<button class="btn btn-xs btn-primary" @click="updateEdit(role)"><i class="icon icon-pencil"></i></button>
-										<button class="btn btn-xs btn-danger" @click="deleteRole(role.id)"><i class="icon icon-trash"></i></button>
+										<button class="btn btn-xs btn-primary" @click="updateEdit(role)" ><i class="icon icon-pencil"></i></button>
+										<button class="btn btn-xs btn-danger" @click="deleteRole(role.id)" :class="{'m-hide':btnPermissions.indexOf('deleteRole') == -1}"><i class="icon icon-trash"></i></button>
 									</td>
 								</tr>
 							</tbody>
@@ -73,7 +73,7 @@
 		<div class="col-md-2 content">
 			<div class="panel">
 				<div class="panel-heading" style="text-align:left;">
-					<button class="btn btn-success" @click="saveBatch">批量分配权限</button>
+					<button class="btn btn-success" @click="saveBatch" :class="{'m-hide':btnPermissions.indexOf('batchPerRole') == -1}">批量分配权限</button>
 				</div>
 				<div class="panel-body" style="height:calc(100% - 49px);">
 					<span>关联权限</span>
@@ -90,7 +90,7 @@
 				{{editTitle}}
 				<i class="icon icon-times" @click="cancel"></i>
 			</div>
-			<div class="edit-panel-div-content form-horizontal">
+			<div class="edit-panel-div-content form-horizontal" style="overflow:auto;">
 				<div class="form-group">
 					<label for="name" class="col-sm-3 required">名称</label>
 					<div class="col-sm-9">

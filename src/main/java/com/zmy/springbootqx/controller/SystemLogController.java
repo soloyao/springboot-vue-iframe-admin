@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zmy.springbootqx.annotation.LogAnnotation;
+import com.zmy.springbootqx.annotation.PermissionAnnotation;
 import com.zmy.springbootqx.pojo.SystemLog;
 import com.zmy.springbootqx.service.SystemLogService;
 
@@ -45,6 +46,7 @@ public class SystemLogController {
 	 * @param keyword
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "listSystemLog")
 	@GetMapping("/systemLogs")
 	@LogAnnotation(desc = "分页获取所有日志")
 	@ApiOperation(value = "分页获取所有日志")

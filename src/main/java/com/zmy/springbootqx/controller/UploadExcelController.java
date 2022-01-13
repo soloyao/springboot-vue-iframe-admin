@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zmy.springbootqx.annotation.LogAnnotation;
+import com.zmy.springbootqx.annotation.PermissionAnnotation;
 import com.zmy.springbootqx.pojo.Hero;
 import com.zmy.springbootqx.service.HeroService;
 import com.zmy.springbootqx.util.ExcelReaderUtil;
@@ -40,6 +41,7 @@ public class UploadExcelController {
 	
 	@Autowired HeroService heroService;
 	
+	@PermissionAnnotation(permName = "importHero")
 	@PostMapping("/uploadExcelHero")
 	@LogAnnotation(desc = "导入英雄Excel文件")
 	public String uploadExcelHero(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
@@ -52,6 +54,7 @@ public class UploadExcelController {
 		}
 	}
 	
+	@PermissionAnnotation(permName = "exportHero")
 	@PostMapping("/downloadExcelHero")
 	@LogAnnotation(desc = "导出英雄Excel文件")
 	public Result downloadExcelHero(@RequestBody JSONObject params) {

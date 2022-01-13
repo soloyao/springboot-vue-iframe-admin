@@ -24,6 +24,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zmy.springbootqx.annotation.LogAnnotation;
+import com.zmy.springbootqx.annotation.PermissionAnnotation;
 import com.zmy.springbootqx.pojo.Role;
 import com.zmy.springbootqx.pojo.User;
 import com.zmy.springbootqx.service.PermissionService;
@@ -100,6 +101,7 @@ public class UserController {
 	 * @param keyword
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "listUser")
 	@GetMapping("/users")
 	@LogAnnotation(desc = "分页获取所有用户")
 	public PageInfo<User> list(@RequestParam(value = "start", defaultValue = "1") int start,
@@ -120,6 +122,7 @@ public class UserController {
 	 * @param id
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "listUser")
 	@GetMapping("/users/{id}")
 	@LogAnnotation(desc = "获取单个用户")
 	public String get(@PathVariable("id") int id) {
@@ -135,6 +138,7 @@ public class UserController {
 	 * 获取所有角色
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "listHero")
 	@GetMapping("/listRoles")
 	public List<Role> get() {
 		List<Role> roles = roleService.list(null);
@@ -146,6 +150,7 @@ public class UserController {
 	 * @param params
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "batchPerUser")
 	@PostMapping("/usersBatch")
 	@LogAnnotation(desc = "批量分配用户角色")
 	public String addBatch(@RequestBody JSONObject params) {
@@ -169,6 +174,7 @@ public class UserController {
 	 * @return
 	 * @throws NoSuchAlgorithmException
 	 */
+	@PermissionAnnotation(permName = "addUser")
 	@PostMapping("/users")
 	@LogAnnotation(desc = "新增用户")
 	public String add(@RequestBody User user) throws NoSuchAlgorithmException {
@@ -191,6 +197,7 @@ public class UserController {
 	 * @return
 	 * @throws NoSuchAlgorithmException
 	 */
+	@PermissionAnnotation(permName = "updateUser")
 	@PutMapping("/users")
 	@LogAnnotation(desc = "修改用户")
 	public String update(@RequestBody User user) throws NoSuchAlgorithmException {
@@ -203,6 +210,7 @@ public class UserController {
 	 * @param id
 	 * @return
 	 */
+	@PermissionAnnotation(permName = "deleteUser")
 	@DeleteMapping("/users/{id}")
 	@LogAnnotation(desc = "删除用户")
 	public String delete(@PathVariable("id") int id) {

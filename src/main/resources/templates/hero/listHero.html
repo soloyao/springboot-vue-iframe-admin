@@ -11,6 +11,7 @@
 				items: [],
 				item4Add: {id: 0, name: "", hp: 0},
 				pagination: {},
+				btnPermissions: [],
 				keyword: "",
 				isEditShow: false,
 				isLoading: false,
@@ -24,8 +25,20 @@
 				data: data4Vue,
 				mounted: function() {
 					this.list(1);
+					this.initNav();
 				},
 				methods: {
+					initNav: function() {
+						var _this = this;
+						var url ="permissionsByUser";
+						axios.get(url).then(function(res) {
+							var data = res.data;
+							if (data.pers == null && data.btns == null) {
+								return;
+							}
+							_this.btnPermissions = data.btns;
+						});
+					},
 					//表格前面的全选框
 	                checkboxAll() {
 	                    if (!this.checkboxAllFlag) {
@@ -189,9 +202,9 @@
 							<span class="input-group-btn">
 								<button class="btn btn-primary" @click="search">搜索</button>
 								<button class="btn btn-default" @click="reset">重置</button>
-								<button class="btn btn-success" @click="addItem">新增</button>
-								<button class="btn btn-primary" @click="excelUpload">导入Excel</button>
-								<button class="btn btn-success" @click="excelDownload">导出Excel</button>
+								<button class="btn btn-success" @click="addItem" :class="{'m-hide':btnPermissions.indexOf('addHero') == -1}">新增</button>
+								<button class="btn btn-primary" @click="excelUpload" :class="{'m-hide':btnPermissions.indexOf('importHero') == -1}">导入Excel</button>
+								<button class="btn btn-success" @click="excelDownload" :class="{'m-hide':btnPermissions.indexOf('exportHero') == -1}">导出Excel</button>
 							</span>
 						</div>
 						<!-- search end -->
@@ -224,8 +237,12 @@
 									<td>{{item.name}}</td>
 									<td>{{item.hp}}</td>
 									<td>
-										<button class="btn btn-xs btn-primary" @click="updateItem(item)"><i class="icon icon-pencil"></i>编辑</button>
-										<button class="btn btn-xs btn-danger" @click="deleteItem(item.id)"><i class="icon icon-trash"></i>删除</button>
+										<button class="btn btn-xs btn-primary" @click="updateItem(item)" :class="{'m-hide':btnPermissions.indexOf('updateHero') == -1}">
+											<i class="icon icon-pencil"></i>编辑
+										</button>
+										<button class="btn btn-xs btn-danger" @click="deleteItem(item.id)" :class="{'m-hide':btnPermissions.indexOf('deleteHero') == -1}">
+											<i class="icon icon-trash"></i>删除
+										</button>
 									</td>
 								</tr>
 								<tr v-if="items && items.length == 0">

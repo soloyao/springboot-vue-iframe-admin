@@ -95,7 +95,7 @@ public class CategoryController {
 	 * @param category 类别对象
 	 * @return Result对象（成功或失败）
 	 */
-	@PermissionAnnotation(permName = "listCategory")
+	@PermissionAnnotation(permName = "addCategory")
 	@PostMapping("/categories")
 	@LogAnnotation(desc = "新增分类")
 	@ApiOperation(value = "新增分类")
@@ -111,7 +111,7 @@ public class CategoryController {
 	 * @param category 类别对象
 	 * @return Result对象（成功或失败）
 	 */
-	@PermissionAnnotation(permName = "listCategory")
+	@PermissionAnnotation(permName = "updateCategory")
 	@PutMapping("/categories")
 	@LogAnnotation(desc = "修改分类")
 	@ApiOperation(value = "修改分类")
@@ -127,7 +127,7 @@ public class CategoryController {
 	 * @param id 类别ID
 	 * @return Result对象（成功或失败）
 	 */
-	@PermissionAnnotation(permName = "listCategory")
+	@PermissionAnnotation(permName = "deleteCategory")
 	@DeleteMapping("/categories/{id}")
 	@LogAnnotation(desc = "删除分类")
 	@ApiOperation(value = "删除分类")

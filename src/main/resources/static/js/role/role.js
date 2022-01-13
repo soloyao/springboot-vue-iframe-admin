@@ -60,6 +60,7 @@ $(function() {
 		roles: [],
 		role4Add: {id: 0, name: "", desc: "", permissions: []},
 		pagination: {},
+		btnPermissions: [],
 		keyword: "",
 		isEditShow: false,
 		isLoading: false,
@@ -74,8 +75,20 @@ $(function() {
 		mounted: function() {
 			this.list(1);
 			this.listPermissions();
+			this.initNav();
 		},
 		methods: {
+			initNav: function() {
+				var _this = this;
+				var url ="permissionsByUser";
+				axios.get(url).then(function(res) {
+					var data = res.data;
+					if (data.pers == null && data.btns == null) {
+						return;
+					}
+					_this.btnPermissions = data.btns;
+				});
+			},
 			getCheck() {
 				var str = $("tbody .checked").map(function(item, ele) {
 					console.log($(ele).data("id"));
