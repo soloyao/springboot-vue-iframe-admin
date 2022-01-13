@@ -10,6 +10,9 @@ div#app {
 .active td{
 	background: #8ece9e !important;
 }
+.m-hide {
+	display:none !important;
+}
 #app .content {
 	height: 100%;
 }

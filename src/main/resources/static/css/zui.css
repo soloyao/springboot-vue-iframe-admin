@@ -4946,8 +4946,8 @@ th {
 .table-bordered td {
   border: 1px solid #ddd;
   }
-.table-striped > tbody > tr:nth-child(odd) > td,
-.table-striped > tbody > tr:nth-child(odd) > th {
+. > tbody > tr:nth-child(odd) > td,
+. > tbody > tr:nth-child(odd) > th {
   background-color: #f9f9f9;
   }
 .table-hover > tbody > tr:hover > td,

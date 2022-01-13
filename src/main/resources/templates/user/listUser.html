@@ -21,7 +21,7 @@
 							<span class="input-group-btn">
 								<button class="btn btn-primary" @click="search">搜索</button>
 								<button class="btn btn-default" @click="reset">重置</button>
-								<button class="btn btn-success" @click="addEdit">新增</button>
+								<button class="btn btn-success" @click="addEdit" :class="{'m-hide':btnPermissions.indexOf('addUser') == -1}">新增</button>
 								<button class="btn btn-danger" @click="getCheck">获取选中行</button>
 							</span>
 						</div>
@@ -32,7 +32,7 @@
 				<div class="panel-body">
 					<!-- table start -->
 					<div style="height:38px;">
-						 <table class="table table-hover table-striped" style="margin:0px;">
+						 <table class="table table-hover " style="margin:0px;">
 						 	<thead>
 						 		<th><div @click="checkboxAll" class="checkbox-primary checkbox-parent" style="width:16px;"><label></label></div></th>
 						 		<th width="76">编号</th>
@@ -46,7 +46,7 @@
 						 </table>
 					</div>
 					<div style="height:calc(100% - 38px);overflow:auto;">
-						<table class="table table-hover table-striped">
+						<table class="table table-hover ">
 							<tbody>
 								<tr v-for="user in users">
 									<td><div @click="checkbox" class="checkbox-primary checkbox-children" style="width:16px;" :data-id="user.id"><label></label></div></td>
@@ -57,8 +57,12 @@
 									<td width="178">{{user.sex}}</td>
 									<td width="407"><template v-for="role in user.roles">{{role.name}}</template></td>
 									<td width="230">
-										<button class="btn btn-xs btn-primary" @click="updateEdit(user)"><i class="icon icon-pencil"></i></button>
-										<button class="btn btn-xs btn-danger" @click="deleteUser(user.id)"><i class="icon icon-trash"></i></button>
+										<button class="btn btn-xs btn-primary" @click="updateEdit(user)" :class="{'m-hide':btnPermissions.indexOf('updateUser') == -1}">
+											<i class="icon icon-pencil"></i>
+										</button>
+										<button class="btn btn-xs btn-danger" @click="deleteUser(user.id)" :class="{'m-hide':btnPermissions.indexOf('deleteUser') == -1}">
+											<i class="icon icon-trash"></i>
+										</button>
 									</td>
 								</tr>
 							</tbody>
@@ -77,7 +81,7 @@
 		<div class="col-md-2 content">
 			<div class="panel">
 				<div class="panel-heading" style="text-align:left;">
-					<button class="btn btn-success" @click="saveBatch">批量分配角色</button>
+					<button class="btn btn-success" @click="saveBatch" :class="{'m-hide':btnPermissions.indexOf('batchPer') == -1}">批量分配角色</button>
 				</div>
 				<div class="panel-body" style="height:calc(100% - 49px);">
 					<span>关联角色</span>

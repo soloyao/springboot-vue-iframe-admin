@@ -1,5 +1,6 @@
 package com.zmy.springbootqx.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -84,12 +85,16 @@ public class PermissionServiceImpl implements PermissionService {
 	}
 	
 	@Override
-	public JSONArray listByUser(User user) {
+	public JSONObject listByUser(User user) {
 		List<Permission> list = permissionMapper.listByUser(user);
+		List<String> btnList = new ArrayList<String>();
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("pers", null);
+		jsonObj.put("btns", null);
 		if (null != list && list.size() != 0) {
 			JSONArray parentArr = new JSONArray();
 			for (Permission parent : list) {
-				if (0 == parent.getPid()) {
+				if (0 == parent.getPid()) {//一级，系统管理、业务管理、地图管理目录
 //					System.out.println(parent.getName());
 					JSONObject parentObj = new JSONObject();
 					parentObj.put("id", parent.getId());
@@ -97,23 +102,29 @@ public class PermissionServiceImpl implements PermissionService {
 					parentObj.put("url", parent.getUrl());
 					JSONArray childrenArr = new JSONArray();
 					for (Permission children : list) {
-						if (parent.getId() == children.getPid()) {
+						if (parent.getId() == children.getPid()) {//二级，用户管理、角色管理等页面
 //							System.out.println("\t" + children.getName());
 							JSONObject childrenObj = new JSONObject();
 							childrenObj.put("id", children.getId());
 							childrenObj.put("name", children.getName());
 							childrenObj.put("url", children.getUrl());
 							childrenArr.add(childrenObj);
+							for (Permission btn : list) {
+								if (children.getId() == btn.getPid()) {
+									btnList.add(btn.getUrl());
+								}
+							}
 						}
 					}
 					parentObj.put("children", childrenArr);
 					parentArr.add(parentObj);
 				}
 			}
-			return parentArr;
-		} else {
-			return null;
+			//这里只能返回一级和二级的菜单，并未构造成功按钮菜单
+			jsonObj.put("pers", parentArr);
+			jsonObj.put("btns", btnList);
 		}
+		return jsonObj;
 	}
 
 	@Override

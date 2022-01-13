@@ -48,7 +48,7 @@ Vue.component("component-table", {
 	},
 	template: "<div id='component-table' style='height:100%;'>" +
 			"<div style='height:38px;'>" +
-			"<table class='table table-hover table-striped' style='margin:0px;'>" +
+			"<table class='table table-hover ' style='margin:0px;'>" +
 			"<thead>" +
 			"<tr>" +
 			"<th><div @click='checkboxAll' class='checkbox-primary checkbox-parent' style='width:16px;'><label></label></div></th>" +
@@ -58,7 +58,7 @@ Vue.component("component-table", {
 			"</table>" +
 			"</div>" +
 			"<div v-if='list && list.length > 0' style='height:calc(100% - 38px);overflow:auto;'>" +
-			"<table class='table table-hover table-striped'>" +
+			"<table class='table table-hover '>" +
 			"<tbody>" +
 			"<tr v-for='item in list'>" +
 			"<td><div @click='checkbox' class='checkbox-primary checkbox-children' style='width:16px;' :data-id='item.id'><label></label></div></td>" +

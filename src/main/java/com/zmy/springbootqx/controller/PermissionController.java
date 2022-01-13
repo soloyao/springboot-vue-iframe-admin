@@ -53,7 +53,7 @@ public class PermissionController {
 	 */
 	@GetMapping("/permissionsByUser")
 	@LogAnnotation(desc = "根据用户获取对应菜单")
-	public JSONArray getPermissionsByUser(HttpSession session) {
+	public JSONObject getPermissionsByUser(HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		return permissionService.listByUser(user);
 	}

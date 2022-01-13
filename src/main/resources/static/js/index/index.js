@@ -53,7 +53,11 @@ $(function() {
 				var url ="permissionsByUser";
 				axios.get(url).then(function(res) {
 					var data = res.data;
-					_this.items = data;
+					console.log(data);
+					if (data.pers == null && data.btns == null) {
+						return;
+					}
+					_this.items = data.pers;
 					var i = 0;
 					_this.items.map(function(item) {
 						item.icon = icon[i++];

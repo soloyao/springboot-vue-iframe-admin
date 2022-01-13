@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.zmy.springbootqx.pojo.Permission;
 import com.zmy.springbootqx.pojo.User;
 
@@ -28,7 +29,7 @@ public interface PermissionService {
 	void delete(int id);
 	void add(Permission permission);
 	void update(Permission permission);
-	JSONArray listByUser(User user);
+	JSONObject listByUser(User user);
 	List<Permission> listParentPermissions();
 	List<Permission> listPermissions();
 }

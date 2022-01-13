@@ -24,18 +24,18 @@ public class TestJunit {
 	
 	@Test
 	public void test() {
-		User user = new User();
-		user.setId(1);
-		JSONArray jsonArray = permissionService.listByUser(user);
-		for (int i = 0; i < jsonArray.size(); i++) {
-			JSONObject jsonObj = jsonArray.getJSONObject(i);
-			System.out.println("\t" + jsonObj.get("name"));
-			JSONArray arr = jsonObj.getJSONArray("children");
-			for (int j = 0; j < arr.size(); j++) {
-				JSONObject obj = arr.getJSONObject(j);
-				System.out.println(obj.get("name"));
-			}
-		}
+//		User user = new User();
+//		user.setId(1);
+//		JSONArray jsonArray = permissionService.listByUser(user);
+//		for (int i = 0; i < jsonArray.size(); i++) {
+//			JSONObject jsonObj = jsonArray.getJSONObject(i);
+//			System.out.println("\t" + jsonObj.get("name"));
+//			JSONArray arr = jsonObj.getJSONArray("children");
+//			for (int j = 0; j < arr.size(); j++) {
+//				JSONObject obj = arr.getJSONObject(j);
+//				System.out.println(obj.get("name"));
+//			}
+//		}
 	}
 	
 }

@@ -32,7 +32,7 @@
 				<div class="panel-body">
 					<!-- table start -->
 					<div style="height:38px;">
-						<table class="table table-hover table-striped" style="margin:0px;">
+						<table class="table table-hover " style="margin:0px;">
 							<thead>
 								<th><div @click="checkboxAll" class="checkbox-primary checkbox-parent" style="width:16px;"><label></label></div></th>
 								<th width="56">编号</th>
@@ -44,7 +44,7 @@
 						</table>
 					</div>
 					<div style="height:calc(100% - 38px);overflow:auto;">
-						<table class="table table-hover table-striped">
+						<table class="table table-hover ">
 							<tbody>
 								<tr v-for="role in roles">
 									<td><div @click="checkbox" class="checkbox-primary checkbox-children" style="width:16px;" :data-id="role.id"><label></label></div></td>

@@ -10,6 +10,7 @@
 		var data4Vue = {
 			items: [],
 			item4Add: {id: 0, name: "", image: ""},
+			btnPermissions: [],
 			pagination: {},
 			keyword: "",
 			isEditShow: false,
@@ -23,10 +24,22 @@
 			el: "#app",
 			data: data4Vue,
 			mounted: function() {
+				this.initNav();
 				this.list(1);
 				$("#lightBoxToggle").lightbox();
 			},
 			methods: {
+				initNav: function() {
+					var _this = this;
+					var url ="permissionsByUser";
+					axios.get(url).then(function(res) {
+						var data = res.data;
+						if (data.pers == null && data.btns == null) {
+							return;
+						}
+						_this.btnPermissions = data.btns;
+					});
+				},
 				//表格前面的全选框
                 checkboxAll() {
                     if (!this.checkboxAllFlag) {
@@ -183,7 +196,8 @@
 							<span class="input-group-btn">
 								<button class="btn btn-primary" @click="search">搜索</button>
 								<button class="btn btn-default" @click="reset">重置</button>
-								<button class="btn btn-success" @click="addItem">新增</button>
+								{{btnPermissions}}
+								<button class="btn btn-success" @click="addItem" :class="{'m-hide':btnPermissions.indexOf('addCategory') == -1}">新增</button>
 								<button class="btn btn-danger" @click="getCheck">获取选中行</button>
 							</span>
 						</div>
@@ -193,7 +207,7 @@
 				</div>
 				<div class="panel-body">
 					<div style="height:100%;overflow:auto;">
-						<table class="table table-hover table-striped" style="margin:0px;">
+						<table class="table table-hover " style="margin:0px;">
 							<thead>
 								<tr>
 									<th style="width:16px;">
@@ -214,8 +228,12 @@
 									<td>{{item.id}}</td>
 									<td>{{item.name}}</td>
 									<td>
-										<button class="btn btn-xs btn-primary" @click="updateItem(item)"><i class="icon icon-pencil"></i>编辑</button>
-										<button class="btn btn-xs btn-danger" @click="deleteItem(item.id)"><i class="icon icon-trash"></i>删除</button>
+										<button class="btn btn-xs btn-primary" @click="updateItem(item)" :class="{'m-hide':btnPermissions.indexOf('updateCategory') == -1}">
+											<i class="icon icon-pencil"></i>编辑
+										</button>
+										<button class="btn btn-xs btn-danger" @click="deleteItem(item.id)" :class="{'m-hide':btnPermissions.indexOf('deleteCategory') == -1}">
+											<i class="icon icon-trash"></i>删除
+										</button>
 									</td>
 								</tr>
 								<tr v-if="items && items.length == 0">

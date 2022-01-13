@@ -36,6 +36,7 @@ $(function() {
 	var data4Vue = {
 		roles: [],
 		users: [],
+		btnPermissions: [],
 		user4Add: {id: 0, name: "", password: "", realname: "", phone: "", sex: "", roles: []},
 		pagination: {},
 		keyword: "",
@@ -52,8 +53,20 @@ $(function() {
 		mounted: function() {
 			this.list(1);
 			this.listRoles();
+			this.initNav();
 		},
 		methods: {
+			initNav: function() {
+				var _this = this;
+				var url ="permissionsByUser";
+				axios.get(url).then(function(res) {
+					var data = res.data;
+					if (data.pers == null && data.btns == null) {
+						return;
+					}
+					_this.btnPermissions = data.btns;
+				});
+			},
 			getCheck() {
 				var str = $("tbody .checked").map(function(item, ele) {
 					console.log($(ele).data("id"));
